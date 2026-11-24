@@ -11,9 +11,13 @@
   "scripts": {
     "render": "node plugin/skills/swipe-styles/core/render.mjs",
     "demos": "node tools/render-demos.mjs",
+    "gallery": "node tools/build-gallery.mjs",
     "test": "node --test \"test/**/*.test.mjs\""
   },
   "dependencies": {
     "playwright": "1.65.1"
+  },
+  "devDependencies": {
+    "gifenc": "1.0.3"
   }
 }

@@ -1,0 +1,558 @@
+/* swipe-styles gallery. The page is a quiet wall and the slides bring the color.
+   Archivo (OFL) for all type, IBM Plex Mono (OFL) for commands and file names.
+   Written by hand; tools/build-gallery.mjs writes index.html and the images. */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/Archivo-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/IBMPlexMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --wall: #dfe2e6;
+  --ink: #000000;
+  --muted: #3c4249;
+  --rule: #b2b8c0;
+  --paper: #ffffff;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1280px;
+  --edge: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+  --slide-w: clamp(196px, 62vw, 290px);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--wall);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--wall);
+  color: var(--ink);
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+code,
+pre {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* Header */
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 20px var(--gutter);
+}
+
+.mark {
+  font-size: 22px;
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.top nav {
+  display: flex;
+  gap: clamp(16px, 3vw, 32px);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.top nav a {
+  text-decoration: none;
+}
+
+.top nav a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+
+section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(64px, 9vw, 120px) var(--gutter) 0;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+h2 {
+  margin: 0 0 clamp(28px, 3.5vw, 44px);
+  padding-top: 18px;
+  border-top: 2px solid var(--ink);
+  font-size: clamp(34px, 4.6vw, 60px);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Hero */
+
+.hero {
+  padding-top: clamp(28px, 5vw, 72px);
+}
+
+h1 {
+  max-width: 12.5ch;
+  margin: 0;
+  font-size: clamp(46px, 8.6vw, 118px);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 0.93;
+  letter-spacing: -0.028em;
+}
+
+.lede {
+  max-width: 36em;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(18px, 1.5vw, 21px);
+}
+
+.install,
+.try {
+  display: flex;
+  align-items: stretch;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.install {
+  max-width: 640px;
+  margin-top: 32px;
+}
+
+.install pre {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 15px 18px;
+  overflow-x: auto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.copy {
+  flex: none;
+  padding: 0 18px;
+  border: 0;
+  border-left: 2px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: 600 15px/1 "Archivo", sans-serif;
+  cursor: pointer;
+}
+
+.copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Narrow screens: the commands wrap instead of hiding behind a scroll, and Copy goes underneath. */
+@media (max-width: 560px) {
+  .install,
+  .try {
+    flex-direction: column;
+  }
+
+  .install pre {
+    font-size: 14px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .copy {
+    padding: 12px 18px;
+    border-left: 0;
+    border-top: 2px solid var(--ink);
+    text-align: left;
+  }
+}
+
+/* Strips of real slides, swiped or scrolled sideways */
+
+.strip-track {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 6px 0 22px;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+
+.strip-track > li {
+  flex: 0 0 var(--slide-w);
+  scroll-snap-align: start;
+}
+
+.strip-track img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  background: #c8cdd3;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.18),
+    0 16px 30px -20px rgb(0 0 0 / 0.55);
+}
+
+.strip-track span {
+  display: block;
+  margin-top: 12px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.strip-nav {
+  display: none;
+}
+
+@media (hover: hover) {
+  .strip-nav {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+}
+
+.strip-nav button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.strip-nav button:first-child svg {
+  transform: scaleX(-1);
+}
+
+.strip-nav button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.strip-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.strip-nav svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+}
+
+/* The hero strip runs across the whole window, starting at the text's left edge. */
+.showcase {
+  width: 100vw;
+  margin: clamp(44px, 6vw, 80px) 0 0 calc(50% - 50vw);
+}
+
+.showcase .strip-track {
+  padding-inline: var(--edge);
+  scroll-padding-inline: var(--edge);
+}
+
+.showcase .strip-nav,
+.showcase figcaption {
+  padding-inline: var(--edge);
+}
+
+.showcase figcaption {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+@media (hover: hover) {
+  .showcase figcaption {
+    margin-top: -36px;
+  }
+}
+
+/* Wide screens: text on the left, the strip on the right running to the window edge,
+   so the slides are on the first screen. */
+@media (min-width: 1100px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 540px) minmax(0, 1fr);
+    column-gap: clamp(40px, 4vw, 72px);
+    align-items: center;
+  }
+
+  .hero h1 {
+    max-width: none;
+    font-size: clamp(64px, 5.8vw, 92px);
+  }
+
+  .showcase {
+    --slide-w: clamp(260px, 22vw, 330px);
+    width: auto;
+    margin: 0 calc(-1 * var(--edge)) 0 0;
+  }
+
+  .showcase .strip-track {
+    padding-inline: 0 var(--edge);
+    scroll-padding-inline: 0;
+  }
+
+  .showcase .strip-nav,
+  .showcase figcaption {
+    padding-inline: 0 var(--edge);
+  }
+}
+
+/* How it works */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(36px, 4vw, 56px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps > li {
+  counter-increment: step;
+}
+
+.steps > li::before {
+  content: counter(step);
+  display: block;
+  margin-bottom: 16px;
+  font-size: clamp(64px, 6.5vw, 96px);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 0.85;
+}
+
+.steps h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.steps p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.steps .example {
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.files {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+}
+
+.files li {
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.files code {
+  color: var(--ink);
+  font-size: 0.88em;
+  font-weight: 500;
+}
+
+/* Styles */
+
+.intro {
+  max-width: 40em;
+  margin: 0;
+  color: var(--muted);
+}
+
+.index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 28px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.style {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  padding-top: clamp(56px, 7vw, 88px);
+}
+
+/* The strip runs to the window edge; its last slide keeps the page margin. */
+.style .strip {
+  margin-right: calc(-1 * var(--edge));
+}
+
+.style .strip-track,
+.style .strip-nav {
+  padding-right: var(--edge);
+}
+
+@media (min-width: 960px) {
+  .style {
+    grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+}
+
+.style h3 {
+  margin: 0;
+  font-size: clamp(38px, 4.4vw, 56px);
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.summary {
+  margin: 16px 0 0;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.suits {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.suits strong {
+  margin-right: 4px;
+  color: var(--ink);
+}
+
+.try {
+  margin-top: 22px;
+}
+
+.try-text {
+  flex: 1;
+  margin: 0;
+  padding: 12px 15px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.meta {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Good to know */
+
+.notes dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 28px 48px;
+  margin: 0;
+}
+
+.notes dt {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.notes dd {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+/* Footer */
+
+.foot {
+  max-width: var(--max);
+  margin: clamp(72px, 10vw, 128px) auto 0;
+  padding: 0 var(--gutter) 48px;
+}
+
+.foot p {
+  margin: 0;
+  padding-top: 18px;
+  border-top: 2px solid var(--ink);
+  color: var(--muted);
+  font-size: 15px;
+}

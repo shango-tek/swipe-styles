@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>swipe-styles: carousel styles for Claude Code</title>
+  <meta name="description" content="An open-source Claude Code plugin: 12 designed styles for Instagram and LinkedIn carousels. Say one sentence, get PNG slides, a PDF and a caption.">
+  <meta property="og:title" content="swipe-styles: carousels in 12 styles, from one sentence">
+  <meta property="og:description" content="An open-source Claude Code plugin for Instagram and LinkedIn carousels.">
+  <meta property="og:image" content="https://shango-tek.github.io/swipe-styles/assets/social.png">
+  <meta property="og:url" content="https://shango-tek.github.io/swipe-styles/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='5' width='17' height='22' fill='%23000'/%3E%3Crect x='12' y='5' width='17' height='22' fill='%23dfe2e6' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="top">
+    <a class="mark" href="#top">swipe-styles</a>
+    <nav aria-label="Page">
+      <a href="#styles">Styles</a>
+      <a href="#how">How it works</a>
+      <a href="https://github.com/shango-tek/swipe-styles">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Carousels in twelve styles, from one sentence.</h1>
+        <p class="lede">swipe-styles is an open-source plugin for Claude Code. Describe your post, and it writes the slides, renders them as Instagram images and a LinkedIn PDF, and checks that every line fits.</p>
+        <div class="install">
+          <pre><code>/plugin marketplace add shango-tek/swipe-styles
+/plugin install swipe-styles@swipe-styles</code></pre>
+          <button class="copy" type="button" data-copy="/plugin marketplace add shango-tek/swipe-styles
+/plugin install swipe-styles@swipe-styles">Copy</button>
+        </div>
+      </div>
+      <figure class="showcase">
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="The same cover slide in every style">
+          <li><img src="showcase/swiss-grid.webp" alt="The cover slide in the Swiss Grid style" width="640" height="800" loading="eager" decoding="async"><span>Swiss Grid</span></li>
+          <li><img src="showcase/blueprint.webp" alt="The cover slide in the Blueprint style" width="640" height="800" loading="eager" decoding="async"><span>Blueprint</span></li>
+          <li><img src="showcase/receipt.webp" alt="The cover slide in the Receipt style" width="640" height="800" loading="eager" decoding="async"><span>Receipt</span></li>
+          <li><img src="showcase/notebook.webp" alt="The cover slide in the Notebook style" width="640" height="800" loading="eager" decoding="async"><span>Notebook</span></li>
+          <li><img src="showcase/pixel-quest.webp" alt="The cover slide in the Pixel Quest style" width="640" height="800" loading="eager" decoding="async"><span>Pixel Quest</span></li>
+          <li><img src="showcase/comic.webp" alt="The cover slide in the Comic style" width="640" height="800" loading="eager" decoding="async"><span>Comic</span></li>
+          <li><img src="showcase/boarding-pass.webp" alt="The cover slide in the Boarding Pass style" width="640" height="800" loading="eager" decoding="async"><span>Boarding Pass</span></li>
+          <li><img src="showcase/tarot.webp" alt="The cover slide in the Tarot style" width="640" height="800" loading="eager" decoding="async"><span>Tarot</span></li>
+          <li><img src="showcase/riso-zine.webp" alt="The cover slide in the Riso Zine style" width="640" height="800" loading="eager" decoding="async"><span>Riso Zine</span></li>
+          <li><img src="showcase/chat-thread.webp" alt="The cover slide in the Chat Thread style" width="640" height="800" loading="eager" decoding="async"><span>Chat Thread</span></li>
+          <li><img src="showcase/varsity.webp" alt="The cover slide in the Varsity style" width="640" height="800" loading="eager" decoding="async"><span>Varsity</span></li>
+          <li><img src="showcase/bauhaus.webp" alt="The cover slide in the Bauhaus style" width="640" height="800" loading="eager" decoding="async"><span>Bauhaus</span></li>
+        </ul>
+      </div>
+        <figcaption>The same cover slide in every style.</figcaption>
+      </figure>
+    </section>
+
+    <section class="how" id="how">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Install the plugin</h3>
+          <p>Run the two commands above in Claude Code. The first carousel sets up Playwright (about 20&nbsp;MB) and uses the Chrome on your computer, or downloads a headless Chromium.</p>
+        </li>
+        <li>
+          <h3>Say one sentence</h3>
+          <p class="example">“Make an Instagram carousel about my sourdough mistakes in the Notebook style.”</p>
+          <p>Claude picks an angle, writes the slides in your language, renders them and fixes any text that does not fit.</p>
+        </li>
+        <li>
+          <h3>Post it</h3>
+          <ul class="files">
+            <li><code>slide-01.png</code> and onwards, 1080&nbsp;×&nbsp;1350, for Instagram</li>
+            <li><code>carousel.pdf</code> for a LinkedIn document post</li>
+            <li><code>caption.txt</code> with the caption and hashtags</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="styles" id="styles">
+      <h2>The styles</h2>
+      <p class="intro">Each style is a set of layouts for seven slide types: cover, text, points, quote, number, picture and call to action. Your handle, color and logo go on every one. The demos below are in English, French and German.</p>
+      <nav class="index" aria-label="Styles">
+        <a href="#swiss-grid">Swiss Grid</a>
+        <a href="#blueprint">Blueprint</a>
+        <a href="#receipt">Receipt</a>
+        <a href="#notebook">Notebook</a>
+        <a href="#pixel-quest">Pixel Quest</a>
+        <a href="#comic">Comic</a>
+        <a href="#boarding-pass">Boarding Pass</a>
+        <a href="#tarot">Tarot</a>
+        <a href="#riso-zine">Riso Zine</a>
+        <a href="#chat-thread">Chat Thread</a>
+        <a href="#varsity">Varsity</a>
+        <a href="#bauhaus">Bauhaus</a>
+      </nav>
+
+    <article class="style" id="swiss-grid">
+      <div class="style-text">
+        <h3>Swiss Grid</h3>
+        <p class="summary">Big condensed grotesque on white, a strict grid, black rules, and one red bar that shows how far the reader is.</p>
+        <p class="suits"><strong>Suits</strong> professional tips, LinkedIn explainers, frameworks, business lessons, data-led posts.</p>
+        <div class="try">
+          <p class="try-text">Make a LinkedIn carousel about why we stopped billing by the hour, in the Swiss Grid style.</p>
+          <button class="copy" type="button" data-copy="Make a LinkedIn carousel about why we stopped billing by the hour, in the Swiss Grid style.">Copy</button>
+        </div>
+        <p class="meta">Demo in English, 7 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/swiss-grid/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Swiss Grid demo carousel">
+          <li><img src="styles/swiss-grid/01.webp" alt="Slide 1 of 7: Stop pricing by the hour. What changed when our studio switched to one fixed price per project." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/swiss-grid/02.webp" alt="Slide 2 of 7: Hours punish good work. The faster we got, the less we earned. A logo that took us 40 hours in our first year took 12 in our fifth, and it was better. Billing by the hour turned experience into a discount." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/swiss-grid/03.webp" alt="Slide 3 of 7: 38%. of project time is invisible to clients" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/swiss-grid/04.webp" alt="Slide 4 of 7: Three rules we price by. Price the outcome: A rebrand that lifts sales is worth more than the hours behind it.. Fix the scope in writing: List every deliverable and round of changes before the first sketch.. Raise prices every January: Small yearly steps keep long-term clients on board." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/swiss-grid/05.webp" alt="Slide 5 of 7: The first fixed quote felt terrifying. The second felt normal. By the tenth, we had stopped tracking hours.. Mara Lindqvist" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/swiss-grid/06.webp" alt="Slide 6 of 7: One price, one page. Our quotes now fit on a single page: the outcome, the scope and the price." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/swiss-grid/07.webp" alt="Slide 7 of 7: Send your next quote with one price. Follow @northline.studio" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="blueprint">
+      <div class="style-text">
+        <h3>Blueprint</h3>
+        <p class="summary">Every slide is a sheet of a technical drawing: white linework on blueprint blue, a fine construction grid, dimension lines, callout balloons and a title block, with red-orange redline markup.</p>
+        <p class="suits"><strong>Suits</strong> tech explainers, system design, how things work, engineering, software architecture, product teardowns.</p>
+        <div class="try">
+          <p class="try-text">Explain what happens when you open a website, as a Blueprint carousel.</p>
+          <button class="copy" type="button" data-copy="Explain what happens when you open a website, as a Blueprint carousel.">Copy</button>
+        </div>
+        <p class="meta">Demo in English, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/blueprint/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Blueprint demo carousel">
+          <li><img src="styles/blueprint/01.webp" alt="Slide 1 of 8: What happens when you open a website. From pressing Enter to the first pixels: every lookup, handshake and request, in order." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/02.webp" alt="Slide 2 of 8: First, find the address. Networks route by IP address, not by name. Unless a cache already knows the answer, your device asks a DNS resolver which address belongs to the name you typed, for example 203.0.113.7." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/03.webp" alt="Slide 3 of 8: Root, then .com, then the domain. With nothing cached, the resolver asks a root server, then a .com server, then the domain’s name server." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/04.webp" alt="Slide 4 of 8: 13. named root servers at the top of DNS" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/05.webp" alt="Slide 5 of 8: Connect, then ask. TCP handshake: Three packets: SYN, SYN-ACK, ACK. HTTP/3 uses QUIC instead.. TLS handshake: Keys agreed, certificate checked: one round trip in TLS 1.3.. HTTP request: The browser sends GET with headers like Host and cookies.. Server response: A status code such as 200, headers, then the HTML." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/06.webp" alt="Slide 6 of 8: Then the browser draws. It parses the HTML into the DOM and the CSS into the CSSOM, works out the layout and paints the pixels. Every script, style sheet and image it finds can start another request." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/07.webp" alt="Slide 7 of 8: Slow page? Don’t guess. Open your browser’s network panel: the waterfall shows how long each step took, from DNS lookup to the last byte.. Stacknotes" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/blueprint/08.webp" alt="Slide 8 of 8: The classic interview question, answered. Save this post" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="receipt">
+      <div class="style-text">
+        <h3>Receipt</h3>
+        <p class="summary">A thermal-paper receipt with torn zigzag edges on a solid color: monospace type, dashed rules, dot leaders, a big total and a barcode.</p>
+        <p class="suits"><strong>Suits</strong> money and budgeting, price breakdowns, shopping and food lists, funny lists, product launches.</p>
+        <div class="try">
+          <p class="try-text">Break down what a coffee made at home really costs, in the Receipt style.</p>
+          <button class="copy" type="button" data-copy="Break down what a coffee made at home really costs, in the Receipt style.">Copy</button>
+        </div>
+        <p class="meta">Demo in French, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/receipt/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Receipt demo carousel">
+          <li><img src="styles/receipt/01.webp" alt="Slide 1 of 8: Ce que coûte vraiment un café fait maison. J’ai tout pesé et tout compté, jusqu’au joint de la cafetière." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/02.webp" alt="Slide 2 of 8: Le kilo ne dit rien. 18 € le kilo de grains, ça fait peur en rayon. Mais personne ne boit un kilo d’un coup. Ce qui compte, c’est le prix d’une tasse. Alors j’ai sorti la balance de cuisine." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/03.webp" alt="Slide 3 of 8: Le détail d’une tasse. Café en grains: 15 g à 18 € le kilo : 0,27 €. Électricité: 5 minutes de plaque : 0,03 €. Joint et filtre: 6 € par an : 0,02 €. Cafetière: 25 € sur six ans : 0,01 €. Eau du robinet: 15 cl : moins d’un centime" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/04.webp" alt="Slide 4 of 8: 0,33 €. Total par tasse" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/05.webp" alt="Slide 5 of 8: Ma cafetière italienne. Achetée 25 € il y a six ans : à peine plus d’un centime par jour." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/06.webp" alt="Slide 6 of 8: L’écart sur un an. 2,50 € au comptoir, 0,33 € à la maison : 2,17 € d’écart chaque jour. Sur 365 jours, ça fait 792 €. Ça ne veut pas dire « plus jamais de terrasse ». Ça veut dire savoir ce qu’on paie." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/07.webp" alt="Slide 7 of 8: Le café en terrasse n’est pas le problème. Le problème, c’est de le payer par habitude au lieu de le choisir.. Le Petit Budget" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/receipt/08.webp" alt="Slide 8 of 8: À toi de faire ton ticket. Dis-moi ton prix en commentaire" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="notebook">
+      <div class="style-text">
+        <h3>Notebook</h3>
+        <p class="summary">A page from a squared school notebook: printed serif text, a highlighter, and notes in blue ink.</p>
+        <p class="suits"><strong>Suits</strong> study tips, teaching, coaching, how-to guides, book notes, self-improvement.</p>
+        <div class="try">
+          <p class="try-text">Turn my study tips into a Notebook carousel for my students.</p>
+          <button class="copy" type="button" data-copy="Turn my study tips into a Notebook carousel for my students.">Copy</button>
+        </div>
+        <p class="meta">Demo in English, 7 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/notebook/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Notebook demo carousel">
+          <li><img src="styles/notebook/01.webp" alt="Slide 1 of 7: Read less, remember more. Four habits that work better than reading the chapter again." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/notebook/02.webp" alt="Slide 2 of 7: Re-reading feels like learning. The page looks familiar the second time, so it feels known. But familiar is not the same as remembered. The test is simple: close the book. What can you write down?" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/notebook/03.webp" alt="Slide 3 of 7: 24 of 30. students scored higher after switching to self-tests" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/notebook/04.webp" alt="Slide 4 of 7: Four habits that work. Close the book: Write down everything you remember, then check.. Space it out: Review after one day, then three, then a week.. Explain it simply: Teach it to a friend in plain words.. Mix the topics: Switch subjects instead of one long block." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/notebook/05.webp" alt="Slide 5 of 7: Struggling to remember is not failing. It is the moment you are learning.. Ms. Okafor" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/notebook/06.webp" alt="Slide 6 of 7: Close it, then write. Five minutes after each chapter is enough" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/notebook/07.webp" alt="Slide 7 of 7: Try it tonight. Save this for exam week" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="pixel-quest">
+      <div class="style-text">
+        <h3>Pixel Quest</h3>
+        <p class="summary">Every slide is a screen of an 8-bit role-playing game: a starry night sky, cream dialog windows with a double pixel border, a ▶ cursor and an XP bar.</p>
+        <p class="suits"><strong>Suits</strong> gaming, tech tips, habits and productivity, learning, fun explainers, level-up challenges.</p>
+        <div class="try">
+          <p class="try-text">Make a German carousel about five small morning habits, in the Pixel Quest style.</p>
+          <button class="copy" type="button" data-copy="Make a German carousel about five small morning habits, in the Pixel Quest style.">Copy</button>
+        </div>
+        <p class="meta">Demo in German, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/pixel-quest/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Pixel Quest demo carousel">
+          <li><img src="styles/pixel-quest/01.webp" alt="Slide 1 of 8: Level up deinen Morgen. Fünf kleine Gewohnheiten. Keine davon dauert länger als fünf Minuten." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/02.webp" alt="Slide 2 of 8: Start im Tutorial. Niemand startet auf Level 99. Nimm dir nicht fünf neue Gewohnheiten auf einmal vor, sondern eine. Erst wenn sie von allein läuft, kommt die nächste dazu." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/03.webp" alt="Slide 3 of 8: Dein Inventar. Tageslicht: Kurz raus. Morgenlicht stellt deine innere Uhr.. Wasser: Das Glas steht schon abends neben dem Bett.. Handy später: Erst aufwachen, dann der Feed.. Bett machen: Zwei Minuten, Quest erledigt.. Ein Satz Plan: Welche Quest zählt heute?" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/04.webp" alt="Slide 4 of 8: Combo-Bonus. Häng die neue Gewohnheit an eine, die schon läuft: Nach dem Zähneputzen trinkst du dein Wasser. Der alte Move startet den neuen, ganz ohne Alarm im Handy." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/05.webp" alt="Slide 5 of 8: 66. Tage, bis eine Gewohnheit automatisch lief" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/06.webp" alt="Slide 6 of 8: Ein verpasster Morgen ist kein Game Over. Am nächsten Tag lädst du einfach den letzten Speicherpunkt.. Pixelpause" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/07.webp" alt="Slide 7 of 8: Abends speichern. Glas, Notizbuch, Stift, Wecker: Alles liegt bereit, bevor ich schlafe. Morgens muss ich nur noch anfangen." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/pixel-quest/08.webp" alt="Slide 8 of 8: Bereit für Level 2?. Post speichern" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="comic">
+      <div class="style-text">
+        <h3>Comic</h3>
+        <p class="summary">Every slide is a comic book page: thick black ink panels on newsprint, Ben-Day dots, yellow caption boxes, speech balloons and a slanted comic-logo title with a hard 3D shadow.</p>
+        <p class="suits"><strong>Suits</strong> storytelling, myths vs. facts, before and after, explainers for kids and parents, humor, fun science.</p>
+        <div class="try">
+          <p class="try-text">Make a French carousel about three myths about sleep, in the Comic style.</p>
+          <button class="copy" type="button" data-copy="Make a French carousel about three myths about sleep, in the Comic style.">Copy</button>
+        </div>
+        <p class="meta">Demo in French, 7 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/comic/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Comic demo carousel">
+          <li><img src="styles/comic/01.webp" alt="Slide 1 of 7: 3 idées reçues sur le sommeil. On les répète partout. Voici ce qu’on sait vraiment." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/comic/02.webp" alt="Slide 2 of 7: « Huit heures pour tous ». On l’entend comme une règle fixe. En réalité, les recommandations donnent une fourchette, pas un chiffre unique : le besoin de sommeil varie d’une personne à l’autre." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/comic/03.webp" alt="Slide 3 of 7: 7–9 h. de sommeil par nuit, recommandées aux adultes" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/comic/04.webp" alt="Slide 4 of 7: « L’alcool aide à dormir ». Le soir: Un verre de vin « pour se détendre ».. Au coucher: Il peut aider à s’endormir plus vite.. Seconde moitié de nuit: Sommeil perturbé : plus léger, plus de réveils." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/comic/05.webp" alt="Slide 5 of 7: « Je rattraperai ce week-end ». Les grasses matinées aident un peu, mais ne compensent pas entièrement une semaine de nuits courtes." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/comic/06.webp" alt="Slide 6 of 7: Le sommeil n’est pas une tirelire : ce qu’on perd en semaine ne se rattrape pas en entier le dimanche.. Bulle de Savoir" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/comic/07.webp" alt="Slide 7 of 7: Tu y croyais ?. Commente 1, 2 ou 3" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="boarding-pass">
+      <div class="style-text">
+        <h3>Boarding Pass</h3>
+        <p class="summary">Every slide is a portrait boarding pass: a band in the airline color with a flight route whose plane flies one step further with every swipe, a perforated tear line with notches, icons instead of field labels, and a barcode stub.</p>
+        <p class="suits"><strong>Suits</strong> travel tips, itineraries, events, product launches, roadmaps, career journeys.</p>
+        <div class="try">
+          <p class="try-text">Make a carousel about 48 hours in Lisbon, in German, in the Boarding Pass style.</p>
+          <button class="copy" type="button" data-copy="Make a carousel about 48 hours in Lisbon, in German, in the Boarding Pass style.">Copy</button>
+        </div>
+        <p class="meta">Demo in German, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/boarding-pass/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Boarding Pass demo carousel">
+          <li><img src="styles/boarding-pass/01.webp" alt="Slide 1 of 8: 48 Stunden in Lissabon. Meine Route für ein langes Wochenende: zu Fuß, mit der Tram und mit Pastel de Nata." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/02.webp" alt="Slide 2 of 8: Pack Schuhe mit Profil ein. Lissabon ist steil, und viele Gehwege sind mit glattem Kalkstein gepflastert, der Calçada portuguesa. Bei Regen wird sie rutschig. Turnschuhe mit gutem Profil schlagen hier jede schicke Sandale." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/03.webp" alt="Slide 3 of 8: Die Route in vier Stopps. Alfama am Morgen: Durch die Gassen, bevor die Reisegruppen kommen.. Tram 28: Die gelbe Linie quer durch die Altstadt. Früh einsteigen.. Belém am Tejo: Mosteiro dos Jerónimos und Torre de Belém.. Miradouro am Abend: In Graça liegt dir die Stadt zu Füßen." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/04.webp" alt="Slide 4 of 8: Tram 28 in der Alfama. Steil, eng und laut: Die alten Wagen quietschen durch Kurven, in die kaum ein Auto passt." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/05.webp" alt="Slide 5 of 8: 7. Hügel im Spitznamen der Stadt" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/06.webp" alt="Slide 6 of 8: Pastel de Nata, und zwar warm. Die Puddingtörtchen aus Blätterteig gibt es in fast jeder Pastelaria der Stadt. Iss sie warm, mit Zimt oder Puderzucker obendrauf. Dazu eine Bica: So heißt der Espresso in Lissabon." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/07.webp" alt="Slide 7 of 8: Plan nur den halben Tag. Den Rest verplant Lissabon für dich: mit einer Treppe, einem Miradouro und noch einer Nata.. Fernweh Notizen" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/boarding-pass/08.webp" alt="Slide 8 of 8: Speicher dir die Route. Post speichern" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="tarot">
+      <div class="style-text">
+        <h3>Tarot</h3>
+        <p class="summary">Every slide is a tarot card: an oxblood card with a double gold border and corner fans, a Roman numeral at the top, an arched inner frame with a line-art emblem and a name plate at the bottom; the last slide is the patterned card back.</p>
+        <p class="suits"><strong>Suits</strong> astrology, spirituality, self-reflection and journaling prompts, wellness rituals, books and fantasy, moon and seasonal rituals.</p>
+        <div class="try">
+          <p class="try-text">Make a Tarot carousel with five journaling questions for the evening.</p>
+          <button class="copy" type="button" data-copy="Make a Tarot carousel with five journaling questions for the evening.">Copy</button>
+        </div>
+        <p class="meta">Demo in German, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/tarot/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Tarot demo carousel">
+          <li><img src="styles/tarot/01.webp" alt="Slide 1 of 8: 5 Fragen für deinen Abend. Keine Wahrsagerei: eine Karte, ein Stift und zehn ehrliche Minuten." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/02.webp" alt="Slide 2 of 8: Die Karte sagt nichts voraus. Sie gibt dir ein Bild, an dem deine Gedanken hängen bleiben. Du ziehst eine Karte, schaust sie eine Minute an und fragst dich: Was sehe ich heute darin? Die Antwort kommt von dir." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/03.webp" alt="Slide 3 of 8: 78. Karten hat ein klassisches Tarotdeck" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/04.webp" alt="Slide 4 of 8: Fünf Fragen an deine Karte. Was fällt dir zuerst auf?: Eine Farbe, eine Geste, ein Detail.. Woran erinnert sie dich?: An einen Moment von heute oder einen Menschen.. Welches Gefühl ist da?: Benenne es, ohne es gleich zu bewerten.. Was darf heute gehen?: Eine Sorge, die bis morgen warten kann.. Was nimmst du mit?: Einen Satz, mit dem du einschlafen willst." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/05.webp" alt="Slide 5 of 8: Zehn Minuten reichen. Kerze an, Handy weg. Zieh eine Karte, beantworte die fünf Fragen in deinem Journal und leg die Karte neben dein Bett. Morgen früh liest du nach, was du geschrieben hast." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/06.webp" alt="Slide 6 of 8: Mein Abendtisch. Eine Kerze, mein Journal und die Karte des Tages. Das Handy liegt im Flur." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/07.webp" alt="Slide 7 of 8: Die Karte weiß nichts über mein Leben. Aber sie bringt mich dazu, ehrlich hinzuschauen. Mehr brauche ich abends nicht.. Mondnotizen" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/tarot/08.webp" alt="Slide 8 of 8: Probier es heute Abend. Post speichern" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="riso-zine">
+      <div class="style-text">
+        <h3>Riso Zine</h3>
+        <p class="summary">Two-color Risograph print: fluorescent pink and blue ink overprinting on grainy paper, chunky type slightly out of register.</p>
+        <p class="suits"><strong>Suits</strong> art and design, music, events, creative tips, zines and DIY, Gen-Z creators.</p>
+        <div class="try">
+          <p class="try-text">Make a Riso Zine carousel that invites people to our zine workshop.</p>
+          <button class="copy" type="button" data-copy="Make a Riso Zine carousel that invites people to our zine workshop.">Copy</button>
+        </div>
+        <p class="meta">Demo in English, 7 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/riso-zine/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Riso Zine demo carousel">
+          <li><img src="styles/riso-zine/01.webp" alt="Slide 1 of 7: Make a zine in two days. Eight pages, one sheet of paper, no budget." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/riso-zine/02.webp" alt="Slide 2 of 7: Why zines are back. A feed scrolls past. A zine stays on a shelf. Small print runs let you share work that is too weird, too personal or too slow for an algorithm." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/riso-zine/03.webp" alt="Slide 3 of 7: What you need. One sheet of paper, folded into eight pages. A pen, scissors and a photocopier. Something you care about more than likes. Friends to swap copies with" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/riso-zine/04.webp" alt="Slide 4 of 7: 120. zines printed in our shop by first-timers" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/riso-zine/05.webp" alt="Slide 5 of 7: Nobody asked for my zine about bus stops. Forty people took a copy anyway.. Juno Park" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/riso-zine/06.webp" alt="Slide 6 of 7: Fold, cut, staple. One sheet becomes an eight-page booklet in three minutes." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/riso-zine/07.webp" alt="Slide 7 of 7: Make one this weekend. Follow @inkspot.press" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="chat-thread">
+      <div class="style-text">
+        <h3>Chat Thread</h3>
+        <p class="summary">Every slide is a screen of a messaging conversation: the audience asks in white bubbles on the left, the creator answers in accent bubbles on the right, on a pale canvas tinted to match.</p>
+        <p class="suits"><strong>Suits</strong> coaching, relationships, customer stories, FAQs, marketing tips, conversations and dialogues.</p>
+        <div class="try">
+          <p class="try-text">Turn the questions couples ask me into a Chat Thread carousel.</p>
+          <button class="copy" type="button" data-copy="Turn the questions couples ask me into a Chat Thread carousel.">Copy</button>
+        </div>
+        <p class="meta">Demo in English, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/chat-thread/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Chat Thread demo carousel">
+          <li><img src="styles/chat-thread/01.webp" alt="Slide 1 of 8: Before you book a wedding photographer. The five questions couples ask us every week, answered straight." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/02.webp" alt="Slide 2 of 8: How far ahead should we book you?. Summer Saturdays book up 12 to 18 months ahead. Fridays, Sundays and winter dates often work with 4 to 6 months’ notice." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/03.webp" alt="Slide 3 of 8: 700. edited photos from a 10-hour wedding day" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/04.webp" alt="Slide 4 of 8: When do we get our photos?. A sneak peek of 40 favorites within 72 hours, while the day still feels fresh. The full gallery follows in 6 to 8 weeks." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/05.webp" alt="Slide 5 of 8: What if your camera breaks mid-ceremony?. Two cameras: Both on us all day, so a swap takes seconds.. Two cards: Every shot is saved to two memory cards at once.. Two backups: Files are copied to two drives the same night." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/06.webp" alt="Slide 6 of 8: Do we need a second photographer?. Past 100 guests, yes: one of us stays with you, the other catches every reaction." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/07.webp" alt="Slide 7 of 8: Before you book anyone, ask to see one full wedding gallery. Highlights show the best twenty frames. The full gallery shows your whole day.. Lumen &amp; Lace" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/chat-thread/08.webp" alt="Slide 8 of 8: Got a date in mind?. Send us your date" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="varsity">
+      <div class="style-text">
+        <h3>Varsity</h3>
+        <p class="summary">A letterman jacket in slides: navy wool, tackle-twill lettering with a gold ring, sleeve stripes, felt pennants, chenille patches and a knit waistband.</p>
+        <p class="suits"><strong>Suits</strong> fitness, running and sports, coaching, team building, school and college, game-day content.</p>
+        <div class="try">
+          <p class="try-text">Make a Varsity carousel with five warm-up moves for our run club.</p>
+          <button class="copy" type="button" data-copy="Make a Varsity carousel with five warm-up moves for our run club.">Copy</button>
+        </div>
+        <p class="meta">Demo in English, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/varsity/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Varsity demo carousel">
+          <li><img src="styles/varsity/01.webp" alt="Slide 1 of 8: 5 warm-up moves before your run. Five to ten minutes, no gear, right where your run starts." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/02.webp" alt="Slide 2 of 8: Start warm, not cold. Easy moving drills raise your heart rate and warm up your muscles. They take your hips, knees and ankles through the motions of running, so the first mile feels smoother and you ease into your pace." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/03.webp" alt="Slide 3 of 8: The playbook. Leg swings: 10 per leg, front to back, holding a fence.. Walking lunges: 10 slow steps, chest tall, back knee low.. High knees: 20 seconds of quick, light steps.. Butt kicks: 20 seconds, heels up toward your glutes.. Ankle hops: 20 small, springy hops on the balls of your feet." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/04.webp" alt="Slide 4 of 8: 5–10. minutes before an easy run" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/05.webp" alt="Slide 5 of 8: Long stretches come after. Held stretches fit best after your run, when you are warm. Before it, keep moving: dynamic drills get you ready, while long holds can briefly take some spring out of your legs." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/06.webp" alt="Slide 6 of 8: Nobody posts the warm-up. It’s still the ten minutes that make the first mile feel like running, not surviving.. Northside Run Club" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/07.webp" alt="Slide 7 of 8: Lace up, then loosen up. No track needed. A quiet sidewalk or a park path works just as well." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/varsity/08.webp" alt="Slide 8 of 8: See you at the start line. Save this post" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="style" id="bauhaus">
+      <div class="style-text">
+        <h3>Bauhaus</h3>
+        <p class="summary">Every slide is a Bauhaus poster: circles, squares, triangles, semicircles and quarter circles in red, yellow, blue and black on cool grey paper, with heavy geometric type standing on, beside or inside the shapes.</p>
+        <p class="suits"><strong>Suits</strong> design, architecture, art history, education, culture, creative process.</p>
+        <div class="try">
+          <p class="try-text">Make a French carousel with five composition lessons from the Bauhaus, in the Bauhaus style.</p>
+          <button class="copy" type="button" data-copy="Make a French carousel with five composition lessons from the Bauhaus, in the Bauhaus style.">Copy</button>
+        </div>
+        <p class="meta">Demo in French, 8 slides. <a href="https://github.com/shango-tek/swipe-styles/blob/main/plugin/skills/swipe-styles/styles/bauhaus/STYLE.md">How to write for it</a></p>
+      </div>
+      <div class="strip" data-strip>
+        <ul class="strip-track" tabindex="0" aria-label="Bauhaus demo carousel">
+          <li><img src="styles/bauhaus/01.webp" alt="Slide 1 of 8: Cinq leçons du Bauhaus pour mieux composer. L’école n’a vécu que quatorze ans. Ses règles marchent encore sur vos affiches et vos posts." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/02.webp" alt="Slide 2 of 8: 14. ans d’existence, de 1919 à 1933" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/03.webp" alt="Slide 3 of 8: Partez de trois formes. Au Bauhaus, Kandinsky faisait travailler ses élèves sur le cercle, le carré et le triangle. Avant de chercher un style, posez ces trois formes sur la page et regardez comment elles se répondent." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/04.webp" alt="Slide 4 of 8: Une forme, un rôle. Le cercle: Il attire l’œil : gardez-le pour l’élément clé.. Le carré: Il pose et stabilise : il porte le texte.. Le triangle: Il donne une direction : il pointe vers l’action." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/05.webp" alt="Slide 5 of 8: Trois couleurs, pas plus. Rouge, jaune, bleu, et le noir pour le texte. Avec une palette aussi courte, chaque couleur a un rôle. Gardez la plus vive pour ce qu’on doit voir en premier." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/06.webp" alt="Slide 6 of 8: Leçon 4 : la grille d’abord. Fenêtres en bandes, toit plat, aucun ornement : la trame fait toute la composition." width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/07.webp" alt="Slide 7 of 8: Notre cinquième leçon tient en une phrase : retirez tout ce qui ne sert pas la lecture.. Atelier Forme" width="640" height="800" loading="lazy" decoding="async"></li>
+          <li><img src="styles/bauhaus/08.webp" alt="Slide 8 of 8: À vous de composer. Enregistrez ce post" width="640" height="800" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </article>
+    </section>
+
+    <section class="notes">
+      <h2>Good to know</h2>
+      <dl>
+        <div><dt>Your brand</dt><dd>Add your handle, accent color and logo. Each style shows them in its own way and keeps text readable on your color.</dd></div>
+        <div><dt>Any language</dt><dd>The layouts contain no fixed words. Long German and French words are hyphenated.</dd></div>
+        <div><dt>Sizes</dt><dd>4:5 (1080&nbsp;×&nbsp;1350) for Instagram and LinkedIn, or square (1080&nbsp;×&nbsp;1080).</dd></div>
+        <div><dt>Checked</dt><dd>The renderer reports text that does not fit, with the slide and the field, and Claude rewrites it.</dd></div>
+        <div><dt>Runs on your computer</dt><dd>Rendering happens locally with Playwright. Nothing is uploaded and nothing is posted for you.</dd></div>
+        <div><dt>Needs</dt><dd>Claude Code and Node.js 20 or newer.</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>MIT license. The fonts are open-source (SIL Open Font License); each keeps its license file. <a href="https://github.com/shango-tek/swipe-styles">Source on GitHub</a>.</p>
+  </footer>
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

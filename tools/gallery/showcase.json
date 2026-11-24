@@ -1,0 +1,14 @@
+{
+  "style": "swiss-grid",
+  "lang": "en",
+  "topic": "The cover slide the gallery and the README show in every style. Keep it within the smallest word limits of all styles.",
+  "brand": { "name": "Your Brand", "handle": "@yourhandle" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Freelance basics",
+      "title": "Price your first project right",
+      "subtitle": "Three rules I wish someone had told me in year one."
+    }
+  ]
+}
