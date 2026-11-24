@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <title>A pair of running shoes at the start line of a blue track, stadium lights behind</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1833"/>
+      <stop offset="1" stop-color="#1b315e"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#284884"/>
+      <stop offset="1" stop-color="#3961a8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6d6" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#fff6d6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dim">
+      <feColorMatrix values="0.82 0 0 0 0  0 0.85 0 0 0  0 0 0.9 0 0  0 0 0 1 0"/>
+    </filter>
+    <!-- One running shoe, side view, toe to the right. About 545 by 230. -->
+    <g id="shoe">
+      <!-- outsole -->
+      <path d="M10 196 C6 214 20 228 46 228 L472 228 C510 228 534 214 544 190 L538 182 C522 200 498 208 468 208 L42 208 C26 208 14 203 10 196 Z" fill="#0b1833"/>
+      <!-- midsole with a gold stripe -->
+      <path d="M6 148 L12 198 C16 206 28 210 44 210 L468 210 C500 210 524 200 540 184 C532 168 514 160 496 158 L60 154 C40 153 20 151 6 148 Z" fill="#f1e8d2"/>
+      <path d="M14 182 C120 178 240 194 360 186 C430 182 490 178 534 176 L538 184 C500 192 440 196 360 198 C240 204 120 192 16 194 Z" fill="#f6b31a"/>
+      <!-- upper -->
+      <path d="M14 156 C2 118 4 70 20 38 C27 24 40 18 58 20 C92 24 118 44 140 60 C150 48 160 36 178 34 C194 34 202 44 206 56 C262 84 340 102 410 116 C470 128 518 142 536 168 C540 174 538 180 532 182 C470 172 300 164 14 156 Z" fill="#fff9ec"/>
+      <!-- midfoot saddle, heel counter, toe cap -->
+      <path d="M150 74 C190 96 214 126 214 162 L330 166 C334 146 350 128 380 116 C320 104 262 88 206 58 C190 62 168 66 150 74 Z" fill="#dfe5ef"/>
+      <path d="M14 156 C2 118 4 70 20 38 C27 24 40 18 58 20 C64 21 70 23 76 26 C60 60 62 110 86 158 Z" fill="#f6b31a"/>
+      <path d="M440 122 C490 132 522 146 536 168 C540 174 538 180 532 182 C510 178 486 176 456 175 C470 158 466 138 440 122 Z" fill="#dfe5ef"/>
+      <!-- collar lining -->
+      <path d="M58 20 C92 24 118 44 140 60 C128 62 112 56 98 46 C84 36 70 28 58 20 Z" fill="#13254a"/>
+      <!-- laces -->
+      <path d="M198 54 L189 81 M236 66 L227 93 M274 78 L265 105 M312 90 L303 117 M350 102 L341 129" fill="none" stroke="#13254a" stroke-width="9" stroke-linecap="round"/>
+      <!-- heel tab -->
+      <rect x="14" y="30" width="14" height="40" rx="6" fill="#13254a"/>
+    </g>
+  </defs>
+
+  <!-- stands and sky -->
+  <rect width="1000" height="360" fill="url(#sky)"/>
+  <g fill="#14284f">
+    <rect y="232" width="1000" height="34"/>
+    <rect y="284" width="1000" height="34"/>
+  </g>
+  <rect y="342" width="1000" height="10" fill="#f6b31a"/>
+  <!-- floodlights -->
+  <circle cx="790" cy="120" r="150" fill="url(#glow)"/>
+  <g transform="translate(720 80)">
+    <rect x="-6" y="-6" width="152" height="92" rx="8" fill="#0b1833"/>
+    <g fill="#fff6d6">
+      <circle cx="18" cy="18" r="12"/><circle cx="54" cy="18" r="12"/><circle cx="90" cy="18" r="12"/><circle cx="126" cy="18" r="12"/>
+      <circle cx="18" cy="58" r="12"/><circle cx="54" cy="58" r="12"/><circle cx="90" cy="58" r="12"/><circle cx="126" cy="58" r="12"/>
+    </g>
+    <rect x="66" y="86" width="10" height="190" fill="#0b1833"/>
+  </g>
+
+  <!-- track: lane lines get further apart toward the viewer -->
+  <rect y="352" width="1000" height="648" fill="url(#track)"/>
+  <g fill="#eef2f8">
+    <rect y="388" width="1000" height="4"/>
+    <rect y="440" width="1000" height="6"/>
+    <rect y="520" width="1000" height="8"/>
+    <rect y="648" width="1000" height="11"/>
+    <rect y="900" width="1000" height="16"/>
+  </g>
+  <!-- start line, running toward the stands -->
+  <path d="M862 1000 L912 1000 L756 352 L744 352 Z" fill="#eef2f8"/>
+
+  <!-- shadows -->
+  <ellipse cx="520" cy="852" rx="370" ry="30" fill="#1c3566" opacity="0.85"/>
+  <ellipse cx="330" cy="722" rx="270" ry="22" fill="#1c3566" opacity="0.75"/>
+
+  <!-- the pair: the back shoe smaller and a little darker -->
+  <use href="#shoe" transform="translate(70 488)" filter="url(#dim)"/>
+  <use href="#shoe" transform="translate(160 562) scale(1.3)"/>
+</svg>

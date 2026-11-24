@@ -1,0 +1,32 @@
+{
+  "id": "tarot",
+  "name": "Tarot",
+  "summary": "Every slide is a tarot card: an oxblood card with a double gold border and corner fans, a Roman numeral at the top, an arched inner frame with a line-art emblem and a name plate at the bottom; the last slide is the patterned card back.",
+  "category": "Mystic",
+  "suits": ["astrology", "spirituality", "self-reflection and journaling prompts", "wellness rituals", "books and fantasy", "moon and seasonal rituals"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#C9A44C",
+    "use": "the antique gold of all line art: the card border and corner fans, the numeral, the arch, the emblems, the plates, the star markers, the small cards of the spread, the gold action plate and *emphasis*"
+  },
+  "fonts": [
+    { "family": "Cinzel", "license": "OFL-1.1", "folder": "fonts/cinzel" },
+    { "family": "EB Garamond", "license": "OFL-1.1", "folder": "fonts/eb-garamond" }
+  ],
+  "limits": {
+    "cover.title": { "words": 6 },
+    "cover.subtitle": { "words": 14 },
+    "text.title": { "words": 6 },
+    "text.body": { "words": 40 },
+    "points.title": { "words": 5 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 24 },
+    "stat.label": { "words": 7 },
+    "stat.note": { "words": 16 },
+    "image.title": { "words": 5 },
+    "image.caption": { "words": 14 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 16 },
+    "cta.action": { "words": 4 }
+  }
+}

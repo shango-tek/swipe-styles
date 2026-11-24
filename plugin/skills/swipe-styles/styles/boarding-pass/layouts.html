@@ -1,0 +1,272 @@
+<!-- Boarding Pass layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     Every slide is the pass itself: the band in the airline color at the top (with the flight route and
+     the plane at --progress), the ticket area, a perforated tear line with notches, and the stub.
+     .bd-band and .bd-perf are decoration; all text sits in .safe. -->
+
+<template data-type="cover">
+  <section class="slide bd bd-cover">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="bd-code bd-cover-code" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <img class="bd-logo" data-field="logo">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <h1 class="bd-display" data-field="title" data-fit-min="76"></h1>
+        <p class="bd-sub" data-field="subtitle" data-fit-min="36"></p>
+        <div class="bd-fields">
+          <p class="bd-field bd-f-date" data-field="kicker" data-fit-min="26"></p>
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat bd-f-end" data-field="counter"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide bd bd-text">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <p class="bd-field bd-f-clock bd-kicker" data-field="kicker" data-fit-min="26"></p>
+        <h2 class="bd-h2" data-field="title" data-fit-min="60"></h2>
+        <p class="bd-body" data-field="body" data-fit-min="32"></p>
+      </div>
+      <footer class="bd-stub">
+        <div class="bd-stub-fields">
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat" data-field="counter"></p>
+        </div>
+        <div class="bd-code" aria-hidden="true"></div>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide bd bd-points">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <p class="bd-field bd-f-clock bd-kicker" data-field="kicker" data-fit-min="26"></p>
+        <h2 class="bd-h2" data-field="title" data-fit-min="56"></h2>
+        <ol class="bd-stops" data-list="items">
+          <li class="bd-stop" data-item>
+            <span class="bd-stop-n" data-item-field="n"></span>
+            <span class="bd-stop-title" data-item-field="title" data-fit-min="34"></span>
+            <span class="bd-stop-text" data-item-field="text" data-fit-min="29"></span>
+          </li>
+        </ol>
+      </div>
+      <footer class="bd-stub">
+        <div class="bd-stub-fields">
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat" data-field="counter"></p>
+        </div>
+        <div class="bd-code" aria-hidden="true"></div>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide bd bd-quote-slide">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <div class="bd-msg">
+          <blockquote class="bd-quote" data-field="quote" data-fit-min="38"></blockquote>
+        </div>
+        <div class="bd-cite">
+          <p class="bd-field bd-f-person bd-author" data-field="author" data-fit-min="28"></p>
+          <p class="bd-role" data-field="role" data-fit-min="26"></p>
+        </div>
+      </div>
+      <footer class="bd-stub">
+        <div class="bd-stub-fields">
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat" data-field="counter"></p>
+        </div>
+        <div class="bd-code" aria-hidden="true"></div>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide bd bd-stat">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <p class="bd-field bd-f-clock bd-kicker" data-field="kicker" data-fit-min="26"></p>
+        <div class="bd-statrow">
+          <div class="bd-board">
+            <p class="bd-value" data-field="value" data-fit-min="110"></p>
+          </div>
+          <p class="bd-label" data-field="label" data-fit-min="44"></p>
+        </div>
+        <p class="bd-note" data-field="note" data-fit-min="30"></p>
+      </div>
+      <footer class="bd-stub">
+        <div class="bd-stub-fields">
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat" data-field="counter"></p>
+        </div>
+        <div class="bd-code" aria-hidden="true"></div>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide bd bd-image">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <figure class="bd-card">
+          <img data-field="src">
+          <svg class="bd-postmark" viewBox="0 0 260 150" width="286" height="165" aria-hidden="true">
+            <circle cx="186" cy="75" r="64" stroke-width="5" />
+            <circle cx="186" cy="75" r="52" stroke-width="2.5" stroke-dasharray="6 5" />
+            <path stroke-width="5" d="M0 40c16-12 32-12 48 0s32 12 48 0 32-12 48 0M0 62c16-12 32-12 48 0s32 12 48 0 32-12 48 0M0 84c16-12 32-12 48 0s32 12 48 0 32-12 48 0M0 106c16-12 32-12 48 0s32 12 48 0 32-12 48 0" />
+            <path class="bd-postmark-plane" transform="translate(160 49) scale(.82) rotate(-20 32 32)" d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" />
+          </svg>
+        </figure>
+        <h2 class="bd-img-title" data-field="title" data-fit-min="40"></h2>
+        <p class="bd-caption" data-field="caption" data-fit-min="28"></p>
+      </div>
+      <footer class="bd-stub">
+        <div class="bd-stub-fields">
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat" data-field="counter"></p>
+        </div>
+        <div class="bd-code" aria-hidden="true"></div>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide bd bd-cta">
+    <div class="bd-band" aria-hidden="true">
+      <div class="bd-route">
+        <svg class="bd-route-svg" viewBox="0 0 1080 150" width="1080" height="150">
+          <path class="bd-todo" d="M96 126 Q540 -70 984 126" />
+          <path class="bd-done" d="M96 126 Q540 -70 984 126" pathLength="1" />
+          <circle class="bd-from" cx="96" cy="126" r="12" />
+          <circle class="bd-to" cx="984" cy="126" r="13" />
+          <circle class="bd-to-dot" cx="984" cy="126" r="5" />
+        </svg>
+        <svg class="bd-plane" viewBox="0 0 64 64" width="92" height="92"><path d="M60 32c0-2.2-2.6-3.6-6-3.6H41L27 6h-6l7.5 22.4H14L9 19H5l3 13-3 13h4l5-9.4h14.5L21 58h6l14-22.4h13c3.4 0 6-1.4 6-3.6z" /></svg>
+      </div>
+    </div>
+    <div class="bd-perf" aria-hidden="true"></div>
+    <div class="safe">
+      <header class="bd-head">
+        <img class="bd-logo" data-field="logo">
+        <p class="bd-name" data-field="name"></p>
+      </header>
+      <div class="bd-main">
+        <h2 class="bd-cta-title" data-field="title" data-fit-min="64"></h2>
+        <p class="bd-cta-text" data-field="text" data-fit-min="32"></p>
+        <p class="bd-action" data-field="action" data-fit-min="34"></p>
+      </div>
+      <footer class="bd-stub">
+        <div class="bd-code" aria-hidden="true"></div>
+        <div class="bd-stub-fields">
+          <p class="bd-field bd-f-person" data-field="handle"></p>
+          <p class="bd-field bd-f-seat" data-field="counter"></p>
+        </div>
+      </footer>
+    </div>
+  </section>
+</template>

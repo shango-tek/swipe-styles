@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <!-- A bedroom at night, drawn like a comic panel: flat greys and ink outlines, for the halftone. -->
+  <rect width="1000" height="1000" fill="#a9a9a9"/>
+  <rect y="700" width="1000" height="300" fill="#6e6e6e"/>
+  <g stroke="#111" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" transform="translate(0 60)">
+    <!-- wall and floor -->
+    <path d="M-10 640 H1010 V960 H-10 Z" fill="#6e6e6e"/>
+    <path d="M-10 640 H1010" fill="none"/>
+    <!-- floor boards -->
+    <path d="M120 700 L50 960 M330 700 L296 960 M560 700 L560 960 M790 700 L840 960" fill="none" stroke-width="5"/>
+
+    <!-- window: frame, night sky, moon, stars -->
+    <rect x="520" y="70" width="400" height="430" fill="#e9e9e9"/>
+    <rect x="550" y="100" width="340" height="370" fill="#3c3c3c"/>
+    <path d="M790 150 a72 72 0 1 0 64 106 a58 58 0 1 1 -64 -106 Z" fill="#fafafa"/>
+    <g fill="#fafafa" stroke-width="5">
+      <path d="M612 160 l8 18 l18 8 l-18 8 l-8 18 l-8 -18 l-18 -8 l18 -8 Z"/>
+      <path d="M660 330 l6 13 l13 6 l-13 6 l-6 13 l-6 -13 l-13 -6 l13 -6 Z"/>
+      <path d="M845 395 l5 11 l11 5 l-11 5 l-5 11 l-5 -11 l-11 -5 l11 -5 Z"/>
+    </g>
+    <path d="M720 100 V470 M550 285 H890" fill="none" stroke="#e9e9e9" stroke-width="22"/>
+    <rect x="550" y="100" width="340" height="370" fill="none"/>
+    <path d="M709 100 V470 M731 100 V470 M550 274 H890 M550 296 H890" fill="none" stroke-width="5"/>
+    <!-- sill -->
+    <rect x="495" y="500" width="450" height="34" fill="#d4d4d4"/>
+
+    <!-- moonlight falling on the bed -->
+    <path d="M550 470 L890 470 L720 960 L120 960 Z" fill="#fff" fill-opacity="0.22" stroke="none"/>
+
+    <!-- bed: headboard, mattress, pillow, blanket with a sleeper -->
+    <path d="M40 420 Q40 360 100 360 H190 Q250 360 250 420 V700 H40 Z" fill="#555"/>
+    <path d="M60 440 H230" fill="none" stroke-width="5"/>
+    <rect x="40" y="610" width="660" height="110" rx="14" fill="#cfcfcf"/>
+    <path d="M90 600 Q80 520 160 512 Q250 506 262 560 Q270 610 210 616 Z" fill="#f2f2f2"/>
+    <path d="M200 616 Q230 540 330 548 Q420 470 520 540 Q610 540 700 600 V680 Q690 700 660 702 H200 Z" fill="#8c8c8c"/>
+    <path d="M330 560 Q350 610 330 660 M470 548 Q500 620 480 690 M600 580 Q610 630 600 690" fill="none" stroke-width="5"/>
+    <path d="M200 616 Q260 600 300 620" fill="none" stroke-width="5"/>
+    <!-- bed legs -->
+    <path d="M60 720 V770 M680 720 V770" fill="none" stroke-width="14"/>
+
+    <!-- nightstand with an alarm clock -->
+    <rect x="760" y="560" width="190" height="200" fill="#7c7c7c"/>
+    <path d="M760 640 H950" fill="none" stroke-width="5"/>
+    <circle cx="855" cy="603" r="7" fill="#111" stroke="none"/>
+    <circle cx="855" cy="700" r="7" fill="#111" stroke="none"/>
+    <circle cx="830" cy="508" r="48" fill="#f2f2f2"/>
+    <path d="M830 508 V480 M830 508 L850 520" fill="none" stroke-width="7"/>
+    <path d="M796 474 a20 20 0 0 1 22 -20 M864 474 a20 20 0 0 0 -22 -20" fill="#555"/>
+    <path d="M800 552 L792 562 M860 552 L868 562" fill="none" stroke-width="7"/>
+
+    <!-- sleep marks -->
+    <g fill="none" stroke-width="10">
+      <path d="M232 430 H272 L232 470 H272"/>
+      <path d="M300 360 H352 L300 412 H352"/>
+      <path d="M382 270 H446 L382 334 H446"/>
+    </g>
+  </g>
+</svg>

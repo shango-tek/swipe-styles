@@ -1,0 +1,118 @@
+<!-- Pixel Quest layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     .pq-box elements are the game's dialog windows; .pq-scene and .pq-moon are decoration. -->
+
+<template data-type="cover">
+  <section class="slide pq pq-cover">
+    <div class="pq-scene" aria-hidden="true"></div>
+    <div class="safe">
+      <img class="pq-logo" data-field="logo">
+      <div class="pq-screen">
+        <h1 class="pq-display" data-field="title" data-fit-min="64"></h1>
+        <p class="pq-menu" data-field="kicker" data-fit-min="40"></p>
+        <div class="pq-box pq-sub-box" data-if="subtitle">
+          <p class="pq-sub" data-field="subtitle" data-fit-min="38"></p>
+        </div>
+      </div>
+      <div class="pq-room" aria-hidden="true"></div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide pq pq-text">
+    <div class="safe">
+      <p class="pq-kicker" data-field="kicker"></p>
+      <h2 class="pq-title" data-field="title" data-fit-min="48"></h2>
+      <div class="pq-sky" aria-hidden="true"><div class="pq-moon"></div></div>
+      <div class="pq-box pq-says">
+        <p class="pq-body" data-field="body" data-fit-min="36"></p>
+      </div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide pq pq-points">
+    <div class="safe">
+      <p class="pq-kicker" data-field="kicker"></p>
+      <h2 class="pq-title" data-field="title" data-fit-min="48"></h2>
+      <div class="pq-box pq-inventory">
+        <ul class="pq-list" data-list="items">
+          <li class="pq-item" data-item>
+            <span class="pq-icon" aria-hidden="true"></span>
+            <span class="pq-item-body">
+              <span class="pq-item-title" data-item-field="title" data-fit-min="40"></span>
+              <span class="pq-item-text" data-item-field="text" data-fit-min="33"></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide pq pq-quote-slide">
+    <div class="safe">
+      <div class="pq-sky" aria-hidden="true"><div class="pq-moon"></div></div>
+      <div class="pq-box pq-says pq-speech">
+        <p class="pq-tag" data-field="author" data-fit-min="40"></p>
+        <blockquote class="pq-quote" data-field="quote" data-fit-min="44"></blockquote>
+        <p class="pq-role" data-field="role"></p>
+      </div>
+      <div class="pq-sky" aria-hidden="true"></div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide pq pq-stat">
+    <div class="safe">
+      <p class="pq-kicker" data-field="kicker"></p>
+      <div class="pq-score">
+        <p class="pq-value" data-field="value" data-fit-min="96"></p>
+        <div class="pq-xp" aria-hidden="true"></div>
+        <p class="pq-label" data-field="label" data-fit-min="40"></p>
+      </div>
+      <div class="pq-box pq-says" data-if="note">
+        <p class="pq-note" data-field="note" data-fit-min="38"></p>
+      </div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide pq pq-image">
+    <div class="safe">
+      <figure class="pq-frame"><img data-field="src"></figure>
+      <div class="pq-box pq-says pq-find">
+        <h2 class="pq-img-title" data-field="title" data-fit-min="40"></h2>
+        <p class="pq-caption" data-field="caption" data-fit-min="36"></p>
+      </div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide pq pq-cta">
+    <div class="pq-scene pq-scene-end" aria-hidden="true"></div>
+    <div class="safe">
+      <img class="pq-logo" data-field="logo">
+      <div class="pq-screen">
+        <h2 class="pq-display pq-cta-title" data-field="title" data-fit-min="64"></h2>
+        <p class="pq-cta-text" data-field="text" data-fit-min="36"></p>
+        <div class="pq-box pq-menu-box" data-if="action">
+          <p class="pq-menu pq-action" data-field="action" data-fit-min="40"></p>
+        </div>
+      </div>
+      <div class="pq-room" aria-hidden="true"></div>
+      <footer class="pq-hud"><span class="pq-handle" data-field="handle"></span><span class="pq-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>

@@ -1,0 +1,843 @@
+/* Blueprint: every slide is a sheet of a technical drawing. White linework on blueprint blue, a fine
+   construction grid, a title block in the corner, and red-orange redline markup as the accent.
+   Type: IBM Plex Sans Condensed (titles, body) and IBM Plex Mono (labels, numbers), both OFL.
+   Everything sits on a 27px grid: 40 x 50 cells on a 1080 x 1350 sheet, 40 x 40 on the square. */
+
+@font-face {
+  font-family: "IBM Plex Sans Condensed";
+  src: url("../../fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Condensed";
+  src: url("../../fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Condensed";
+  src: url("../../fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Condensed";
+  src: url("../../fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../../fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../../fonts/ibm-plex-mono/IBMPlexMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../../fonts/ibm-plex-mono/IBMPlexMono-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --accent: #ff6b4a;
+  /* The redline ink. A dark brand color is lifted to at least this lightness (same hue and chroma),
+     so the markup stays visible on the blue paper. The default accent passes through unchanged. */
+  --red: oklch(from var(--accent) max(l, 0.7) c h);
+  --paper: #1b4889;
+  --paper-deep: #163b72;
+  --line: #ffffff;
+  --cyan: #b9e0f5;
+  --grid-minor: rgb(255 255 255 / 0.06);
+  --grid-major: rgb(255 255 255 / 0.13);
+  --u: 27px;
+  --safe: 81px;
+  --sans: "IBM Plex Sans Condensed", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+
+  --svg-reg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='white' stroke-width='2'%3E%3Ccircle cx='30' cy='30' r='17'/%3E%3Cpath d='M30 2 V58 M2 30 H58'/%3E%3C/g%3E%3Cpath fill='white' d='M30 30 V21 A9 9 0 0 1 39 30 Z M30 30 V39 A9 9 0 0 1 21 30 Z'/%3E%3C/svg%3E");
+  --svg-proj: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 44'%3E%3Cg fill='none' stroke='white' stroke-linejoin='round'%3E%3Cg stroke-width='2.4'%3E%3Ccircle cx='19' cy='22' r='15'/%3E%3Ccircle cx='19' cy='22' r='7'/%3E%3Cpath d='M44 15 L84 7 V37 L44 29 Z'/%3E%3C/g%3E%3Cpath stroke-width='1.2' stroke-dasharray='8 3 2 3' d='M1 22 H87 M19 3 V41'/%3E%3C/g%3E%3C/svg%3E");
+  --svg-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4.2 3.3'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- The sheet ---------- */
+
+.bp {
+  container-type: size;
+  background: radial-gradient(ellipse 85% 75% at 50% 42%, var(--paper) 58%, var(--paper-deep) 100%);
+  color: var(--line);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+.bp .safe {
+  z-index: 2;
+}
+
+/* The drawing frame two grid cells in from the edge, with zone ticks in the margin around it. */
+.bp-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bp-sheet::before,
+.bp-sheet::after {
+  content: "";
+  position: absolute;
+}
+
+.bp-sheet::before {
+  inset: 34px 54px;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.55) 2px, transparent 2px) 80px 0 / 135px 20px repeat-x,
+    linear-gradient(90deg, rgb(255 255 255 / 0.55) 2px, transparent 2px) 80px 100% / 135px 20px repeat-x;
+}
+
+.bp-sheet::after {
+  inset: 54px 34px;
+  background:
+    linear-gradient(rgb(255 255 255 / 0.55) 2px, transparent 2px) 0 80px / 20px 135px repeat-y,
+    linear-gradient(rgb(255 255 255 / 0.55) 2px, transparent 2px) 100% 80px / 20px 135px repeat-y;
+}
+
+/* The construction grid lives inside the frame: fine lines every 27px, stronger ones every 135px. */
+.bp-frame {
+  position: absolute;
+  inset: 54px;
+  border: 3px solid rgb(255 255 255 / 0.9);
+  background:
+    linear-gradient(var(--grid-major) 2px, transparent 2px) -3px 77px / 135px 135px,
+    linear-gradient(90deg, var(--grid-major) 2px, transparent 2px) 77px -3px / 135px 135px,
+    linear-gradient(var(--grid-minor) 1px, transparent 1px) -3px -3px / 27px 27px,
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px) -3px -3px / 27px 27px;
+}
+
+/* The element just above the title block keeps a gap to it. */
+.bp .safe > :nth-last-child(2) {
+  margin-bottom: 54px;
+}
+
+/* Redline emphasis: the word stays white, an engineer's red line runs under it. */
+.bp em {
+  font-style: normal;
+  text-decoration-line: underline;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 0.085em;
+  text-underline-offset: 0.12em;
+  text-decoration-skip-ink: none;
+}
+
+/* ---------- Title block (footer) ---------- */
+
+.bp-tb {
+  display: flex;
+  align-self: flex-end;
+  height: 81px;
+  margin: auto -27px -27px 0;
+  border: 3px solid var(--line);
+  background: var(--paper);
+  font-family: var(--mono);
+  line-height: 1;
+}
+
+.bp-tb-cell {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-left: 2px solid var(--line);
+}
+
+.bp-tb-cell:first-child {
+  border-left: 0;
+}
+
+.bp-tb-cell > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.bp-tb-proj {
+  width: 116px;
+  background: var(--svg-proj) center / 72px auto no-repeat;
+}
+
+.bp-tb-logo img {
+  height: 46px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+}
+
+.bp-tb-handle {
+  min-width: 300px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.bp-tb-count {
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Dimension lines (cover kicker, stat value) ---------- */
+
+.bp-dim {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Extension lines at both ends. */
+.bp-dim::before,
+.bp-dim::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -12px;
+  width: 2px;
+  background: var(--line);
+}
+
+.bp-dim::before {
+  left: 0;
+}
+
+.bp-dim::after {
+  right: 0;
+}
+
+.bp-dim-line {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 64px;
+  height: 2px;
+  background: var(--line);
+}
+
+/* Arrowheads: narrow filled triangles, 3:1, tips on the extension lines. */
+.bp-dim-start::before,
+.bp-dim-end::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 36px;
+  height: 14px;
+  background: var(--line);
+}
+
+.bp-dim-start::before {
+  left: 0;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.bp-dim-end::after {
+  right: 0;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+}
+
+/* ---------- Cover ---------- */
+
+/* An isometric part, drawn inline. It takes whatever room the title leaves above it, up to 420px,
+   so a long title makes it smaller instead of running into it. */
+.bp-iso {
+  flex: 1 1 0;
+  min-height: 0;
+  margin: 0 0 40px;
+}
+
+.bp-iso svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 420px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bp-iso-visible {
+  stroke: var(--line);
+  stroke-width: 3.2;
+}
+
+.bp-iso-hidden {
+  stroke: var(--cyan);
+  stroke-width: 2;
+  stroke-dasharray: 10 7;
+}
+
+.bp-iso-centre {
+  stroke: var(--cyan);
+  stroke-width: 1.6;
+  stroke-dasharray: 26 6 4 6;
+}
+
+/* A redline loop around the hole, as if a reviewer circled it. */
+.bp-iso-redline {
+  stroke: var(--red);
+  stroke-width: 6;
+}
+
+.bp-reg {
+  position: absolute;
+  z-index: 1;
+  width: 54px;
+  height: 54px;
+  background: var(--svg-reg) center / contain no-repeat;
+  opacity: 0.8;
+}
+
+.bp-reg-1 {
+  top: 81px;
+  left: 81px;
+}
+
+.bp-reg-2 {
+  bottom: 81px;
+  left: 81px;
+}
+
+.bp-display {
+  font-size: 128px;
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.012em;
+}
+
+.bp-dim-cover {
+  margin-top: 16px;
+  padding-top: 34px;
+}
+
+.bp-dim-text {
+  max-width: 68%;
+  margin: 0 22px;
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.bp-sub {
+  max-width: 820px;
+  margin-top: 46px;
+  font-size: 40px;
+  line-height: 1.3;
+  color: var(--cyan);
+}
+
+/* ---------- View titles (text, points, image) ----------
+   As on a drawing: the title above a heavy rule, a note below it, and on text and image slides a
+   detail bubble with the slide number sitting on the left end of the rule. */
+
+.bp-view {
+  position: relative;
+}
+
+.bp-view-bubble {
+  padding-left: 150px;
+}
+
+.bp-h2 {
+  font-size: 96px;
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.bp-view-rule {
+  position: relative;
+  height: 6px;
+  margin-top: 24px;
+  background: var(--line);
+}
+
+/* A thin second line under the heavy one. */
+.bp-view-rule::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 12px;
+  height: 2px;
+  background: var(--line);
+}
+
+.bp-view-bubble .bp-view-rule {
+  margin-left: -26px;
+}
+
+.bp-view-bubble .bp-view-rule:last-child {
+  margin-bottom: 62px;
+}
+
+.bp-bubble {
+  position: absolute;
+  top: 50%;
+  left: -124px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 124px;
+  height: 124px;
+  margin-top: -62px;
+  border: 4px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.bp-view-note {
+  margin-top: 30px;
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--cyan);
+}
+
+/* ---------- Text ---------- */
+
+/* The body sits in the middle of the free sheet below the view title. */
+.bp-body {
+  max-width: 820px;
+  margin-top: auto;
+  margin-left: 150px;
+  padding-top: 72px;
+  font-size: 47px;
+  line-height: 1.36;
+}
+
+/* ---------- Points: a parts list with balloons and leader lines ---------- */
+
+.bp-parts {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 36px;
+  margin-top: 54px;
+}
+
+.bp-part {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  column-gap: 74px;
+  align-items: start;
+}
+
+/* The leader: a thin line from the balloon, ending in a dot at the item. */
+.bp-part::before {
+  content: "";
+  position: absolute;
+  top: 37px;
+  left: 76px;
+  width: 52px;
+  height: 2px;
+  background: var(--line);
+}
+
+.bp-part::after {
+  content: "";
+  position: absolute;
+  top: 33px;
+  left: 124px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.bp-balloon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border: 3px solid var(--line);
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.bp-part-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding-top: 12px;
+}
+
+.bp-part-title {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.06;
+}
+
+.bp-part-text {
+  font-size: 36px;
+  line-height: 1.32;
+  color: var(--cyan);
+}
+
+/* An item given as a plain string: one line of text, set larger and white. */
+.bp-part-body > .bp-part-text:only-child {
+  font-size: 44px;
+  line-height: 1.26;
+  color: var(--line);
+}
+
+/* ---------- Quote: a redline note, a dashed box with a leader to the author ---------- */
+
+.bp-notebox {
+  position: relative;
+  margin-top: auto;
+  padding: 72px 60px 64px;
+  background:
+    linear-gradient(90deg, var(--red) 20px, transparent 20px) 0 0 / 32px 4px repeat-x,
+    linear-gradient(90deg, var(--red) 20px, transparent 20px) 0 100% / 32px 4px repeat-x,
+    linear-gradient(var(--red) 20px, transparent 20px) 0 0 / 4px 32px repeat-y,
+    linear-gradient(var(--red) 20px, transparent 20px) 100% 0 / 4px 32px repeat-y;
+}
+
+.bp-quote {
+  font-size: 66px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+}
+
+.bp-cite {
+  position: relative;
+  margin-top: 54px;
+  padding-left: 150px;
+}
+
+/* The leader from the note box down to the author, ending in a dot. */
+.bp-cite::before {
+  content: "";
+  position: absolute;
+  top: -54px;
+  left: 60px;
+  width: 66px;
+  height: 76px;
+  border-left: 3px solid var(--red);
+  border-bottom: 3px solid var(--red);
+}
+
+.bp-cite::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 121px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.bp-author {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.bp-role {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--cyan);
+}
+
+/* ---------- Stat: the number drawn as a dimension, circled by a revision cloud ---------- */
+
+.bp-stat-kicker {
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--cyan);
+}
+
+.bp-dim-stat {
+  margin-top: auto;
+  padding: 54px 0;
+}
+
+.bp-dim-stat::before,
+.bp-dim-stat::after {
+  bottom: 0;
+}
+
+.bp-cloud {
+  position: relative;
+  flex: none;
+  max-width: calc(100% - 300px);
+  margin: 0 76px;
+}
+
+/* The revision cloud: rows of shallow arcs that meet in cusps, drawn with radial gradients.
+   ::before draws the top and bottom rows, ::after the left and right columns. */
+.bp-cloud::before,
+.bp-cloud::after {
+  content: "";
+  position: absolute;
+  --arc: transparent 32.5px, var(--red) 33px 38.5px, transparent 39px;
+}
+
+.bp-cloud::before {
+  inset: -24px -46px -42px;
+  padding: 0 6px;
+  background:
+    radial-gradient(circle at 50% calc(100% + 14px), var(--arc)) left top / 70px 26px round no-repeat,
+    radial-gradient(circle at 50% -14px, var(--arc)) left bottom / 70px 26px round no-repeat;
+}
+
+.bp-cloud::after {
+  inset: -4px -66px -22px;
+  padding: 6px 0;
+  background:
+    radial-gradient(circle at calc(100% + 14px) 50%, var(--arc)) left top / 26px 70px no-repeat round,
+    radial-gradient(circle at -14px 50%, var(--arc)) right top / 26px 70px no-repeat round;
+}
+
+/* The arcs are fitted to the inner length; the 6px of padding at each end lets the strokes run on
+   through the corner cusps. */
+.bp-cloud::before,
+.bp-cloud::after {
+  background-origin: content-box;
+  background-clip: border-box;
+}
+
+.bp-value {
+  position: relative;
+  font-size: 340px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: lining-nums;
+}
+
+.bp-label {
+  max-width: 880px;
+  margin-top: 40px;
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.bp-note {
+  max-width: 820px;
+  margin-top: 24px;
+  font-size: 36px;
+  line-height: 1.34;
+  color: var(--cyan);
+}
+
+/* ---------- Image: a cyanotype print in a frame with crop marks ---------- */
+
+.bp-figure {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 27px 27px 0;
+  background: var(--paper-deep);
+  outline: 2px solid var(--line);
+  isolation: isolate;
+}
+
+/* Cyanotype: the picture in greys, printed with screen onto the deep blue plate.
+   Dark becomes blue, light becomes white, like a print on blueprint paper. */
+.bp-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.08);
+  mix-blend-mode: screen;
+}
+
+/* Crop marks: short lines that continue the frame's edges outside each corner. */
+.bp-crop {
+  position: absolute;
+  inset: -42px;
+  pointer-events: none;
+}
+
+.bp-crop-a {
+  --m: rgb(255 255 255 / 0.9);
+  background:
+    linear-gradient(var(--m), var(--m)) left 0 top 41px / 30px 2px no-repeat,
+    linear-gradient(var(--m), var(--m)) left 41px top 0 / 2px 30px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 0 top 41px / 30px 2px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 41px top 0 / 2px 30px no-repeat,
+    linear-gradient(var(--m), var(--m)) left 0 bottom 41px / 30px 2px no-repeat,
+    linear-gradient(var(--m), var(--m)) left 41px bottom 0 / 2px 30px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 0 bottom 41px / 30px 2px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 41px bottom 0 / 2px 30px no-repeat;
+}
+
+/* Centre marks at the middle of each edge. */
+.bp-crop-b {
+  --m: rgb(255 255 255 / 0.6);
+  background:
+    linear-gradient(var(--m), var(--m)) center top / 2px 30px no-repeat,
+    linear-gradient(var(--m), var(--m)) center bottom / 2px 30px no-repeat,
+    linear-gradient(var(--m), var(--m)) left center / 30px 2px no-repeat,
+    linear-gradient(var(--m), var(--m)) right center / 30px 2px no-repeat;
+}
+
+.bp-view-img {
+  margin-top: 54px;
+}
+
+.bp-img-title {
+  font-size: 66px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.008em;
+}
+
+.bp-caption {
+  margin-top: 28px;
+  font-family: var(--mono);
+  font-size: 27px;
+  line-height: 1.32;
+  color: var(--cyan);
+}
+
+.bp-image .safe > :nth-last-child(2) {
+  margin-bottom: 40px;
+}
+
+/* ---------- Call to action: the action in a redline rubber stamp ---------- */
+
+.bp-cta-title {
+  margin-top: 54px;
+  font-size: 120px;
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.012em;
+}
+
+.bp-cta-text {
+  max-width: 800px;
+  margin-top: 40px;
+  font-size: 42px;
+  line-height: 1.34;
+  color: var(--cyan);
+}
+
+/* Without a stamp, the title and text sit in the middle of the sheet. */
+.bp-cta .safe:not(:has(.bp-stamp-zone)) > :first-child {
+  margin-top: auto;
+}
+
+.bp-stamp-zone {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-height: 260px;
+  padding: 40px 36px 0 0;
+}
+
+.bp-stamp {
+  max-width: 740px;
+  position: relative;
+  padding: 40px 56px 44px;
+  border: 8px solid var(--red);
+  border-radius: 18px;
+  color: var(--red);
+  transform: rotate(-6deg);
+  -webkit-mask: var(--svg-ink) 0 0 / 240px 240px;
+  mask: var(--svg-ink) 0 0 / 240px 240px;
+}
+
+/* The thin inner line of the stamp's double border. */
+.bp-stamp::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 3px solid var(--red);
+  border-radius: 8px;
+}
+
+.bp-action {
+  font-size: 66px;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+/* ---------- Square format: the same sheet, tighter ---------- */
+
+@container (max-height: 1100px) {
+  .bp-display {
+    font-size: 112px;
+  }
+
+  .bp-h2 {
+    font-size: 84px;
+  }
+
+  .bp-body {
+    padding-top: 54px;
+  }
+
+  .bp-parts {
+    gap: 30px;
+  }
+
+  .bp-value {
+    font-size: 230px;
+  }
+
+  .bp-dim-stat {
+    padding: 40px 0;
+  }
+
+  .bp-cta-title {
+    margin-top: 27px;
+    font-size: 110px;
+  }
+
+  .bp-stamp-zone {
+    min-height: 200px;
+  }
+}

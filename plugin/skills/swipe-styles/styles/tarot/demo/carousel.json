@@ -1,0 +1,68 @@
+{
+  "topic": "Tarot as a journaling tool: five questions for the evening, with no fortune-telling claims. Mondnotizen is a made-up example brand.",
+  "style": "tarot",
+  "lang": "de",
+  "brand": {
+    "name": "Mondnotizen",
+    "handle": "@mondnotizen"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Tarot als Journaling-Werkzeug",
+      "title": "5 Fragen für deinen Abend",
+      "subtitle": "Keine Wahrsagerei: eine Karte, ein Stift und zehn ehrliche Minuten."
+    },
+    {
+      "type": "text",
+      "kicker": "Die Idee",
+      "title": "Die Karte sagt nichts voraus",
+      "body": "Sie gibt dir ein Bild, an dem deine Gedanken hängen bleiben. Du ziehst eine Karte, schaust sie eine Minute an und fragst dich: *Was sehe ich heute darin?* Die Antwort kommt von dir."
+    },
+    {
+      "type": "stat",
+      "kicker": "Gut zu wissen",
+      "value": "78",
+      "label": "Karten hat ein klassisches Tarotdeck",
+      "note": "22 Große und 56 Kleine Arkana. Für deinen Abend reicht eine einzige Karte."
+    },
+    {
+      "type": "points",
+      "kicker": "Für dein Journal",
+      "title": "Fünf Fragen an deine Karte",
+      "items": [
+        { "title": "Was fällt dir zuerst auf?", "text": "Eine Farbe, eine Geste, ein Detail." },
+        { "title": "Woran erinnert sie dich?", "text": "An einen Moment von heute oder einen Menschen." },
+        { "title": "Welches Gefühl ist da?", "text": "Benenne es, ohne es gleich zu bewerten." },
+        { "title": "Was darf heute gehen?", "text": "Eine Sorge, die bis morgen warten kann." },
+        { "title": "Was nimmst du mit?", "text": "Einen Satz, mit dem du einschlafen willst." }
+      ]
+    },
+    {
+      "type": "text",
+      "kicker": "Das Ritual",
+      "title": "Zehn Minuten reichen",
+      "body": "Kerze an, *Handy weg*. Zieh eine Karte, beantworte die fünf Fragen in deinem Journal und leg die Karte neben dein Bett. Morgen früh liest du nach, was du geschrieben hast."
+    },
+    {
+      "type": "image",
+      "src": "abendtisch.svg",
+      "title": "Mein Abendtisch",
+      "caption": "Eine Kerze, mein Journal und die Karte des Tages. Das Handy liegt im Flur."
+    },
+    {
+      "type": "quote",
+      "quote": "Die Karte weiß nichts über mein Leben. Aber sie bringt mich dazu, ehrlich hinzuschauen. Mehr brauche ich abends nicht.",
+      "author": "Mondnotizen",
+      "role": "aus meinem Abendjournal"
+    },
+    {
+      "type": "cta",
+      "title": "Probier es heute Abend",
+      "text": "So hast du die fünf Fragen griffbereit, wenn du deine erste Karte ziehst.",
+      "action": "Post speichern"
+    }
+  ],
+  "caption": "Tarot muss nichts vorhersagen, um nützlich zu sein.\n\nIch nutze die Karten abends als Schreibimpuls: eine Karte ziehen, fünf Fragen beantworten, fertig. Keine Deutung aus dem Buch, nur das, was du selbst darin siehst.\n\nSpeicher dir den Post für heute Abend.",
+  "hashtags": ["tarot", "journaling", "selbstreflexion", "abendroutine", "tarotjournal"]
+}

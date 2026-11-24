@@ -1,0 +1,57 @@
+{
+  "topic": "Three common myths about sleep, explained for families. Bulle de Savoir is a made-up science explainer account.",
+  "style": "comic",
+  "lang": "fr",
+  "brand": { "name": "Bulle de Savoir", "handle": "@bulledesavoir" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Mythes contre faits",
+      "title": "3 idées reçues sur le sommeil",
+      "subtitle": "On les répète partout. Voici ce qu’on sait vraiment."
+    },
+    {
+      "type": "text",
+      "kicker": "Idée reçue 1",
+      "title": "« Huit heures pour tous »",
+      "body": "On l’entend comme une règle fixe. En réalité, les recommandations donnent une *fourchette*, pas un chiffre unique : le besoin de sommeil varie d’une personne à l’autre."
+    },
+    {
+      "type": "stat",
+      "kicker": "Ce qu’on sait",
+      "value": "7–9 h",
+      "label": "de sommeil par nuit, recommandées aux adultes",
+      "note": "Recommandation de la National Sleep Foundation (2015) pour les 18 à 64 ans."
+    },
+    {
+      "type": "points",
+      "kicker": "Idée reçue 2",
+      "title": "« L’alcool aide à dormir »",
+      "items": [
+        { "title": "Le soir", "text": "Un verre de vin « pour se détendre »." },
+        { "title": "Au coucher", "text": "Il peut aider à s’endormir plus vite." },
+        { "title": "Seconde moitié de nuit", "text": "Sommeil *perturbé* : plus léger, plus de réveils." }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "chambre.svg",
+      "title": "« Je rattraperai ce week-end »",
+      "caption": "Les grasses matinées aident un peu, mais ne compensent pas entièrement une semaine de nuits courtes."
+    },
+    {
+      "type": "quote",
+      "quote": "Le sommeil n’est pas une tirelire : ce qu’on perd en semaine ne se rattrape pas en entier le dimanche.",
+      "author": "Bulle de Savoir",
+      "role": "La science en bulles, pour petits et grands"
+    },
+    {
+      "type": "cta",
+      "title": "Tu y croyais ?",
+      "text": "Avoue tout : quelle idée reçue t’avait convaincu ? Réponds avec son numéro.",
+      "action": "Commente 1, 2 ou 3"
+    }
+  ],
+  "caption": "3 idées reçues sur le sommeil, et ce qu’on sait vraiment.\n\n« Il faut dormir huit heures », « un petit verre aide à dormir », « je rattraperai ce week-end »… On les a tous entendues.\n\nEt toi, laquelle tu croyais ? Dis-le en commentaire avec son numéro.",
+  "hashtags": ["sommeil", "ideesrecues", "vulgarisationscientifique", "parents"]
+}

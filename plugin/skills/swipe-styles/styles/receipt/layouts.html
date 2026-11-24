@@ -1,0 +1,121 @@
+<!-- Receipt layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     .rc-receipt is the paper strip (decoration); all text sits in .safe, inside the paper. -->
+
+<template data-type="cover">
+  <section class="slide rc rc-cover">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <header class="rc-head">
+        <img class="rc-logo" data-field="logo">
+        <p class="rc-store" data-field="name" data-fit-min="30"></p>
+        <p class="rc-store-handle" data-field="handle"></p>
+      </header>
+      <div class="rc-main">
+        <p class="rc-order" data-field="kicker" data-fit-min="24"></p>
+        <h1 class="rc-display" data-field="title" data-fit-min="52"></h1>
+        <p class="rc-sub" data-field="subtitle" data-fit-min="28"></p>
+      </div>
+      <footer class="rc-foot"><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide rc rc-text">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <div class="rc-main">
+        <p class="rc-kicker" data-field="kicker" data-fit-min="24"></p>
+        <h2 class="rc-section" data-field="title" data-fit-min="34"></h2>
+        <p class="rc-body" data-field="body" data-fit-min="28"></p>
+      </div>
+      <footer class="rc-foot"><span data-field="handle"></span><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide rc rc-points">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <div class="rc-main">
+        <p class="rc-kicker" data-field="kicker" data-fit-min="24"></p>
+        <h2 class="rc-section" data-field="title" data-fit-min="34"></h2>
+        <ul class="rc-items" data-list="items">
+          <li class="rc-item" data-item>
+            <span class="rc-qty" aria-hidden="true"></span>
+            <span class="rc-item-title" data-item-field="title" data-fit-min="24"></span>
+            <span class="rc-leader" aria-hidden="true"></span>
+            <span class="rc-tick" aria-hidden="true"></span>
+            <span class="rc-item-text" data-item-field="text" data-fit-min="24"></span>
+          </li>
+        </ul>
+      </div>
+      <footer class="rc-foot"><span data-field="handle"></span><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide rc rc-quote">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <div class="rc-main">
+        <div class="rc-stars" aria-hidden="true"></div>
+        <blockquote class="rc-quote-text" data-field="quote" data-fit-min="30"></blockquote>
+        <div class="rc-stars" aria-hidden="true"></div>
+        <p class="rc-author" data-field="author" data-fit-min="24"></p>
+        <p class="rc-role" data-field="role" data-fit-min="24"></p>
+      </div>
+      <footer class="rc-foot"><span data-field="handle"></span><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide rc rc-stat">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <div class="rc-main">
+        <p class="rc-kicker" data-field="kicker" data-fit-min="24"></p>
+        <div class="rc-total">
+          <p class="rc-label" data-field="label" data-fit-min="26"></p>
+          <p class="rc-value" data-field="value" data-fit-min="72"></p>
+        </div>
+        <p class="rc-note" data-field="note" data-fit-min="24"></p>
+      </div>
+      <footer class="rc-foot"><span data-field="handle"></span><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide rc rc-image">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <figure class="rc-figure"><img data-field="src"></figure>
+      <h2 class="rc-img-title" data-field="title" data-fit-min="28"></h2>
+      <p class="rc-caption" data-field="caption" data-fit-min="24"></p>
+      <footer class="rc-foot"><span data-field="handle"></span><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide rc rc-cta">
+    <div class="rc-receipt" aria-hidden="true"><div class="rc-paper"></div></div>
+    <div class="safe">
+      <header class="rc-head">
+        <img class="rc-logo" data-field="logo">
+      </header>
+      <div class="rc-main">
+        <h2 class="rc-cta-title" data-field="title" data-fit-min="44"></h2>
+        <p class="rc-cta-text" data-field="text" data-fit-min="26"></p>
+        <p class="rc-action" data-field="action" data-fit-min="26"></p>
+        <div class="rc-cut" aria-hidden="true"></div>
+        <div class="rc-barcode" aria-hidden="true"></div>
+      </div>
+      <footer class="rc-foot"><span data-field="handle"></span><span class="rc-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>

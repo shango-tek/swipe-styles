@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <!-- A still life for the Tarot demo: a candle, an open journal, a tarot card and the moon in the window.
+       Drawn in greys; the style prints it as a gold-sepia duotone. -->
+  <defs>
+    <radialGradient id="sky" cx="0.68" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#3a3a3a"/>
+      <stop offset="1" stop-color="#202020"/>
+    </radialGradient>
+    <radialGradient id="moonglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="candleglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.42"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="table" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#565656"/>
+      <stop offset="1" stop-color="#2e2e2e"/>
+    </linearGradient>
+    <linearGradient id="candle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a8a8a8"/>
+      <stop offset="0.45" stop-color="#e4e4e4"/>
+      <stop offset="1" stop-color="#bdbdbd"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wall -->
+  <rect width="1000" height="1000" fill="#1a1a1a"/>
+
+  <!-- Window with the night sky -->
+  <rect x="200" y="110" width="600" height="460" fill="url(#sky)"/>
+  <circle cx="650" cy="235" r="170" fill="url(#moonglow)"/>
+  <circle cx="650" cy="235" r="64" fill="#ececec"/>
+  <g fill="none" stroke="#c4c4c4" stroke-width="3">
+    <circle cx="628" cy="218" r="14"/>
+    <circle cx="672" cy="262" r="9"/>
+    <circle cx="664" cy="206" r="6"/>
+  </g>
+  <g fill="#bdbdbd">
+    <path d="M300 170 L304 183 L317 187 L304 191 L300 204 L296 191 L283 187 L296 183Z"/>
+    <path d="M396 262 L399 271 L408 274 L399 277 L396 286 L393 277 L384 274 L393 271Z"/>
+    <path d="M545 150 L548 159 L557 162 L548 165 L545 174 L542 165 L533 162 L542 159Z"/>
+    <path d="M742 420 L745 429 L754 432 L745 435 L742 444 L739 435 L730 432 L739 429Z"/>
+    <circle cx="452" cy="196" r="3"/>
+    <circle cx="258" cy="300" r="3"/>
+    <circle cx="560" cy="420" r="3"/>
+    <circle cx="760" cy="150" r="3"/>
+  </g>
+  <g fill="none" stroke="#727272" stroke-width="12">
+    <rect x="200" y="110" width="600" height="460"/>
+  </g>
+  <path d="M500 110 V570 M200 340 H800" stroke="#727272" stroke-width="9" fill="none"/>
+  <rect x="176" y="566" width="648" height="22" fill="#5e5e5e"/>
+
+  <!-- Table -->
+  <rect x="0" y="650" width="1000" height="350" fill="url(#table)"/>
+  <path d="M0 650 H1000" stroke="#8a8a8a" stroke-width="4"/>
+
+  <!-- Candle glow -->
+  <circle cx="300" cy="470" r="260" fill="url(#candleglow)"/>
+
+  <!-- Candle on its dish -->
+  <ellipse cx="300" cy="742" rx="96" ry="24" fill="#7c7c7c" stroke="#b8b8b8" stroke-width="4"/>
+  <ellipse cx="300" cy="736" rx="70" ry="15" fill="#5a5a5a"/>
+  <path d="M262 528 V734 Q300 748 338 734 V528Z" fill="url(#candle)"/>
+  <ellipse cx="300" cy="528" rx="38" ry="10" fill="#eeeeee" stroke="#cfcfcf" stroke-width="2"/>
+  <path d="M276 530 Q274 556 279 566 Q284 556 283 532Z" fill="#f2f2f2"/>
+  <path d="M300 528 V500" stroke="#2a2a2a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M300 418 C318 448 324 474 312 494 C306 503 294 503 288 494 C276 474 282 448 300 418Z" fill="#ffffff"/>
+  <path d="M300 460 C307 474 308 486 303 493 C300 497 296 496 295 492 C292 484 294 472 300 460Z" fill="#cfcfcf"/>
+
+  <!-- Journal: dark cover, two open pages, written lines -->
+  <path d="M418 714 L648 690 L882 714 L902 912 L652 892 L398 916Z" fill="#262626"/>
+  <path d="M432 706 L640 688 L650 878 L420 900Z" fill="#dedede" stroke="#f4f4f4" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M640 688 L860 706 L878 896 L650 878Z" fill="#d2d2d2" stroke="#f4f4f4" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M640 688 L650 878" stroke="#9a9a9a" stroke-width="3"/>
+  <g stroke="#8c8c8c" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M462 740 L612 728 M464 770 L614 758 M466 800 L586 790 M468 830 L616 818"/>
+    <path d="M672 726 L828 738 M674 756 L832 768 M676 786 L776 794"/>
+  </g>
+  <!-- A small moon sketched on the page -->
+  <path d="M800 806 A26 26 0 1 0 820 850 A20 20 0 1 1 800 806Z" fill="none" stroke="#6e6e6e" stroke-width="3"/>
+  <!-- Pen -->
+  <path d="M706 958 L912 812" stroke="#141414" stroke-width="14" stroke-linecap="round"/>
+  <path d="M706 958 L690 970" stroke="#9a9a9a" stroke-width="6" stroke-linecap="round"/>
+  <path d="M876 838 L900 821" stroke="#9a9a9a" stroke-width="15"/>
+
+  <!-- The card of the day, lying in front of the candle -->
+  <g transform="rotate(-11 196 872)">
+    <rect x="122" y="768" width="148" height="226" rx="10" fill="#e6e6e6"/>
+    <rect x="134" y="780" width="124" height="202" rx="5" fill="none" stroke="#4e4e4e" stroke-width="3"/>
+    <path d="M150 948 H242 V968 H150Z" fill="none" stroke="#4e4e4e" stroke-width="3"/>
+    <circle cx="196" cy="862" r="22" fill="none" stroke="#4e4e4e" stroke-width="3"/>
+    <path d="M196 826 V818 M196 898 V906 M160 862 H152 M232 862 H240 M171 837 L165 831 M221 837 L227 831 M171 887 L165 893 M221 887 L227 893" stroke="#4e4e4e" stroke-width="3" stroke-linecap="round"/>
+    <path d="M186 798 H206" stroke="#4e4e4e" stroke-width="3"/>
+  </g>
+</svg>

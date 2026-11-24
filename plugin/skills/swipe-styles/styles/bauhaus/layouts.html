@@ -1,0 +1,138 @@
+<!-- Bauhaus layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     Every slide is a poster: the .bh-art layer holds the shapes (circle, square, triangle,
+     semicircle, quarter circle) and the black rule they stand on; the text in .safe is placed
+     on, beside or inside them. -->
+
+<template data-type="cover">
+  <section class="slide bh bh-cover">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-black bh-quarter-bl bh-cv-quarter"></span>
+      <span class="bh-s bh-red bh-cv-square"></span>
+      <span class="bh-s bh-blue bh-circle bh-cv-circle"></span>
+      <span class="bh-s bh-yellow bh-tri-up bh-cv-tri"></span>
+      <span class="bh-s bh-rule bh-cv-rule"></span>
+    </div>
+    <div class="safe">
+      <img class="bh-logo" data-field="logo">
+      <p class="bh-cv-kicker" data-field="kicker" data-fit-min="30"></p>
+      <h1 class="bh-cv-title" data-field="title" data-fit-min="80"></h1>
+      <p class="bh-cv-sub" data-field="subtitle" data-fit-min="38"></p>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide bh bh-text">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-blue bh-circle bh-tx-circle"></span>
+      <span class="bh-s bh-red bh-semi-up bh-tx-semi"></span>
+      <span class="bh-s bh-rule bh-tx-rule"></span>
+    </div>
+    <div class="safe">
+      <div class="bh-head">
+        <p class="bh-kicker" data-field="kicker" data-fit-min="28"></p>
+        <h2 class="bh-h2" data-field="title" data-fit-min="56"></h2>
+      </div>
+      <p class="bh-body" data-field="body" data-fit-min="32"></p>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide bh bh-points">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-black bh-semi-down bh-pt-semi"></span>
+      <span class="bh-s bh-yellow bh-tri-up bh-pt-tri"></span>
+      <span class="bh-s bh-rule bh-pt-rule"></span>
+    </div>
+    <div class="safe">
+      <div class="bh-head">
+        <p class="bh-kicker" data-field="kicker" data-fit-min="28"></p>
+        <h2 class="bh-h2" data-field="title" data-fit-min="52"></h2>
+      </div>
+      <ul class="bh-list" data-list="items">
+        <li class="bh-item" data-item>
+          <span class="bh-mark" aria-hidden="true"></span>
+          <span class="bh-item-body">
+            <span class="bh-item-title" data-item-field="title" data-fit-min="36"></span>
+            <span class="bh-item-text" data-item-field="text" data-fit-min="30"></span>
+          </span>
+        </li>
+      </ul>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide bh bh-quote">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-blue bh-quarter-br bh-qt-quarter"></span>
+      <span class="bh-s bh-yellow bh-semi-up bh-qt-dome"></span>
+      <span class="bh-s bh-red bh-circle bh-qt-dot"></span>
+    </div>
+    <div class="safe">
+      <blockquote class="bh-qt-text" data-field="quote" data-fit-min="40"></blockquote>
+      <div class="bh-cite">
+        <p class="bh-author" data-field="author"></p>
+        <p class="bh-role" data-field="role"></p>
+      </div>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide bh bh-stat">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-yellow bh-tri-down bh-st-tri"></span>
+      <span class="bh-s bh-red bh-circle bh-st-circle"></span>
+      <span class="bh-s bh-black bh-st-square"></span>
+    </div>
+    <div class="safe">
+      <p class="bh-kicker bh-st-kicker" data-field="kicker" data-fit-min="28"></p>
+      <p class="bh-st-value" data-field="value" data-fit-min="100"></p>
+      <p class="bh-st-label" data-field="label" data-fit-min="50"></p>
+      <p class="bh-st-note" data-field="note" data-fit-min="30"></p>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide bh bh-image">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-black bh-quarter-br bh-im-quarter"></span>
+      <span class="bh-s bh-yellow bh-semi-left bh-im-semi"></span>
+    </div>
+    <figure class="bh-im-figure"><img data-field="src"></figure>
+    <div class="bh-art bh-art-front" aria-hidden="true">
+      <span class="bh-s bh-red bh-im-square"></span>
+    </div>
+    <div class="safe">
+      <h2 class="bh-im-title" data-field="title" data-fit-min="44"></h2>
+      <p class="bh-im-caption" data-field="caption" data-fit-min="30"></p>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide bh bh-cta">
+    <div class="bh-art" aria-hidden="true">
+      <span class="bh-s bh-yellow bh-quarter-bl bh-ct-quarter"></span>
+    </div>
+    <div class="safe">
+      <img class="bh-logo" data-field="logo">
+      <h2 class="bh-ct-title" data-field="title" data-fit-min="64"></h2>
+      <p class="bh-ct-text" data-field="text" data-fit-min="36"></p>
+      <div class="bh-ct-row" data-if="action">
+        <span class="bh-arrow" aria-hidden="true"><span class="bh-ar-tail"></span><span class="bh-ar-shaft"></span><span class="bh-ar-head"></span></span>
+        <p class="bh-action" data-field="action" data-fit-min="40"></p>
+      </div>
+      <footer class="bh-foot"><span data-field="handle"></span><span class="bh-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>

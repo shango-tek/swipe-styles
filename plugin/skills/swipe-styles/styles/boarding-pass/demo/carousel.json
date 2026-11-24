@@ -1,0 +1,64 @@
+{
+  "topic": "A travel creator shares a route for a long weekend in Lisbon: shoes, the classic sights, the seven hills and pastel de nata. Fernweh Notizen is a made-up example; the facts are about public places.",
+  "style": "boarding-pass",
+  "lang": "de",
+  "brand": { "name": "Fernweh Notizen", "handle": "@fernweh.notizen" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Freitag bis Sonntag",
+      "title": "48 Stunden in Lissabon",
+      "subtitle": "Meine Route für ein langes Wochenende: zu Fuß, mit der Tram und mit Pastel de Nata."
+    },
+    {
+      "type": "text",
+      "kicker": "Vor dem Abflug",
+      "title": "Pack Schuhe mit Profil ein",
+      "body": "Lissabon ist steil, und viele Gehwege sind mit glattem Kalkstein gepflastert, der *Calçada portuguesa*. Bei Regen wird sie rutschig. Turnschuhe mit gutem Profil schlagen hier jede schicke Sandale."
+    },
+    {
+      "type": "points",
+      "kicker": "Tag 1 und 2",
+      "title": "Die Route in vier Stopps",
+      "items": [
+        { "title": "Alfama am Morgen", "text": "Durch die Gassen, bevor die Reisegruppen kommen." },
+        { "title": "Tram 28", "text": "Die gelbe Linie quer durch die Altstadt. Früh einsteigen." },
+        { "title": "Belém am Tejo", "text": "Mosteiro dos Jerónimos und Torre de Belém." },
+        { "title": "Miradouro am Abend", "text": "In Graça liegt dir die Stadt zu Füßen." }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "tram28.svg",
+      "title": "Tram 28 in der Alfama",
+      "caption": "Steil, eng und laut: Die alten Wagen quietschen durch Kurven, in die kaum ein Auto passt."
+    },
+    {
+      "type": "stat",
+      "kicker": "Gut zu wissen",
+      "value": "7",
+      "label": "Hügel im Spitznamen der Stadt",
+      "note": "Lissabon gilt als „Stadt der sieben Hügel“. Nach dem dritten Anstieg glaubst du, es sind mehr."
+    },
+    {
+      "type": "text",
+      "kicker": "Zwischendurch",
+      "title": "Pastel de Nata, und zwar warm",
+      "body": "Die Puddingtörtchen aus Blätterteig gibt es in fast jeder Pastelaria der Stadt. Iss sie *warm*, mit Zimt oder Puderzucker obendrauf. Dazu eine Bica: So heißt der Espresso in Lissabon."
+    },
+    {
+      "type": "quote",
+      "quote": "Plan nur den halben Tag. Den Rest verplant Lissabon für dich: mit einer Treppe, einem Miradouro und noch einer Nata.",
+      "author": "Fernweh Notizen",
+      "role": "aus meinem Reisetagebuch"
+    },
+    {
+      "type": "cta",
+      "title": "Speicher dir die Route",
+      "text": "Dann hast du sie griffbereit, wenn du deinen Trip nach Lissabon planst.",
+      "action": "Post speichern"
+    }
+  ],
+  "caption": "48 Stunden in Lissabon, ohne Hektik: Das ist meine Route für ein langes Wochenende.\n\nAlfama am Morgen, Tram 28, Belém am Tejo und abends ein Miradouro. Dazwischen Pastel de Nata, warm.\n\nSpeicher dir den Post für deinen nächsten Trip.",
+  "hashtags": ["lissabon", "lissabonreise", "portugalreise", "städtetrip", "reisetipps"]
+}

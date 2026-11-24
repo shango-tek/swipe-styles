@@ -1,0 +1,973 @@
+/* Boarding Pass: every slide is a portrait boarding pass. A band in the airline color with the flight
+   route (the plane sits at --progress, so it flies one step further with every slide), the ticket area
+   on light security paper, a perforated tear line with notches, and the stub with a stacked barcode.
+   Type: Overpass (OFL, after the US highway signs) for titles and text, Overpass Mono (OFL) for the
+   field values, codes, the counter and the split-flap board. No labels: icons stand in for them. */
+
+@font-face {
+  font-family: "Overpass";
+  src: url("../../fonts/overpass/Overpass-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Overpass Mono";
+  src: url("../../fonts/overpass-mono/OverpassMono-Variable.ttf") format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --accent: #0b6872;
+  /* The band and the boarding button show the brand color as it is. What sits on them (the name, the
+     route, the plane, the button text) is white on a dark or strong accent and near-black on a light
+     one: the switch is at OKLCH lightness 0.64. */
+  --bd-on: oklch(from var(--accent) clamp(0.2, (0.64 - l) * 1000, 1) 0 0);
+  /* The accent printed on the paper (icons, stops, message badge, postmark): a light brand color is
+     darkened to at most this lightness (same hue and chroma), so it stays visible and white numbers on
+     it stay readable. The default and dark accents pass unchanged. */
+  --bd-air: oklch(from var(--accent) min(l, 0.52) c h);
+  /* What the pass lies on, seen through the notches and the rounded corners: the airline color, very dark. */
+  --bd-table: oklch(from var(--accent) 0.24 calc(c * 0.5) h);
+
+  --bd-paper-c: #f3f5f4;
+  --bd-card: #ffffff;
+  --bd-ink: #16222a;
+  --bd-mute: #55626a;
+  --bd-rule: #b9c3c6;
+  --bd-housing: #12171b;
+  --bd-flap: #2a3137;
+  --bd-flap-lo: #20262b;
+  --bd-flap-ink: #f5f3ea;
+
+  --bd-band-h: 262px;
+  --bd-stub-h: 198px;
+  --bd-x: 72px;
+  --bd-y: 44px;
+  --bd-notch: 34px;
+  --bd-corner: 26px;
+
+  --sans: "Overpass", sans-serif;
+  --mono: "Overpass Mono", monospace;
+
+  --bd-bubble: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' fill-rule='evenodd' d='M4.5 3.5h15a2.5 2.5 0 0 1 2.5 2.5v9.5a2.5 2.5 0 0 1-2.5 2.5H12l-5.5 4v-4h-2A2.5 2.5 0 0 1 2 15.5V6a2.5 2.5 0 0 1 2.5-2.5zM7.2 7.6v3.6h2c0 1.3-.6 2.1-1.9 2.5l.6 1.3c2.2-.6 3.4-2.1 3.4-4.4V7.6zm6.1 0v3.6h2c0 1.3-.6 2.1-1.9 2.5l.6 1.3c2.2-.6 3.4-2.1 3.4-4.4V7.6z'/%3E%3C/svg%3E");
+  --bd-guilloche: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='54' viewBox='0 0 360 54'%3E%3Cg fill='none' stroke='%2316222a' stroke-opacity='.05' stroke-width='1.4'%3E%3Cpath d='M0 13c45-18 135-18 180 0s135 18 180 0'/%3E%3Cpath d='M0 13c45 18 135 18 180 0s135-18 180 0'/%3E%3Cpath d='M0 40c45-18 135-18 180 0s135 18 180 0'/%3E%3Cpath d='M0 40c45 18 135 18 180 0s135-18 180 0'/%3E%3C/g%3E%3C/svg%3E");
+  --bd-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%23ffe066' d='M3 7.5C40 4.2 120 3.4 197 5.2l-1.4 29.6C130 36.4 50 37.2 5.2 35.6z'/%3E%3C/svg%3E");
+  --bd-c-person: path(nonzero, "M11.1 11.1a6.9 6.9 0 1 0 13.8 0a6.9 6.9 0 1 0 -13.8 0zM 5.1 32.4c0 -7.65 5.85 -12.3 12.9 -12.3s12.9 4.65 12.9 12.3 z");
+  --bd-c-seat: path(nonzero, "M6.9 3.6c1.8 -0.6 3.6 0.3 4.2 1.95l4.5 12.9h10.8c1.95 0 3.6 1.65 3.6 3.6v0.6c0 1.95 -1.65 3.6 -3.6 3.6H14.1c-1.5 0 -3 -1.05 -3.45 -2.55L4.95 7.8c-0.6 -1.8 0.3 -3.6 1.95 -4.2zM 11.1 28.5h17.1v3.9H11.1zM 17.4 24.9h3.9v4.5h-3.9 z");
+  --bd-c-date: path(evenodd, "M5.25 9A3 3 0 0 1 8.25 6h19.5a3 3 0 0 1 3 3v20.25a3 3 0 0 1 -3 3h-19.5a3 3 0 0 1 -3 -3zM 9 14.4v14.1h18V14.4zM 10.8 2.7h3.6v6.9H10.8zM 21.6 2.7h3.6v6.9h-3.6zM 11.7 17.1h3.9V21H11.7zM 20.4 17.1h3.9V21h-3.9zM 11.7 23.1h3.9V27H11.7 z");
+  --bd-c-clock: path(evenodd, "M18 2.7a15.3 15.3 0 1 1 0 30.6 15.3 15.3 0 0 1 0 -30.6zm 0 3.9a11.4 11.4 0 1 0 0 22.8 11.4 11.4 0 0 0 0 -22.8zM 16.05 9.3h3.9v7.8l5.55 3.3 -1.95 3.3 -7.5 -4.5 z");
+  --bd-c-plane: path("M43.13 23c0 -1.58 -1.87 -2.59 -4.31 -2.59H29.47L19.41 4.31h-4.31l5.39 16.1H10.06L6.47 13.66H3.59l2.16 9.34 -2.16 9.34h2.88l3.59 -6.76h10.42L15.09 41.69h4.31l10.06 -16.1h9.34c2.44 0 4.31 -1.01 4.31 -2.59 z");
+  --bd-code: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 154 30' preserveAspectRatio='none' shape-rendering='crispEdges'%3E%3Cpath fill='%2316222a' d='M0 0h8v3h-8zM9 0h1v3h-1zM11 0h1v3h-1zM13 0h1v3h-1zM17 0h1v3h-1zM19 0h4v3h-4zM27 0h2v3h-2zM30 0h1v3h-1zM34 0h3v3h-3zM39 0h2v3h-2zM42 0h5v3h-5zM49 0h1v3h-1zM51 0h1v3h-1zM53 0h1v3h-1zM56 0h1v3h-1zM63 0h2v3h-2zM68 0h2v3h-2zM71 0h2v3h-2zM76 0h1v3h-1zM80 0h1v3h-1zM85 0h4v3h-4zM91 0h4v3h-4zM96 0h2v3h-2zM99 0h2v3h-2zM102 0h3v3h-3zM107 0h2v3h-2zM111 0h3v3h-3zM116 0h1v3h-1zM119 0h4v3h-4zM124 0h2v3h-2zM127 0h2v3h-2zM131 0h3v3h-3zM136 0h7v3h-7zM144 0h1v3h-1zM148 0h1v3h-1zM150 0h1v3h-1zM153 0h1v3h-1zM0 3h8v3h-8zM9 3h1v3h-1zM11 3h1v3h-1zM13 3h1v3h-1zM17 3h1v3h-1zM21 3h3v3h-3zM26 3h1v3h-1zM30 3h3v3h-3zM34 3h2v3h-2zM40 3h1v3h-1zM45 3h1v3h-1zM48 3h1v3h-1zM51 3h4v3h-4zM56 3h2v3h-2zM62 3h2v3h-2zM65 3h1v3h-1zM68 3h2v3h-2zM71 3h1v3h-1zM76 3h1v3h-1zM78 3h3v3h-3zM85 3h4v3h-4zM90 3h2v3h-2zM93 3h2v3h-2zM99 3h2v3h-2zM102 3h3v3h-3zM109 3h3v3h-3zM113 3h1v3h-1zM116 3h1v3h-1zM119 3h1v3h-1zM124 3h1v3h-1zM126 3h2v3h-2zM129 3h3v3h-3zM136 3h7v3h-7zM144 3h1v3h-1zM148 3h1v3h-1zM150 3h1v3h-1zM153 3h1v3h-1zM0 6h8v3h-8zM9 6h1v3h-1zM11 6h1v3h-1zM13 6h1v3h-1zM17 6h1v3h-1zM20 6h1v3h-1zM22 6h1v3h-1zM26 6h4v3h-4zM34 6h4v3h-4zM40 6h2v3h-2zM44 6h2v3h-2zM48 6h2v3h-2zM51 6h3v3h-3zM55 6h1v3h-1zM59 6h3v3h-3zM63 6h3v3h-3zM68 6h1v3h-1zM70 6h3v3h-3zM75 6h2v3h-2zM81 6h2v3h-2zM85 6h1v3h-1zM90 6h3v3h-3zM96 6h2v3h-2zM99 6h1v3h-1zM102 6h2v3h-2zM105 6h3v3h-3zM109 6h2v3h-2zM114 6h1v3h-1zM119 6h2v3h-2zM124 6h4v3h-4zM129 6h3v3h-3zM134 6h1v3h-1zM136 6h7v3h-7zM144 6h1v3h-1zM148 6h1v3h-1zM150 6h1v3h-1zM153 6h1v3h-1zM0 9h8v3h-8zM9 9h1v3h-1zM11 9h1v3h-1zM13 9h1v3h-1zM17 9h2v3h-2zM20 9h2v3h-2zM25 9h3v3h-3zM32 9h1v3h-1zM34 9h3v3h-3zM39 9h3v3h-3zM44 9h1v3h-1zM48 9h1v3h-1zM51 9h5v3h-5zM59 9h2v3h-2zM62 9h2v3h-2zM65 9h2v3h-2zM68 9h1v3h-1zM72 9h4v3h-4zM77 9h3v3h-3zM81 9h1v3h-1zM85 9h1v3h-1zM87 9h3v3h-3zM92 9h4v3h-4zM97 9h2v3h-2zM102 9h1v3h-1zM104 9h2v3h-2zM108 9h3v3h-3zM112 9h4v3h-4zM119 9h3v3h-3zM123 9h1v3h-1zM126 9h1v3h-1zM133 9h1v3h-1zM136 9h7v3h-7zM144 9h1v3h-1zM148 9h1v3h-1zM150 9h1v3h-1zM153 9h1v3h-1zM0 12h8v3h-8zM9 12h1v3h-1zM11 12h1v3h-1zM13 12h1v3h-1zM17 12h4v3h-4zM22 12h2v3h-2zM26 12h2v3h-2zM29 12h2v3h-2zM34 12h3v3h-3zM39 12h2v3h-2zM43 12h1v3h-1zM47 12h2v3h-2zM51 12h4v3h-4zM56 12h1v3h-1zM58 12h1v3h-1zM62 12h2v3h-2zM68 12h3v3h-3zM72 12h1v3h-1zM76 12h2v3h-2zM81 12h1v3h-1zM85 12h4v3h-4zM90 12h4v3h-4zM95 12h3v3h-3zM99 12h1v3h-1zM102 12h3v3h-3zM106 12h4v3h-4zM112 12h4v3h-4zM117 12h1v3h-1zM119 12h2v3h-2zM125 12h1v3h-1zM128 12h1v3h-1zM131 12h1v3h-1zM136 12h7v3h-7zM144 12h1v3h-1zM148 12h1v3h-1zM150 12h1v3h-1zM153 12h1v3h-1zM0 15h8v3h-8zM9 15h1v3h-1zM11 15h1v3h-1zM13 15h1v3h-1zM17 15h3v3h-3zM23 15h2v3h-2zM26 15h1v3h-1zM31 15h1v3h-1zM34 15h1v3h-1zM36 15h2v3h-2zM41 15h6v3h-6zM48 15h1v3h-1zM51 15h2v3h-2zM56 15h2v3h-2zM59 15h4v3h-4zM65 15h2v3h-2zM68 15h4v3h-4zM75 15h2v3h-2zM78 15h2v3h-2zM83 15h1v3h-1zM85 15h1v3h-1zM87 15h2v3h-2zM90 15h2v3h-2zM96 15h2v3h-2zM102 15h3v3h-3zM106 15h2v3h-2zM109 15h1v3h-1zM114 15h3v3h-3zM119 15h4v3h-4zM126 15h5v3h-5zM132 15h1v3h-1zM134 15h1v3h-1zM136 15h7v3h-7zM144 15h1v3h-1zM148 15h1v3h-1zM150 15h1v3h-1zM153 15h1v3h-1zM0 18h8v3h-8zM9 18h1v3h-1zM11 18h1v3h-1zM13 18h1v3h-1zM17 18h1v3h-1zM19 18h2v3h-2zM23 18h4v3h-4zM30 18h3v3h-3zM34 18h2v3h-2zM37 18h3v3h-3zM41 18h1v3h-1zM46 18h2v3h-2zM51 18h2v3h-2zM55 18h5v3h-5zM62 18h1v3h-1zM64 18h2v3h-2zM68 18h2v3h-2zM72 18h1v3h-1zM74 18h3v3h-3zM81 18h2v3h-2zM85 18h3v3h-3zM91 18h1v3h-1zM95 18h1v3h-1zM97 18h4v3h-4zM102 18h3v3h-3zM107 18h1v3h-1zM110 18h2v3h-2zM114 18h4v3h-4zM119 18h1v3h-1zM121 18h3v3h-3zM127 18h1v3h-1zM130 18h4v3h-4zM136 18h7v3h-7zM144 18h1v3h-1zM148 18h1v3h-1zM150 18h1v3h-1zM153 18h1v3h-1zM0 21h8v3h-8zM9 21h1v3h-1zM11 21h1v3h-1zM13 21h1v3h-1zM17 21h2v3h-2zM21 21h3v3h-3zM26 21h2v3h-2zM32 21h1v3h-1zM34 21h2v3h-2zM37 21h2v3h-2zM40 21h1v3h-1zM43 21h6v3h-6zM51 21h1v3h-1zM54 21h4v3h-4zM59 21h3v3h-3zM65 21h2v3h-2zM68 21h2v3h-2zM74 21h1v3h-1zM77 21h1v3h-1zM80 21h1v3h-1zM85 21h1v3h-1zM89 21h1v3h-1zM92 21h1v3h-1zM94 21h2v3h-2zM102 21h1v3h-1zM106 21h2v3h-2zM112 21h1v3h-1zM115 21h1v3h-1zM119 21h1v3h-1zM123 21h2v3h-2zM128 21h1v3h-1zM131 21h4v3h-4zM136 21h7v3h-7zM144 21h1v3h-1zM148 21h1v3h-1zM150 21h1v3h-1zM153 21h1v3h-1zM0 24h8v3h-8zM9 24h1v3h-1zM11 24h1v3h-1zM13 24h1v3h-1zM17 24h2v3h-2zM20 24h1v3h-1zM24 24h1v3h-1zM29 24h1v3h-1zM34 24h1v3h-1zM36 24h2v3h-2zM41 24h1v3h-1zM44 24h1v3h-1zM51 24h2v3h-2zM54 24h4v3h-4zM60 24h1v3h-1zM65 24h1v3h-1zM68 24h2v3h-2zM72 24h3v3h-3zM77 24h1v3h-1zM79 24h4v3h-4zM85 24h3v3h-3zM92 24h1v3h-1zM95 24h2v3h-2zM99 24h1v3h-1zM102 24h2v3h-2zM108 24h1v3h-1zM110 24h2v3h-2zM116 24h2v3h-2zM119 24h3v3h-3zM123 24h3v3h-3zM127 24h1v3h-1zM130 24h4v3h-4zM136 24h7v3h-7zM144 24h1v3h-1zM148 24h1v3h-1zM150 24h1v3h-1zM153 24h1v3h-1zM0 27h8v3h-8zM9 27h1v3h-1zM11 27h1v3h-1zM13 27h1v3h-1zM17 27h1v3h-1zM21 27h3v3h-3zM25 27h1v3h-1zM30 27h2v3h-2zM34 27h3v3h-3zM39 27h5v3h-5zM45 27h1v3h-1zM47 27h1v3h-1zM51 27h2v3h-2zM54 27h3v3h-3zM58 27h3v3h-3zM64 27h2v3h-2zM68 27h1v3h-1zM70 27h1v3h-1zM74 27h1v3h-1zM81 27h3v3h-3zM85 27h3v3h-3zM89 27h2v3h-2zM94 27h2v3h-2zM99 27h2v3h-2zM102 27h1v3h-1zM105 27h4v3h-4zM112 27h3v3h-3zM116 27h1v3h-1zM119 27h1v3h-1zM121 27h1v3h-1zM126 27h2v3h-2zM132 27h2v3h-2zM136 27h7v3h-7zM144 27h1v3h-1zM148 27h1v3h-1zM150 27h1v3h-1zM153 27h1v3h-1z'/%3E%3C/svg%3E");
+  --bd-code-wide: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 222 30' preserveAspectRatio='none' shape-rendering='crispEdges'%3E%3Cpath fill='%2316222a' d='M0 0h8v3h-8zM9 0h1v3h-1zM11 0h1v3h-1zM13 0h1v3h-1zM17 0h2v3h-2zM22 0h2v3h-2zM27 0h1v3h-1zM29 0h1v3h-1zM34 0h1v3h-1zM36 0h3v3h-3zM41 0h2v3h-2zM49 0h1v3h-1zM51 0h2v3h-2zM54 0h3v3h-3zM58 0h4v3h-4zM64 0h2v3h-2zM68 0h1v3h-1zM73 0h2v3h-2zM76 0h5v3h-5zM82 0h2v3h-2zM85 0h1v3h-1zM90 0h2v3h-2zM93 0h2v3h-2zM98 0h1v3h-1zM102 0h2v3h-2zM109 0h2v3h-2zM113 0h1v3h-1zM117 0h1v3h-1zM119 0h1v3h-1zM123 0h2v3h-2zM126 0h3v3h-3zM131 0h1v3h-1zM136 0h3v3h-3zM140 0h2v3h-2zM145 0h1v3h-1zM149 0h2v3h-2zM153 0h2v3h-2zM156 0h1v3h-1zM158 0h2v3h-2zM161 0h5v3h-5zM170 0h1v3h-1zM174 0h1v3h-1zM177 0h2v3h-2zM182 0h4v3h-4zM187 0h2v3h-2zM190 0h2v3h-2zM194 0h1v3h-1zM197 0h4v3h-4zM204 0h7v3h-7zM212 0h1v3h-1zM216 0h1v3h-1zM218 0h1v3h-1zM221 0h1v3h-1zM0 3h8v3h-8zM9 3h1v3h-1zM11 3h1v3h-1zM13 3h1v3h-1zM17 3h1v3h-1zM22 3h3v3h-3zM26 3h3v3h-3zM30 3h1v3h-1zM34 3h4v3h-4zM39 3h1v3h-1zM43 3h2v3h-2zM47 3h1v3h-1zM51 3h3v3h-3zM56 3h1v3h-1zM58 3h2v3h-2zM64 3h1v3h-1zM68 3h2v3h-2zM71 3h3v3h-3zM76 3h2v3h-2zM81 3h2v3h-2zM85 3h1v3h-1zM87 3h2v3h-2zM92 3h3v3h-3zM97 3h1v3h-1zM102 3h6v3h-6zM111 3h1v3h-1zM113 3h2v3h-2zM117 3h1v3h-1zM119 3h3v3h-3zM125 3h1v3h-1zM127 3h4v3h-4zM133 3h1v3h-1zM136 3h2v3h-2zM139 3h2v3h-2zM144 3h1v3h-1zM146 3h2v3h-2zM153 3h2v3h-2zM157 3h1v3h-1zM161 3h2v3h-2zM166 3h2v3h-2zM170 3h3v3h-3zM178 3h2v3h-2zM181 3h1v3h-1zM184 3h2v3h-2zM187 3h4v3h-4zM193 3h2v3h-2zM197 3h1v3h-1zM199 3h3v3h-3zM204 3h7v3h-7zM212 3h1v3h-1zM216 3h1v3h-1zM218 3h1v3h-1zM221 3h1v3h-1zM0 6h8v3h-8zM9 6h1v3h-1zM11 6h1v3h-1zM13 6h1v3h-1zM17 6h2v3h-2zM20 6h2v3h-2zM26 6h5v3h-5zM32 6h1v3h-1zM34 6h2v3h-2zM39 6h1v3h-1zM41 6h1v3h-1zM47 6h1v3h-1zM51 6h2v3h-2zM55 6h4v3h-4zM61 6h1v3h-1zM64 6h2v3h-2zM68 6h1v3h-1zM71 6h2v3h-2zM76 6h1v3h-1zM81 6h1v3h-1zM85 6h3v3h-3zM91 6h1v3h-1zM93 6h1v3h-1zM96 6h4v3h-4zM102 6h1v3h-1zM106 6h2v3h-2zM109 6h2v3h-2zM113 6h5v3h-5zM119 6h2v3h-2zM122 6h3v3h-3zM129 6h3v3h-3zM133 6h1v3h-1zM136 6h2v3h-2zM139 6h2v3h-2zM143 6h2v3h-2zM146 6h3v3h-3zM153 6h3v3h-3zM157 6h1v3h-1zM161 6h1v3h-1zM166 6h2v3h-2zM170 6h3v3h-3zM176 6h2v3h-2zM179 6h5v3h-5zM185 6h1v3h-1zM187 6h1v3h-1zM189 6h2v3h-2zM196 6h4v3h-4zM201 6h1v3h-1zM204 6h7v3h-7zM212 6h1v3h-1zM216 6h1v3h-1zM218 6h1v3h-1zM221 6h1v3h-1zM0 9h8v3h-8zM9 9h1v3h-1zM11 9h1v3h-1zM13 9h1v3h-1zM17 9h3v3h-3zM21 9h3v3h-3zM26 9h1v3h-1zM31 9h2v3h-2zM34 9h2v3h-2zM38 9h2v3h-2zM42 9h3v3h-3zM48 9h1v3h-1zM51 9h1v3h-1zM54 9h1v3h-1zM57 9h2v3h-2zM62 9h4v3h-4zM68 9h3v3h-3zM74 9h4v3h-4zM79 9h1v3h-1zM81 9h3v3h-3zM85 9h3v3h-3zM91 9h3v3h-3zM95 9h2v3h-2zM100 9h1v3h-1zM102 9h3v3h-3zM107 9h1v3h-1zM109 9h4v3h-4zM114 9h2v3h-2zM119 9h1v3h-1zM122 9h4v3h-4zM127 9h4v3h-4zM133 9h2v3h-2zM136 9h1v3h-1zM140 9h4v3h-4zM146 9h1v3h-1zM150 9h1v3h-1zM153 9h3v3h-3zM157 9h1v3h-1zM162 9h1v3h-1zM164 9h2v3h-2zM170 9h1v3h-1zM174 9h1v3h-1zM178 9h1v3h-1zM183 9h1v3h-1zM187 9h4v3h-4zM193 9h2v3h-2zM197 9h1v3h-1zM200 9h1v3h-1zM204 9h7v3h-7zM212 9h1v3h-1zM216 9h1v3h-1zM218 9h1v3h-1zM221 9h1v3h-1zM0 12h8v3h-8zM9 12h1v3h-1zM11 12h1v3h-1zM13 12h1v3h-1zM17 12h1v3h-1zM22 12h1v3h-1zM25 12h4v3h-4zM30 12h3v3h-3zM34 12h2v3h-2zM38 12h5v3h-5zM47 12h1v3h-1zM49 12h1v3h-1zM51 12h1v3h-1zM55 12h3v3h-3zM60 12h1v3h-1zM64 12h2v3h-2zM68 12h1v3h-1zM70 12h2v3h-2zM74 12h2v3h-2zM80 12h3v3h-3zM85 12h1v3h-1zM88 12h3v3h-3zM92 12h2v3h-2zM98 12h2v3h-2zM102 12h3v3h-3zM106 12h3v3h-3zM110 12h1v3h-1zM114 12h3v3h-3zM119 12h2v3h-2zM122 12h2v3h-2zM127 12h1v3h-1zM129 12h3v3h-3zM136 12h1v3h-1zM138 12h4v3h-4zM145 12h1v3h-1zM147 12h2v3h-2zM153 12h4v3h-4zM160 12h1v3h-1zM162 12h2v3h-2zM167 12h2v3h-2zM170 12h3v3h-3zM174 12h3v3h-3zM178 12h2v3h-2zM183 12h2v3h-2zM187 12h1v3h-1zM192 12h1v3h-1zM194 12h3v3h-3zM199 12h3v3h-3zM204 12h7v3h-7zM212 12h1v3h-1zM216 12h1v3h-1zM218 12h1v3h-1zM221 12h1v3h-1zM0 15h8v3h-8zM9 15h1v3h-1zM11 15h1v3h-1zM13 15h1v3h-1zM17 15h1v3h-1zM20 15h4v3h-4zM28 15h1v3h-1zM31 15h2v3h-2zM34 15h3v3h-3zM40 15h3v3h-3zM44 15h2v3h-2zM49 15h1v3h-1zM51 15h4v3h-4zM58 15h1v3h-1zM62 15h1v3h-1zM65 15h1v3h-1zM68 15h2v3h-2zM75 15h3v3h-3zM79 15h1v3h-1zM81 15h2v3h-2zM85 15h4v3h-4zM90 15h1v3h-1zM94 15h1v3h-1zM99 15h2v3h-2zM102 15h3v3h-3zM106 15h4v3h-4zM111 15h3v3h-3zM115 15h1v3h-1zM119 15h4v3h-4zM125 15h1v3h-1zM129 15h1v3h-1zM134 15h1v3h-1zM136 15h1v3h-1zM139 15h2v3h-2zM144 15h1v3h-1zM146 15h3v3h-3zM153 15h1v3h-1zM155 15h1v3h-1zM160 15h2v3h-2zM164 15h2v3h-2zM170 15h1v3h-1zM175 15h3v3h-3zM179 15h1v3h-1zM182 15h3v3h-3zM187 15h4v3h-4zM192 15h4v3h-4zM197 15h2v3h-2zM200 15h2v3h-2zM204 15h7v3h-7zM212 15h1v3h-1zM216 15h1v3h-1zM218 15h1v3h-1zM221 15h1v3h-1zM0 18h8v3h-8zM9 18h1v3h-1zM11 18h1v3h-1zM13 18h1v3h-1zM17 18h2v3h-2zM21 18h1v3h-1zM27 18h4v3h-4zM32 18h1v3h-1zM34 18h3v3h-3zM38 18h2v3h-2zM43 18h2v3h-2zM48 18h2v3h-2zM51 18h3v3h-3zM58 18h1v3h-1zM60 18h1v3h-1zM62 18h3v3h-3zM68 18h2v3h-2zM71 18h4v3h-4zM79 18h1v3h-1zM83 18h1v3h-1zM85 18h2v3h-2zM88 18h1v3h-1zM91 18h2v3h-2zM94 18h3v3h-3zM102 18h1v3h-1zM106 18h2v3h-2zM111 18h2v3h-2zM117 18h1v3h-1zM119 18h3v3h-3zM123 18h4v3h-4zM129 18h1v3h-1zM133 18h2v3h-2zM136 18h1v3h-1zM138 18h2v3h-2zM144 18h2v3h-2zM149 18h3v3h-3zM153 18h3v3h-3zM157 18h1v3h-1zM159 18h1v3h-1zM162 18h2v3h-2zM170 18h1v3h-1zM173 18h1v3h-1zM177 18h4v3h-4zM185 18h1v3h-1zM187 18h1v3h-1zM190 18h3v3h-3zM195 18h3v3h-3zM202 18h1v3h-1zM204 18h7v3h-7zM212 18h1v3h-1zM216 18h1v3h-1zM218 18h1v3h-1zM221 18h1v3h-1zM0 21h8v3h-8zM9 21h1v3h-1zM11 21h1v3h-1zM13 21h1v3h-1zM17 21h2v3h-2zM20 21h3v3h-3zM27 21h3v3h-3zM31 21h2v3h-2zM34 21h1v3h-1zM36 21h2v3h-2zM42 21h2v3h-2zM46 21h1v3h-1zM51 21h1v3h-1zM54 21h2v3h-2zM57 21h1v3h-1zM60 21h3v3h-3zM68 21h3v3h-3zM75 21h1v3h-1zM77 21h3v3h-3zM82 21h2v3h-2zM85 21h1v3h-1zM90 21h1v3h-1zM92 21h1v3h-1zM94 21h4v3h-4zM102 21h2v3h-2zM108 21h2v3h-2zM112 21h1v3h-1zM116 21h1v3h-1zM119 21h2v3h-2zM122 21h1v3h-1zM127 21h3v3h-3zM134 21h1v3h-1zM136 21h1v3h-1zM139 21h3v3h-3zM143 21h2v3h-2zM149 21h1v3h-1zM153 21h2v3h-2zM158 21h1v3h-1zM162 21h1v3h-1zM166 21h1v3h-1zM170 21h1v3h-1zM173 21h3v3h-3zM178 21h2v3h-2zM181 21h4v3h-4zM187 21h2v3h-2zM190 21h2v3h-2zM194 21h1v3h-1zM198 21h3v3h-3zM204 21h7v3h-7zM212 21h1v3h-1zM216 21h1v3h-1zM218 21h1v3h-1zM221 21h1v3h-1zM0 24h8v3h-8zM9 24h1v3h-1zM11 24h1v3h-1zM13 24h1v3h-1zM17 24h1v3h-1zM19 24h3v3h-3zM24 24h2v3h-2zM30 24h2v3h-2zM34 24h3v3h-3zM38 24h3v3h-3zM42 24h4v3h-4zM47 24h3v3h-3zM51 24h1v3h-1zM53 24h3v3h-3zM57 24h1v3h-1zM61 24h5v3h-5zM68 24h1v3h-1zM71 24h1v3h-1zM77 24h2v3h-2zM80 24h1v3h-1zM85 24h2v3h-2zM91 24h1v3h-1zM95 24h1v3h-1zM100 24h1v3h-1zM102 24h1v3h-1zM104 24h1v3h-1zM106 24h1v3h-1zM111 24h2v3h-2zM119 24h3v3h-3zM124 24h1v3h-1zM126 24h3v3h-3zM131 24h4v3h-4zM136 24h2v3h-2zM140 24h2v3h-2zM143 24h1v3h-1zM145 24h6v3h-6zM153 24h4v3h-4zM162 24h3v3h-3zM166 24h1v3h-1zM168 24h1v3h-1zM170 24h2v3h-2zM173 24h2v3h-2zM176 24h2v3h-2zM181 24h5v3h-5zM187 24h3v3h-3zM192 24h1v3h-1zM195 24h1v3h-1zM200 24h1v3h-1zM204 24h7v3h-7zM212 24h1v3h-1zM216 24h1v3h-1zM218 24h1v3h-1zM221 24h1v3h-1zM0 27h8v3h-8zM9 27h1v3h-1zM11 27h1v3h-1zM13 27h1v3h-1zM17 27h2v3h-2zM21 27h2v3h-2zM27 27h1v3h-1zM31 27h1v3h-1zM34 27h2v3h-2zM38 27h1v3h-1zM42 27h3v3h-3zM47 27h3v3h-3zM51 27h1v3h-1zM53 27h2v3h-2zM61 27h1v3h-1zM66 27h1v3h-1zM68 27h3v3h-3zM72 27h2v3h-2zM77 27h2v3h-2zM82 27h1v3h-1zM85 27h4v3h-4zM92 27h4v3h-4zM97 27h2v3h-2zM100 27h1v3h-1zM102 27h2v3h-2zM107 27h1v3h-1zM109 27h3v3h-3zM113 27h4v3h-4zM119 27h1v3h-1zM122 27h2v3h-2zM126 27h2v3h-2zM131 27h3v3h-3zM136 27h2v3h-2zM142 27h4v3h-4zM147 27h3v3h-3zM151 27h1v3h-1zM153 27h1v3h-1zM157 27h1v3h-1zM160 27h3v3h-3zM166 27h2v3h-2zM170 27h4v3h-4zM177 27h1v3h-1zM181 27h1v3h-1zM183 27h3v3h-3zM187 27h2v3h-2zM190 27h5v3h-5zM196 27h1v3h-1zM200 27h2v3h-2zM204 27h7v3h-7zM212 27h1v3h-1zM216 27h1v3h-1zM218 27h1v3h-1zM221 27h1v3h-1z'/%3E%3C/svg%3E");
+}
+
+/* ---------- The pass ---------- */
+
+.bd {
+  background: var(--bd-guilloche) 0 0 / 360px 54px, var(--bd-paper-c);
+  color: var(--bd-ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-synthesis: none;
+  font-variant-ligatures: none;
+}
+
+.bd .safe {
+  z-index: 2;
+  inset: var(--bd-y) var(--bd-x);
+}
+
+/* Rounded corners: the table shows outside a quarter circle in each corner. */
+.bd::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  --bd-c: var(--bd-corner);
+  background:
+    radial-gradient(circle at 100% 100%, transparent calc(var(--bd-c) - 0.6px), var(--bd-table) var(--bd-c)) 0 0 / var(--bd-c) var(--bd-c) no-repeat,
+    radial-gradient(circle at 0 100%, transparent calc(var(--bd-c) - 0.6px), var(--bd-table) var(--bd-c)) 100% 0 / var(--bd-c) var(--bd-c) no-repeat,
+    radial-gradient(circle at 100% 0, transparent calc(var(--bd-c) - 0.6px), var(--bd-table) var(--bd-c)) 0 100% / var(--bd-c) var(--bd-c) no-repeat,
+    radial-gradient(circle at 0 0, transparent calc(var(--bd-c) - 0.6px), var(--bd-table) var(--bd-c)) 100% 100% / var(--bd-c) var(--bd-c) no-repeat;
+}
+
+/* *word*: marked with a highlighter, the way travellers mark the gate on their pass. */
+.bd em {
+  padding: 0 0.12em;
+  margin: 0 -0.04em;
+  background: var(--bd-mark) 0 55% / 100% 0.92em no-repeat;
+  color: var(--bd-ink);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---------- The band: airline color, brand, and the route ---------- */
+
+.bd-band {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: var(--bd-band-h);
+  background:
+    radial-gradient(ellipse 70% 120% at 50% 120%, rgb(255 255 255 / 0.08), transparent 70%),
+    var(--accent);
+  color: var(--bd-on);
+}
+
+.bd-route {
+  position: absolute;
+  bottom: 6px;
+  left: calc(50% - 540px);
+  width: 1080px;
+  height: 150px;
+}
+
+.bd-route-svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.bd-todo {
+  fill: none;
+  stroke: var(--bd-on);
+  stroke-opacity: 0.62;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 14;
+}
+
+/* The distance flown so far: a solid line up to the plane. */
+.bd-done {
+  fill: none;
+  stroke: var(--bd-on);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: calc(var(--progress, 1) * 0.91) 2;
+}
+
+.bd-from,
+.bd-to-dot {
+  fill: var(--bd-on);
+}
+
+.bd-to {
+  fill: var(--accent);
+  stroke: var(--bd-on);
+  stroke-width: 5;
+}
+
+/* The plane flies along the same curve: it climbs at the start and comes down on the last slide. */
+.bd-plane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92px;
+  height: 92px;
+  overflow: visible;
+  fill: var(--bd-on);
+  filter: drop-shadow(0 8px 6px rgb(0 0 0 / 0.24));
+  offset-path: path("M96 126 Q540 -70 984 126");
+  /* It stops just short of the destination ring on the last slide. */
+  offset-distance: calc(var(--progress, 1) * 91%);
+  offset-rotate: auto;
+  offset-anchor: 50% 50%;
+}
+
+/* Without a brand the band holds only the route, so it moves up to the middle. */
+.bd:not(:has(.bd-head > *)) .bd-route {
+  bottom: calc((var(--bd-band-h) - 150px) / 2 - 8px);
+}
+
+.bd-head {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 64px;
+  margin-bottom: calc(var(--bd-band-h) - var(--bd-y) - 64px);
+}
+
+.bd-logo {
+  height: 64px;
+  width: auto;
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--bd-paper-c);
+  object-fit: contain;
+}
+
+.bd-name {
+  color: var(--bd-on);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+}
+
+/* ---------- Ticket area and stub ---------- */
+
+.bd-main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 60px 0 36px;
+}
+
+/* The tear line: a row of perforation dashes between two half-circle notches. */
+.bd-perf {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--bd-stub-h) - var(--bd-notch));
+  z-index: 1;
+  height: calc(var(--bd-notch) * 2);
+  background: repeating-linear-gradient(90deg, var(--bd-rule) 0 12px, transparent 12px 22px) 50% 50% / calc(100% - var(--bd-notch) * 2 - 40px) 4px no-repeat;
+}
+
+.bd-perf::before,
+.bd-perf::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: calc(var(--bd-notch) * 2);
+  height: calc(var(--bd-notch) * 2);
+  border-radius: 50%;
+  background: var(--bd-table);
+  box-shadow: inset 0 3px 6px rgb(0 0 0 / 0.35);
+}
+
+.bd-perf::before {
+  left: calc(var(--bd-notch) * -1);
+}
+
+.bd-perf::after {
+  right: calc(var(--bd-notch) * -1);
+}
+
+/* The stub's content sits on the bottom edge of the safe area, so the moment the ticket area above
+   runs too long and pushes the stub down, its text leaves the safe area and the fit check sees it. */
+.bd-stub {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+  height: calc(var(--bd-stub-h) - var(--bd-y));
+}
+
+.bd-stub-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* The stacked barcode, as on a real boarding pass. Decoration only. */
+.bd-code {
+  flex: none;
+  width: 400px;
+  height: 104px;
+  margin-left: auto;
+  background: var(--bd-code) 0 0 / 100% 100% no-repeat;
+}
+
+/* ---------- Fields: an icon instead of a label, then the value ---------- */
+
+.bd-field {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  word-spacing: -0.22em;
+  /* A slashed zero, so 0 and O never look alike in codes and handles. */
+  font-variant-numeric: slashed-zero;
+}
+
+/* The icons are vector clip paths drawn at 36px: they print cleanly in the PDF, where masks leave
+   faint boxes. */
+.bd-field::before {
+  content: "";
+  flex: none;
+  align-self: flex-start;
+  width: 36px;
+  height: 36px;
+  background: var(--bd-air);
+  clip-path: var(--bd-icon);
+}
+
+.bd-f-person {
+  --bd-icon: var(--bd-c-person);
+}
+
+.bd-f-seat {
+  --bd-icon: var(--bd-c-seat);
+}
+
+.bd-f-date {
+  --bd-icon: var(--bd-c-date);
+}
+
+.bd-f-clock {
+  --bd-icon: var(--bd-c-clock);
+}
+
+.bd-kicker {
+  margin-bottom: 26px;
+  color: var(--bd-mute);
+}
+
+/* ---------- Cover ---------- */
+
+.bd-display {
+  font-size: 172px;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.bd-sub {
+  max-width: 880px;
+  margin-top: 42px;
+  font-size: 44px;
+  line-height: 1.3;
+  color: var(--bd-mute);
+}
+
+/* The data row of the pass: kicker (date), handle (passenger) and counter (seat). */
+.bd-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 56px;
+  margin-top: auto;
+  padding-top: 40px;
+}
+
+/* On the cover the icon sits above the value, where a pass prints the field label. */
+.bd-fields .bd-field {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.bd-fields .bd-f-date {
+  flex: 0 1 auto;
+}
+
+.bd-f-end {
+  margin-left: auto;
+}
+
+/* On the cover the stub holds only the barcode, so the safe area ends at the tear line and the
+   barcode is decoration below it. */
+.bd-cover .safe {
+  bottom: calc(var(--bd-stub-h) + 6px);
+}
+
+.bd-cover-code {
+  position: absolute;
+  left: var(--bd-x);
+  right: var(--bd-x);
+  bottom: var(--bd-y);
+  z-index: 1;
+  width: auto;
+  height: 98px;
+  margin: 0;
+  background-image: var(--bd-code-wide);
+}
+
+.bd-cover .bd-main {
+  padding-bottom: 30px;
+}
+
+/* ---------- Text ---------- */
+
+.bd-h2 {
+  font-size: 94px;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.bd-body {
+  max-width: 920px;
+  margin-top: 46px;
+  font-size: 46px;
+  line-height: 1.4;
+}
+
+/* Without kicker and title the body is the statement of the slide: bigger, in the middle. */
+.bd-main > .bd-body:first-child {
+  margin-block: auto;
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.012em;
+}
+
+.bd-main > .bd-stops:first-child {
+  margin-block: auto;
+}
+
+/* ---------- Points: the itinerary, a vertical route with one stop per item ---------- */
+
+.bd-points .bd-h2 {
+  font-size: 80px;
+}
+
+.bd-stops {
+  display: flex;
+  flex-direction: column;
+  margin-top: 46px;
+}
+
+.bd-stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  column-gap: 30px;
+  align-items: start;
+}
+
+/* The route between two stops. */
+.bd-stop::before {
+  content: "";
+  position: absolute;
+  top: 68px;
+  bottom: 0;
+  left: 32px;
+  width: 4px;
+  background: repeating-linear-gradient(180deg, var(--bd-air) 0 8px, transparent 8px 16px) 0 6px / 4px calc(100% - 12px) no-repeat;
+}
+
+.bd-stop:last-child::before {
+  display: none;
+}
+
+/* The stop marker carries the item number as its code. */
+.bd-stop-n {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--bd-air);
+  color: #ffffff;
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 68px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  font-variant-numeric: slashed-zero;
+}
+
+.bd-stop-title {
+  grid-column: 2;
+  padding-top: 11px;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.bd-stop-text {
+  grid-column: 2;
+  margin-top: 6px;
+  font-size: 36px;
+  line-height: 1.32;
+  color: var(--bd-mute);
+}
+
+/* The space to the next stop scales with the text, so it shrinks when the fit check shrinks the text. */
+.bd-stop > :last-child {
+  padding-bottom: 0.9em;
+}
+
+.bd-stop:last-child > :last-child {
+  padding-bottom: 0;
+}
+
+/* A plain item (no title): its text is the stop itself. */
+.bd-stop:not(:has(.bd-stop-title)) .bd-stop-text {
+  margin-top: 0;
+  padding-top: 10px;
+  font-size: 44px;
+  line-height: 1.2;
+  color: var(--bd-ink);
+}
+
+/* ---------- Quote: a message card ---------- */
+
+.bd-quote-slide .bd-main {
+  justify-content: center;
+  padding-top: 104px;
+}
+
+.bd-msg {
+  position: relative;
+  padding: 86px 60px 58px;
+  border-radius: 30px;
+  background: var(--bd-card);
+  box-shadow: 0 0 0 2px rgb(22 34 42 / 0.06), 0 26px 50px -26px rgb(22 34 42 / 0.4);
+}
+
+/* The message icon, punched into the top edge of the card. */
+.bd-msg::before {
+  content: "";
+  position: absolute;
+  top: -46px;
+  left: 54px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--bd-bubble) 50% 54% / 50px 50px no-repeat, var(--bd-air);
+  box-shadow: 0 0 0 10px var(--bd-paper-c);
+}
+
+/* The tail of the speech card, pointing at the author. */
+.bd-msg::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 76px;
+  width: 46px;
+  height: 31px;
+  background: var(--bd-card);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.bd-quote {
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+/* Each language gets its own quotation marks. */
+.bd-quote:lang(de) {
+  quotes: "\201E" "\201C" "\201A" "\2018";
+}
+
+.bd-quote:lang(fr) {
+  quotes: "\00AB\202F" "\202F\00BB" "\2039\202F" "\202F\203A";
+}
+
+.bd-quote::before {
+  content: open-quote;
+}
+
+.bd-quote::after {
+  content: close-quote;
+}
+
+.bd-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 62px;
+  padding-left: 76px;
+}
+
+.bd-author {
+  font-size: 32px;
+}
+
+.bd-role {
+  padding-left: calc(1.2em * 32 / 30 + 14px);
+  font-size: 30px;
+  line-height: 1.3;
+  color: var(--bd-mute);
+}
+
+/* ---------- Stat: the split-flap departure board ---------- */
+
+.bd-stat .bd-main {
+  justify-content: center;
+}
+
+.bd-statrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 40px 48px;
+  margin-top: 6px;
+}
+
+.bd-board {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  padding: 20px;
+  border-radius: 22px;
+  background: var(--bd-housing);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.07), 0 26px 40px -24px rgb(0 0 0 / 0.55);
+}
+
+/* One flap per character: Overpass Mono is monospaced, so every character takes 1ch plus the
+   letter spacing, and a background with the same period puts each one on its own flap. */
+.bd-value {
+  --g: 0.16em;
+  --gap: 0.05em;
+  --cell: calc(1ch + var(--g));
+  position: relative;
+  margin-right: calc(var(--g) / -2);
+  /* The digits sit in the middle of the flap: the font's cap height is 0.7em, its ascent 0.883em. */
+  padding: 0.2em 0 0 calc(var(--g) / 2);
+  font-family: var(--mono);
+  font-size: 430px;
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: var(--g);
+  white-space: nowrap;
+  color: var(--bd-flap-ink);
+  font-variant-numeric: lining-nums slashed-zero;
+  clip-path: inset(0 calc(var(--g) / 2) 0 0);
+  background:
+    repeating-linear-gradient(90deg,
+      var(--bd-housing) 0 calc(var(--gap) / 2),
+      transparent calc(var(--gap) / 2) calc(var(--cell) - var(--gap) / 2),
+      var(--bd-housing) calc(var(--cell) - var(--gap) / 2) var(--cell)),
+    linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent 12%, transparent 50%, rgb(0 0 0 / 0.18) 50%, transparent 58%),
+    linear-gradient(180deg, var(--bd-flap) 50%, var(--bd-flap-lo) 50%);
+}
+
+/* The hinge: a dark split through the middle of every flap, over the characters, with the
+   notches of the axle at both sides of each flap. */
+.bd-value::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--bd-housing) 0 calc(var(--gap) / 2 + 0.03em),
+      transparent calc(var(--gap) / 2 + 0.03em) calc(var(--cell) - var(--gap) / 2 - 0.03em),
+      var(--bd-housing) calc(var(--cell) - var(--gap) / 2 - 0.03em) var(--cell)) 0 50% / 100% 0.075em no-repeat,
+    linear-gradient(180deg, transparent calc(50% - 0.012em), var(--bd-housing) calc(50% - 0.012em) calc(50% + 0.012em), transparent calc(50% + 0.012em));
+}
+
+.bd-label {
+  flex: 1 1 400px;
+  hyphens: manual;
+  text-wrap: balance;
+  max-width: 900px;
+  padding-bottom: 6px;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+}
+
+.bd-note {
+  max-width: 860px;
+  margin-top: 40px;
+  font-size: 34px;
+  line-height: 1.38;
+  color: var(--bd-mute);
+}
+
+/* ---------- Image: a postcard from the destination, tucked into the pass ---------- */
+
+.bd-image .bd-main {
+  flex: 1 1 0;
+  padding-top: 52px;
+}
+
+.bd-card {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 240px;
+  margin: 0 10px;
+  padding: 18px;
+  background: var(--bd-card);
+  box-shadow: 0 0 0 1px rgb(22 34 42 / 0.06), 0 22px 40px -22px rgb(22 34 42 / 0.5);
+  transform: rotate(-1.4deg);
+}
+
+.bd-card img {
+  position: absolute;
+  inset: 18px;
+  width: calc(100% - 36px);
+  height: calc(100% - 36px);
+  object-fit: cover;
+}
+
+.bd-postmark {
+  position: absolute;
+  top: -34px;
+  right: -26px;
+  width: 286px;
+  height: 165px;
+  overflow: visible;
+  fill: none;
+  stroke: var(--bd-air);
+  opacity: 0.86;
+  transform: rotate(-9deg);
+}
+
+.bd-postmark-plane {
+  fill: var(--bd-air);
+  stroke: none;
+}
+
+.bd-img-title {
+  margin-top: 46px;
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.bd-caption {
+  max-width: 900px;
+  margin-top: 16px;
+  font-size: 34px;
+  line-height: 1.36;
+  color: var(--bd-mute);
+}
+
+/* ---------- Call to action: boarding ---------- */
+
+.bd-cta {
+  --bd-stub-h: 318px;
+}
+
+.bd-cta .bd-main {
+  justify-content: center;
+}
+
+.bd-cta-title {
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+
+.bd-cta-text {
+  max-width: 880px;
+  margin-top: 36px;
+  font-size: 42px;
+  line-height: 1.32;
+  color: var(--bd-mute);
+}
+
+/* The action is the boarding button. */
+.bd-action {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.4em;
+  max-width: 100%;
+  margin-top: 56px;
+  padding: 0.5em 1.1em 0.44em 0.8em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bd-on);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  box-shadow: 0 18px 30px -18px rgb(22 34 42 / 0.6);
+}
+
+.bd-action::before {
+  content: "";
+  flex: none;
+  width: 46px;
+  height: 46px;
+  background: currentColor;
+  clip-path: var(--bd-c-plane);
+  transform: rotate(-24deg);
+}
+
+.bd-cta .bd-stub {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 26px;
+}
+
+.bd-cta .bd-code {
+  width: 100%;
+  height: 132px;
+  margin-left: 0;
+  background-image: var(--bd-code-wide);
+}
+
+.bd-cta .bd-stub-fields {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* ---------- Square slides (1080 × 1080): the same pass, tighter ---------- */
+
+@media (max-height: 1100px) {
+  :root {
+    --bd-band-h: 226px;
+    --bd-stub-h: 160px;
+    --bd-y: 38px;
+  }
+
+  .bd-cta {
+    --bd-stub-h: 252px;
+  }
+
+  .bd-main {
+    padding: 44px 0 24px;
+  }
+
+  .bd-display {
+    font-size: 126px;
+  }
+
+  .bd-sub {
+    margin-top: 28px;
+    font-size: 38px;
+  }
+
+  .bd-fields {
+    padding-top: 28px;
+  }
+
+  .bd-code {
+    height: 84px;
+  }
+
+  .bd-cover-code {
+    height: 80px;
+  }
+
+  .bd-kicker {
+    margin-bottom: 18px;
+  }
+
+  .bd-h2 {
+    font-size: 76px;
+  }
+
+  .bd-body {
+    margin-top: 32px;
+    font-size: 38px;
+  }
+
+  .bd-points .bd-h2 {
+    font-size: 64px;
+  }
+
+  .bd-stops {
+    margin-top: 30px;
+  }
+
+  .bd-stop {
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 26px;
+  }
+
+  .bd-stop::before {
+    top: 56px;
+    left: 26px;
+  }
+
+  .bd-stop-n {
+    width: 56px;
+    height: 56px;
+    font-size: 23px;
+    line-height: 56px;
+  }
+
+  .bd-stop-title {
+    padding-top: 7px;
+    font-size: 38px;
+  }
+
+  .bd-stop-text {
+    margin-top: 2px;
+    font-size: 30px;
+  }
+
+  .bd-stop > :last-child {
+    padding-bottom: 0.6em;
+  }
+
+  .bd-stop:not(:has(.bd-stop-title)) .bd-stop-text {
+    padding-top: 8px;
+    font-size: 38px;
+  }
+
+  .bd-quote-slide .bd-main {
+    padding-top: 84px;
+  }
+
+  .bd-msg {
+    padding: 72px 52px 46px;
+  }
+
+  .bd-quote {
+    font-size: 48px;
+  }
+
+  .bd-cite {
+    margin-top: 50px;
+  }
+
+  .bd-value {
+    font-size: 300px;
+  }
+
+  .bd-label {
+    margin-top: 34px;
+    font-size: 50px;
+  }
+
+  .bd-note {
+    font-size: 31px;
+  }
+
+  .bd-image .bd-main {
+    padding-top: 40px;
+  }
+
+  .bd-img-title {
+    margin-top: 34px;
+    font-size: 52px;
+  }
+
+  .bd-caption {
+    font-size: 31px;
+  }
+
+  .bd-cta-title {
+    font-size: 104px;
+  }
+
+  .bd-cta-text {
+    margin-top: 28px;
+    font-size: 38px;
+  }
+
+  .bd-action {
+    margin-top: 40px;
+    font-size: 42px;
+  }
+
+  .bd-cta .bd-stub {
+    gap: 20px;
+  }
+
+  .bd-cta .bd-code {
+    height: 110px;
+  }
+}

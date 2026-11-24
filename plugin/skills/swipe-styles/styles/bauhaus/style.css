@@ -1,0 +1,1079 @@
+/* Bauhaus: every slide is a poster built from the primary forms (circle, square, triangle,
+   semicircle, quarter circle) in red, yellow, blue and black on cool paper. Heavy geometric type
+   stands on the same black rule as the shapes, sits beside them or inside them.
+   Type: Jost (OFL), a geometric sans in the tradition of the 1920s.
+
+   Text never overlaps a shape by accident: every slide type keeps its text in a zone the shapes
+   leave free, and the zones are guarded (fixed heights, max-heights) so the renderer shrinks
+   text instead of letting it run into a shape. Where text sits on a shape on purpose, the shape
+   is yellow (black text) or red (text in --bh-on-red). */
+
+@font-face {
+  font-family: "Jost";
+  src: url("../../fonts/jost/Jost-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: block;
+}
+
+:root {
+  --accent: #d5281b;
+  --safe: 80px;
+}
+
+.bh {
+  --bh-paper: #eceeef;
+  --bh-ink: #000000;
+  --bh-yellow: #f2b705;
+  --bh-blue: #1c4b9b;
+  --bh-grey: #4f5358;
+  /* The red role. A very pale brand color is darkened a little so its shapes still show on the paper. */
+  --bh-red: oklch(from var(--accent) min(l, 0.82) c h);
+  /* Text set inside a red shape: white on a dark or mid accent, black on a light one. */
+  --bh-on-red: oklch(from var(--bh-red) clamp(0, (0.6 - l) * 1000, 1) 0 0);
+
+  container-type: size;
+  background: var(--bh-paper);
+  color: var(--bh-ink);
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+}
+
+.bh .safe {
+  z-index: 2;
+}
+
+/* *Emphasis*: the word is printed on a yellow block. */
+.bh em {
+  padding: 0 0.12em;
+  margin: 0 -0.04em;
+  background: var(--bh-yellow);
+  color: var(--bh-ink);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---------- The shapes ---------- */
+
+.bh-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bh-art-front {
+  z-index: 1;
+}
+
+.bh-s {
+  position: absolute;
+  display: block;
+}
+
+.bh-red {
+  background: var(--bh-red);
+}
+
+.bh-yellow {
+  background: var(--bh-yellow);
+}
+
+.bh-blue {
+  background: var(--bh-blue);
+}
+
+.bh-black {
+  background: var(--bh-ink);
+}
+
+.bh-circle {
+  border-radius: 50%;
+}
+
+/* Semicircles: the box is twice as wide as high (or twice as high as wide). */
+.bh-semi-up {
+  border-radius: 9999px 9999px 0 0;
+}
+
+.bh-semi-down {
+  border-radius: 0 0 9999px 9999px;
+}
+
+.bh-semi-left {
+  border-radius: 9999px 0 0 9999px;
+}
+
+/* Quarter circles, named after the rounded corner. */
+.bh-quarter-br {
+  border-radius: 0 0 100% 0;
+}
+
+.bh-quarter-bl {
+  border-radius: 0 0 0 100%;
+}
+
+.bh-tri-up {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.bh-tri-down {
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* A full-bleed black rule: the horizon the shapes and the headlines stand on. */
+.bh-rule {
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: var(--bh-ink);
+}
+
+/* ---------- Shared text ---------- */
+
+.bh-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 76px;
+  width: auto;
+  max-width: 270px;
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* The kicker is set vertically, reading upwards, like the spine label of a poster. */
+.bh-kicker {
+  flex: none;
+  max-height: 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.bh-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 32px;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.bh-count {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Headline row of the text and points slides: kicker and title stand on the black rule. */
+.bh-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 26px;
+}
+
+.bh-h2 {
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Cover: square, circle and triangle stand on the horizon, the title below ---------- */
+
+.bh-cv-quarter {
+  top: 0;
+  left: 830px;
+  width: 250px;
+  height: 250px;
+}
+
+.bh-cv-square {
+  top: 220px;
+  left: 80px;
+  width: 270px;
+  height: 270px;
+}
+
+.bh-cv-circle {
+  top: 20px;
+  left: 380px;
+  width: 470px;
+  height: 470px;
+}
+
+.bh-cv-tri {
+  top: 260px;
+  left: 840px;
+  width: 240px;
+  height: 230px;
+}
+
+.bh-cv-rule {
+  top: 490px;
+}
+
+/* The text zone starts under the horizon. */
+.bh-cover .safe {
+  padding-top: 470px;
+}
+
+/* The kicker sits inside the red square, on its bottom edge. It grows upwards; past the
+   square's height it is cut, which makes the fit loop shrink it. */
+.bh-cv-kicker {
+  position: absolute;
+  bottom: calc(100% - 386px);
+  left: 26px;
+  width: 220px;
+  max-height: 226px;
+  padding-bottom: 0.2em;
+  overflow: hidden;
+  text-wrap: balance;
+  color: var(--bh-on-red);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.bh-cv-title {
+  margin-top: auto;
+  font-size: 168px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.bh-cv-sub {
+  max-width: 880px;
+  margin-top: 40px;
+  font-size: 40px;
+  line-height: 1.28;
+}
+
+.bh-cover .bh-foot {
+  margin-top: 0;
+  padding-top: 52px;
+}
+
+/* ---------- Text: the title stands on the rule next to a red semicircle ---------- */
+
+.bh-tx-circle {
+  top: -120px;
+  left: 780px;
+  width: 440px;
+  height: 440px;
+}
+
+.bh-tx-semi {
+  top: 550px;
+  left: 660px;
+  width: 340px;
+  height: 170px;
+}
+
+.bh-tx-rule {
+  top: 720px;
+}
+
+.bh-text .bh-head {
+  height: 612px;
+  max-width: 540px;
+}
+
+.bh-text .bh-h2 {
+  font-size: 118px;
+}
+
+.bh-body {
+  max-width: 910px;
+  margin-top: 84px;
+  font-size: 46px;
+  line-height: 1.34;
+}
+
+/* ---------- Points: every item gets its own primary form ---------- */
+
+.bh-pt-semi {
+  top: 0;
+  left: 740px;
+  width: 260px;
+  height: 130px;
+}
+
+.bh-pt-tri {
+  top: 300px;
+  left: 740px;
+  width: 260px;
+  height: 260px;
+}
+
+.bh-pt-rule {
+  top: 560px;
+}
+
+.bh-points .bh-head {
+  height: 452px;
+  max-width: 620px;
+}
+
+.bh-points .bh-h2 {
+  font-size: 104px;
+}
+
+/* Four or five items: the rule moves up to make room. */
+.bh-points:has(.bh-item:nth-child(4)) .bh-pt-tri {
+  top: 190px;
+  height: 210px;
+}
+
+.bh-points:has(.bh-item:nth-child(4)) .bh-pt-rule {
+  top: 400px;
+}
+
+.bh-points:has(.bh-item:nth-child(4)) .bh-head {
+  height: 292px;
+}
+
+.bh-points:has(.bh-item:nth-child(4)) .bh-h2 {
+  font-size: 92px;
+}
+
+.bh-list {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 30px;
+  padding-top: 72px;
+}
+
+.bh-item {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.bh-mark {
+  flex: none;
+  width: 84px;
+  height: 84px;
+}
+
+/* Circle, square, triangle, semicircle, quarter circle. */
+.bh-item:nth-child(5n + 1) .bh-mark {
+  border-radius: 50%;
+  background: var(--bh-blue);
+}
+
+.bh-item:nth-child(5n + 2) .bh-mark {
+  background: var(--bh-red);
+}
+
+.bh-item:nth-child(5n + 3) .bh-mark {
+  background: var(--bh-yellow);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.bh-item:nth-child(5n + 4) .bh-mark {
+  height: 42px;
+  margin-top: 42px;
+  border-radius: 9999px 9999px 0 0;
+  background: var(--bh-ink);
+}
+
+.bh-item:nth-child(5n + 5) .bh-mark {
+  border-radius: 100% 0 0 0;
+  background: var(--bh-blue);
+}
+
+.bh-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.bh-item-title {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.04;
+}
+
+.bh-item-text {
+  font-size: 40px;
+  line-height: 1.28;
+}
+
+/* A plain string item has no title: its text is a little bigger. */
+.bh-item-body > .bh-item-text:only-child {
+  font-size: 44px;
+}
+
+.bh-points .bh-foot {
+  margin-top: 0;
+}
+
+/* ---------- Quote: the quote above a yellow dome, the author inside it ---------- */
+
+.bh-qt-quarter {
+  top: 0;
+  left: 0;
+  width: 190px;
+  height: 190px;
+}
+
+.bh-qt-dome {
+  top: 870px;
+  left: 50px;
+  width: 980px;
+  height: 490px;
+}
+
+.bh-qt-dot {
+  top: 800px;
+  left: 470px;
+  width: 140px;
+  height: 140px;
+}
+
+/* The quote may not grow into the red ball: past this height it is cut and shrunk. */
+.bh-qt-text {
+  max-height: 540px;
+  margin-top: 150px;
+  padding-bottom: 0.24em;
+  overflow: hidden;
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.014em;
+  quotes: "\201C" "\201D";
+}
+
+.bh-qt-text:lang(fr) {
+  quotes: "\00AB\00A0" "\00A0\00BB";
+}
+
+.bh-qt-text:lang(de) {
+  quotes: "\201E" "\201C";
+}
+
+.bh-qt-text::before {
+  content: open-quote;
+}
+
+.bh-qt-text::after {
+  content: close-quote;
+}
+
+/* Author and role sit inside the dome. */
+.bh-cite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding: 40px 70px 0;
+  text-align: center;
+}
+
+.bh-author {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.bh-role {
+  margin-top: 6px;
+  font-size: 34px;
+  line-height: 1.25;
+}
+
+.bh-quote .bh-foot {
+  margin-top: 56px;
+}
+
+/* ---------- Stat: the value inside a big red circle ---------- */
+
+.bh-st-tri {
+  top: 0;
+  left: 860px;
+  width: 220px;
+  height: 190px;
+}
+
+.bh-st-circle {
+  top: 90px;
+  left: 190px;
+  width: 700px;
+  height: 700px;
+}
+
+.bh-st-square {
+  top: 610px;
+  left: 820px;
+  width: 180px;
+  height: 180px;
+}
+
+.bh-st-kicker {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  max-height: 700px;
+}
+
+/* A box across the middle of the circle; the value is centred in it and never wraps. */
+.bh-st-value {
+  position: absolute;
+  top: 110px;
+  left: 160px;
+  width: 600px;
+  height: 500px;
+  overflow: hidden;
+  color: var(--bh-on-red);
+  font-size: 330px;
+  font-weight: 800;
+  line-height: 500px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  white-space: nowrap;
+  font-variant-numeric: lining-nums;
+}
+
+.bh-stat .safe {
+  padding-top: 770px;
+}
+
+.bh-st-label {
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.bh-st-note {
+  max-width: 860px;
+  margin-top: 22px;
+  font-size: 34px;
+  line-height: 1.32;
+  color: var(--bh-grey);
+}
+
+/* ---------- Image: the picture in a circle, with forms tangent to it ---------- */
+
+.bh-im-quarter {
+  top: 0;
+  left: 0;
+  width: 309px;
+  height: 309px;
+}
+
+.bh-im-semi {
+  top: 234px;
+  left: 934px;
+  width: 146px;
+  height: 292px;
+}
+
+.bh-im-figure {
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  left: 140px;
+  width: 800px;
+  height: 800px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--bh-ink);
+}
+
+.bh-im-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bh-im-square {
+  top: 700px;
+  left: 790px;
+  width: 170px;
+  height: 170px;
+}
+
+.bh-image .safe {
+  padding-top: 836px;
+}
+
+.bh-im-title {
+  font-size: 74px;
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+}
+
+.bh-im-caption {
+  max-width: 880px;
+  margin-top: 20px;
+  font-size: 36px;
+  line-height: 1.3;
+  color: var(--bh-grey);
+}
+
+/* Only the picture: it grows and moves to the middle of the slide. */
+.bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-figure {
+  top: 160px;
+  left: 70px;
+  width: 940px;
+  height: 940px;
+}
+
+.bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-quarter {
+  width: 340px;
+  height: 340px;
+}
+
+.bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-semi {
+  display: none;
+}
+
+.bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-square {
+  top: 930px;
+  left: 830px;
+  width: 190px;
+  height: 190px;
+}
+
+/* ---------- Call to action: the three forms become an arrow that points at the action ---------- */
+
+.bh-ct-quarter {
+  top: 0;
+  left: 480px;
+  width: 600px;
+  height: 600px;
+}
+
+/* The text zone starts below the quarter circle, so a long title can never reach it. */
+.bh-cta .safe {
+  padding-top: 520px;
+}
+
+.bh-ct-title {
+  margin-top: auto;
+  font-size: 128px;
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+}
+
+.bh-ct-text {
+  max-width: 880px;
+  margin-top: 34px;
+  font-size: 42px;
+  line-height: 1.3;
+}
+
+/* The arrow and the action stand on a black rule that runs to both edges of the slide. */
+.bh-ct-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin-top: 64px;
+  padding-bottom: 46px;
+}
+
+.bh-ct-row::after {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--safe));
+  right: calc(-1 * var(--safe));
+  bottom: 0;
+  height: 16px;
+  background: var(--bh-ink);
+}
+
+.bh-arrow {
+  display: flex;
+  flex: none;
+  align-self: flex-end;
+  margin-bottom: -30px;
+}
+
+.bh-ar-tail,
+.bh-ar-shaft,
+.bh-ar-head {
+  width: var(--bh-arrow, 104px);
+  height: var(--bh-arrow, 104px);
+}
+
+.bh-ar-tail {
+  border-radius: 50%;
+  background: var(--bh-blue);
+}
+
+.bh-ar-shaft {
+  background: var(--bh-red);
+}
+
+.bh-ar-head {
+  width: calc(var(--bh-arrow, 104px) * 0.92);
+  background: var(--bh-yellow);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.bh-action {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.bh-cta .bh-foot {
+  margin-top: 0;
+}
+
+/* ---------- Square format (1080 × 1080): the same posters, compressed ---------- */
+
+@container (max-height: 1100px) {
+  /* Cover */
+  .bh-cv-quarter {
+    left: 880px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .bh-cv-square {
+    top: 180px;
+    width: 210px;
+    height: 210px;
+  }
+
+  .bh-cv-circle {
+    left: 320px;
+    width: 370px;
+    height: 370px;
+  }
+
+  .bh-cv-tri {
+    top: 210px;
+    left: 820px;
+    width: 200px;
+    height: 180px;
+  }
+
+  .bh-cv-rule {
+    top: 390px;
+    height: 14px;
+  }
+
+  .bh-cover .safe {
+    padding-top: 364px;
+  }
+
+  .bh-cv-kicker {
+    bottom: calc(100% - 290px);
+    left: 22px;
+    width: 170px;
+    max-height: 172px;
+    font-size: 30px;
+  }
+
+  .bh-cv-title {
+    font-size: 128px;
+  }
+
+  .bh-cv-sub {
+    margin-top: 28px;
+    font-size: 36px;
+  }
+
+  .bh-cover .bh-foot {
+    padding-top: 36px;
+  }
+
+  /* Text */
+  .bh-tx-circle {
+    top: -140px;
+    left: 820px;
+    width: 380px;
+    height: 380px;
+  }
+
+  .bh-tx-semi {
+    top: 390px;
+    left: 700px;
+    width: 300px;
+    height: 150px;
+  }
+
+  .bh-tx-rule {
+    top: 540px;
+    height: 14px;
+  }
+
+  .bh-text .bh-head {
+    height: 434px;
+  }
+
+  .bh-text .bh-h2 {
+    font-size: 100px;
+  }
+
+  .bh-body {
+    margin-top: 66px;
+    font-size: 42px;
+  }
+
+  /* Points */
+  .bh-pt-semi {
+    width: 220px;
+    height: 110px;
+    left: 760px;
+  }
+
+  .bh-pt-tri,
+  .bh-points:has(.bh-item:nth-child(4)) .bh-pt-tri {
+    top: 200px;
+    left: 760px;
+    width: 220px;
+    height: 180px;
+  }
+
+  .bh-pt-rule,
+  .bh-points:has(.bh-item:nth-child(4)) .bh-pt-rule {
+    top: 380px;
+    height: 14px;
+  }
+
+  .bh-points .bh-head,
+  .bh-points:has(.bh-item:nth-child(4)) .bh-head {
+    height: 274px;
+  }
+
+  .bh-points .bh-h2,
+  .bh-points:has(.bh-item:nth-child(4)) .bh-h2 {
+    font-size: 84px;
+  }
+
+  .bh-list {
+    gap: 22px;
+    padding-top: 50px;
+  }
+
+  .bh-mark {
+    width: 68px;
+    height: 68px;
+  }
+
+  .bh-item:nth-child(5n + 4) .bh-mark {
+    height: 34px;
+    margin-top: 34px;
+  }
+
+  .bh-item-title {
+    font-size: 44px;
+  }
+
+  .bh-item-text,
+  .bh-item-body > .bh-item-text:only-child {
+    font-size: 36px;
+  }
+
+  /* Quote */
+  .bh-qt-quarter {
+    width: 160px;
+    height: 160px;
+  }
+
+  .bh-qt-dome {
+    top: 660px;
+    left: 110px;
+    width: 860px;
+    height: 430px;
+  }
+
+  .bh-qt-dot {
+    top: 600px;
+    left: 480px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .bh-qt-text {
+    max-height: 410px;
+    margin-top: 110px;
+    font-size: 80px;
+  }
+
+  .bh-cite {
+    padding-top: 30px;
+  }
+
+  .bh-author {
+    font-size: 36px;
+  }
+
+  .bh-role {
+    font-size: 30px;
+  }
+
+  .bh-quote .bh-foot {
+    margin-top: 34px;
+  }
+
+  /* Stat */
+  .bh-st-tri {
+    left: 900px;
+    width: 180px;
+    height: 150px;
+  }
+
+  .bh-st-circle {
+    top: 60px;
+    left: 270px;
+    width: 540px;
+    height: 540px;
+  }
+
+  .bh-st-square {
+    top: 460px;
+    left: 760px;
+    width: 140px;
+    height: 140px;
+  }
+
+  .bh-st-kicker {
+    top: 0;
+    max-height: 520px;
+  }
+
+  .bh-st-value {
+    top: 50px;
+    left: 220px;
+    width: 480px;
+    height: 400px;
+    font-size: 260px;
+    line-height: 400px;
+  }
+
+  .bh-stat .safe {
+    padding-top: 566px;
+  }
+
+  .bh-st-label {
+    font-size: 54px;
+  }
+
+  .bh-st-note {
+    margin-top: 16px;
+    font-size: 32px;
+  }
+
+  /* Image */
+  .bh-im-quarter {
+    width: 333px;
+    height: 333px;
+  }
+
+  .bh-im-semi {
+    top: 120px;
+    left: 850px;
+    width: 230px;
+    height: 460px;
+  }
+
+  .bh-im-figure {
+    top: 40px;
+    left: 230px;
+    width: 620px;
+    height: 620px;
+  }
+
+  .bh-im-square {
+    top: 530px;
+    left: 710px;
+    width: 140px;
+    height: 140px;
+  }
+
+  .bh-image .safe {
+    padding-top: 626px;
+  }
+
+  .bh-im-title {
+    font-size: 62px;
+  }
+
+  .bh-im-caption {
+    margin-top: 14px;
+    font-size: 32px;
+  }
+
+  .bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-figure {
+    top: 90px;
+    left: 160px;
+    width: 760px;
+    height: 760px;
+  }
+
+  .bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-quarter {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bh-image:not(:has(.bh-im-title, .bh-im-caption)) .bh-im-square {
+    top: 730px;
+    left: 790px;
+    width: 160px;
+    height: 160px;
+  }
+
+  /* Call to action */
+  .bh-ct-quarter {
+    left: 640px;
+    width: 440px;
+    height: 440px;
+  }
+
+  .bh-cta .safe {
+    padding-top: 380px;
+  }
+
+  .bh-ct-title {
+    font-size: 108px;
+  }
+
+  .bh-ct-text {
+    margin-top: 24px;
+    font-size: 38px;
+  }
+
+  .bh-ct-row {
+    --bh-arrow: 84px;
+    margin-top: 44px;
+    padding-bottom: 38px;
+  }
+
+  .bh-ct-row::after {
+    height: 14px;
+  }
+
+  .bh-arrow {
+    margin-bottom: -24px;
+  }
+
+  .bh-action {
+    font-size: 52px;
+  }
+
+  .bh-foot {
+    padding-top: 26px;
+  }
+
+  .bh-cover .bh-foot {
+    padding-top: 30px;
+  }
+}

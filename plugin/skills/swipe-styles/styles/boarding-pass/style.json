@@ -1,0 +1,32 @@
+{
+  "id": "boarding-pass",
+  "name": "Boarding Pass",
+  "summary": "Every slide is a portrait boarding pass: a band in the airline color with a flight route whose plane flies one step further with every swipe, a perforated tear line with notches, icons instead of field labels, and a barcode stub.",
+  "category": "Travel",
+  "suits": ["travel tips", "itineraries", "events", "product launches", "roadmaps", "career journeys"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#0B6872",
+    "use": "the airline color: the band with the route and the boarding button as it is; the field icons, itinerary stops, speech icon and postmark on the paper (a light accent is printed darker there)"
+  },
+  "fonts": [
+    { "family": "Overpass", "license": "OFL-1.1", "folder": "fonts/overpass" },
+    { "family": "Overpass Mono", "license": "OFL-1.1", "folder": "fonts/overpass-mono" }
+  ],
+  "limits": {
+    "cover.title": { "words": 6 },
+    "cover.subtitle": { "words": 16 },
+    "text.title": { "words": 7 },
+    "text.body": { "words": 40 },
+    "points.title": { "words": 6 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 28 },
+    "stat.label": { "words": 7 },
+    "stat.note": { "words": 20 },
+    "image.title": { "words": 6 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 18 },
+    "cta.action": { "words": 4 }
+  }
+}

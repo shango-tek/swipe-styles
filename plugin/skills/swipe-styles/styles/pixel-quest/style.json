@@ -1,0 +1,32 @@
+{
+  "id": "pixel-quest",
+  "name": "Pixel Quest",
+  "summary": "Every slide is a screen of an 8-bit role-playing game: a starry night sky, cream dialog windows with a double pixel border, a ▶ cursor and an XP bar.",
+  "category": "Playful",
+  "suits": ["gaming", "tech tips", "habits and productivity", "learning", "fun explainers", "level-up challenges"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#FF5470",
+    "use": "the ▶ cursor, the ▼ continue marker, the XP bar, the score, *emphasis*, the selected menu entry, the inventory icons, the shadow under big titles, the hero's scarf and the castle flag"
+  },
+  "fonts": [
+    { "family": "Silkscreen", "license": "OFL-1.1", "folder": "fonts/silkscreen" },
+    { "family": "Pixelify Sans", "license": "OFL-1.1", "folder": "fonts/pixelify-sans" }
+  ],
+  "limits": {
+    "cover.title": { "words": 5 },
+    "cover.subtitle": { "words": 16 },
+    "text.title": { "words": 5 },
+    "text.body": { "words": 45 },
+    "points.title": { "words": 5 },
+    "points.items": { "count": 5, "words": 10 },
+    "quote.quote": { "words": 22 },
+    "stat.label": { "words": 7 },
+    "stat.note": { "words": 18 },
+    "image.title": { "words": 5 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 5 },
+    "cta.text": { "words": 18 },
+    "cta.action": { "words": 4 }
+  }
+}

@@ -1,0 +1,814 @@
+/* Chat Thread: every slide is one screen of a messaging conversation. The audience asks in white
+   bubbles on the left, the creator answers in accent bubbles on the right.
+   Type: Figtree (OFL), a friendly geometric sans, set large because the screen is shown on a phone.
+
+   Its own chat app, not a copy of a real one: a pale canvas tinted with the accent's hue (never a
+   pattern or wallpaper), plump bubbles with a 46px radius and a swept tail that flicks upward, a
+   centered day pill, and a mulberry default accent. Every color is derived from --accent, so a brand
+   color re-tints the whole screen.
+
+   Bubbles paint their background with ::before and their tail with ::after, both inside the bubble's
+   own box (the tail lives in extra padding on the tail side). Nothing pokes out of a text element,
+   so the overflow check of fill.js measures the text, not the decoration. */
+
+@font-face {
+  font-family: "Figtree";
+  src: url("../../fonts/figtree/Figtree-Variable.ttf") format("truetype");
+  font-weight: 300 900;
+  font-display: block;
+}
+
+:root {
+  --accent: #7a2e6b;
+}
+
+.ct {
+  /* The sent bubble: the accent, darkened where needed so white text keeps at least 4.5:1
+     (lightness 0.52 leaves 4.57:1 even for the most extreme sRGB color after gamut clipping).
+     Dark and mid accents pass through unchanged; light ones (yellow, pastel) get a deeper shade
+     of the same hue. */
+  --ct-sent: oklch(from var(--accent) min(l, 0.52) min(c, 0.2) h);
+  /* Everything else is a quiet tint of the accent's hue. The chroma is capped by the accent's own,
+     so a grey or black brand color gives neutral greys instead of a stray tint. */
+  --ct-canvas: oklch(from var(--accent) 0.945 min(c, 0.016) h);
+  --ct-pill: oklch(from var(--accent) 0.9 min(c, 0.024) h);
+  --ct-line: oklch(from var(--accent) 0.88 min(c, 0.02) h);
+  --ct-bar: oklch(from var(--accent) 0.992 min(c, 0.005) h);
+  --ct-ink: oklch(from var(--accent) 0.25 min(c, 0.02) h);
+  --ct-meta: oklch(from var(--accent) 0.47 min(c, 0.03) h);
+  --ct-white: #ffffff;
+
+  --ct-side: 56px;
+  --ct-top: 40px;
+  --ct-bottom: 56px;
+  --ct-tail: 26px;
+  --ct-r: 46px;
+  --ct-r-joined: 16px;
+
+  background: var(--ct-canvas);
+  color: var(--ct-ink);
+  font-family: "Figtree", sans-serif;
+  font-weight: 500;
+  font-variant-numeric: lining-nums;
+}
+
+.ct .safe {
+  inset: var(--ct-top) var(--ct-side) var(--ct-bottom);
+}
+
+/* *word*: bold, as in a chat app. */
+.ct em {
+  font-weight: 800;
+}
+
+/* ---------- Header bar ---------- */
+
+/* Bleeds to the edges of the slide; its text stays inside the safe area through the padding. */
+.ct-head {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 166px;
+  margin: calc(-1 * var(--ct-top)) calc(-1 * var(--ct-side)) 0;
+  padding: var(--ct-top) var(--ct-side) 26px;
+  background: var(--ct-bar);
+  border-bottom: 2px solid var(--ct-line);
+}
+
+.ct-back {
+  flex: none;
+  width: 22px;
+  height: 38px;
+  margin-right: 2px;
+  fill: none;
+  stroke: var(--ct-sent);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The avatar: the logo if there is one, otherwise the first letter of the brand name, otherwise a
+   generic person. The layers sit on top of each other; fill.js removes the ones without data. */
+.ct-avatar {
+  position: relative;
+  flex: none;
+  width: 96px;
+  height: 96px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--ct-pill);
+}
+
+.ct-avatar-icon {
+  position: absolute;
+  inset: 0;
+  fill: oklch(from var(--accent) 0.74 min(c, 0.04) h);
+}
+
+/* Shows only the first letter of the name: the rest of the text is set at 0px. */
+.ct-initial {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background: var(--ct-sent);
+  color: var(--ct-white);
+  font-size: 0;
+  line-height: 96px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ct-initial::first-letter {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.ct-logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 14px;
+  object-fit: contain;
+  background: var(--ct-white);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--ct-line);
+}
+
+.ct-who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ct-name {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.ct-handle {
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ct-meta);
+}
+
+.ct-count {
+  flex: none;
+  margin-left: auto;
+  padding: 8px 18px 9px;
+  border-radius: 999px;
+  background: var(--ct-canvas);
+  color: var(--ct-meta);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- The thread ---------- */
+
+/* The messages sit low on the screen, as in a running chat. The two spacers share the free height
+   2:1, so a short exchange floats in the lower half instead of sticking to the header. */
+.ct-thread {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
+
+.ct-thread::before,
+.ct-thread::after {
+  content: "";
+  flex: 2 1 0;
+}
+
+.ct-thread::after {
+  flex-grow: 1;
+}
+
+/* The day pill: the kicker, centered like the date line between messages. */
+.ct-day {
+  align-self: center;
+  max-width: 84%;
+  margin-bottom: 36px;
+  padding: 9px 26px 11px;
+  border-radius: 999px;
+  background: var(--ct-pill);
+  color: var(--ct-meta);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* ---------- Bubbles ---------- */
+
+.ct-msg {
+  position: relative;
+  isolation: isolate;
+  max-width: 88%;
+  padding: 24px 36px 28px;
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 1.26;
+  letter-spacing: -0.006em;
+  text-wrap: pretty;
+  hyphenate-limit-chars: 12 5 5;
+}
+
+.ct-msg::before,
+.ct-msg::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--ct-bubble);
+}
+
+.ct-msg::before {
+  inset: 0;
+  border-radius: var(--ct-r);
+}
+
+/* The tail: 26px wide, plus 12px that tuck under the bubble so no seam can show. */
+.ct-msg::after {
+  bottom: 0;
+  width: calc(var(--ct-tail) + 12px);
+  height: 60px;
+}
+
+/* Received: white, on the left, tail at the bottom left. */
+.ct-in {
+  --ct-bubble: var(--ct-white);
+  align-self: flex-start;
+  padding-left: calc(36px + var(--ct-tail));
+  color: var(--ct-ink);
+}
+
+.ct-in::before {
+  left: var(--ct-tail);
+  border-bottom-left-radius: 0;
+}
+
+.ct-in::after {
+  left: 0;
+  clip-path: path("M38 0H26V8C26 34 18 50 3 56C0.5 57 0.5 60 3.5 60H38Z");
+}
+
+/* Sent: the accent, on the right, tail at the bottom right. */
+.ct-out {
+  --ct-bubble: var(--ct-sent);
+  align-self: flex-end;
+  padding-right: calc(36px + var(--ct-tail));
+  color: var(--ct-white);
+}
+
+.ct-out::before {
+  right: var(--ct-tail);
+  border-bottom-right-radius: 0;
+}
+
+.ct-out::after {
+  right: 0;
+  clip-path: path("M0 0H12V8C12 34 20 50 35 56C37.5 57 37.5 60 34.5 60H0Z");
+}
+
+/* A run of messages from one side: tight gaps, joined corners, one tail on the last. */
+.ct-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.ct-group > .ct-out:not(:last-child)::after {
+  display: none;
+}
+
+.ct-group > .ct-out:not(:last-child)::before {
+  border-bottom-right-radius: var(--ct-r-joined);
+}
+
+.ct-group > .ct-out:not(:first-child)::before {
+  border-top-right-radius: var(--ct-r-joined);
+}
+
+/* Space between turns of the conversation. */
+.ct-in + .ct-group,
+.ct-in + .ct-reacted,
+.ct-in + .ct-big,
+.ct-group + .ct-typing {
+  margin-top: 30px;
+}
+
+/* ---------- Typing indicator ---------- */
+
+.ct-typing {
+  --ct-bubble: var(--ct-white);
+  position: relative;
+  isolation: isolate;
+  align-self: flex-start;
+  display: flex;
+  gap: 12px;
+  padding: 32px 38px 32px calc(38px + var(--ct-tail));
+}
+
+.ct-typing::before,
+.ct-typing::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--ct-white);
+}
+
+.ct-typing::before {
+  inset: 0 0 0 var(--ct-tail);
+  border-radius: var(--ct-r);
+  border-bottom-left-radius: 0;
+}
+
+.ct-typing::after {
+  left: 0;
+  bottom: 0;
+  width: calc(var(--ct-tail) + 12px);
+  height: 60px;
+  clip-path: path("M38 0H26V8C26 34 18 50 3 56C0.5 57 0.5 60 3.5 60H38Z");
+}
+
+.ct-typing i {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ct-meta);
+}
+
+.ct-typing i:nth-child(1) {
+  opacity: 0.35;
+}
+
+.ct-typing i:nth-child(2) {
+  opacity: 0.6;
+  transform: translateY(-5px);
+}
+
+/* ---------- Reaction ---------- */
+
+/* A heart left on the answer, hanging on its bottom edge. */
+.ct-reacted {
+  position: relative;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 88%;
+  margin-bottom: 30px;
+}
+
+.ct-reacted > .ct-msg {
+  max-width: 100%;
+}
+
+.ct-react {
+  position: absolute;
+  left: 22px;
+  bottom: -38px;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 6px solid var(--ct-canvas);
+  border-radius: 50%;
+  background: var(--ct-white);
+}
+
+.ct-react svg {
+  width: 34px;
+  height: 34px;
+  fill: var(--ct-sent);
+}
+
+/* ---------- Cover ---------- */
+
+.ct-hook {
+  font-size: 104px;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.026em;
+  padding-top: 30px;
+  padding-bottom: 38px;
+  text-wrap: balance;
+}
+
+.ct-hook em {
+  font-weight: 900;
+}
+
+.ct-follow {
+  font-size: 46px;
+}
+
+.ct-cover .ct-follow {
+  font-size: 48px;
+}
+
+/* ---------- Text ---------- */
+
+.ct-ask {
+  max-width: 84%;
+  font-size: 60px;
+  font-weight: 650;
+  line-height: 1.14;
+  letter-spacing: -0.016em;
+  text-wrap: balance;
+}
+
+.ct-answer {
+  font-size: 52px;
+}
+
+/* ---------- Points ---------- */
+
+.ct-burst > .ct-item {
+  font-size: 46px;
+  line-height: 1.22;
+}
+
+/* The item title is the bold first line of its message. The item itself carries the font size
+   (and gets shrunk), so the title and the text always share one line height. */
+.ct-item-title {
+  display: block;
+  font-weight: 800;
+}
+
+.ct-item-text {
+  display: block;
+}
+
+/* Four or five items: the bold title runs into its text, so the burst stays short. */
+.ct-burst:has(> :nth-child(4)) > .ct-item {
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+
+.ct-burst:has(> :nth-child(4)) .ct-item-title,
+.ct-burst:has(> :nth-child(4)) .ct-item-text {
+  display: inline;
+}
+
+.ct-burst:has(> :nth-child(4)) .ct-item-title {
+  margin-right: 0.3em;
+}
+
+/* ---------- Quote ---------- */
+
+.ct-sender {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 14px;
+  row-gap: 2px;
+  margin: 0 0 12px calc(84px + var(--ct-tail) + 4px);
+}
+
+.ct-from {
+  color: var(--ct-sent);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ct-role {
+  color: var(--ct-meta);
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ct-said {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+/* The author's own little avatar, with the first letter of their name. */
+.ct-face {
+  position: relative;
+  flex: none;
+  width: 84px;
+  height: 84px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.ct-face .ct-initial {
+  line-height: 84px;
+  background: oklch(from var(--accent) 0.84 min(c, 0.05) h);
+  color: var(--ct-ink);
+}
+
+.ct-face .ct-initial::first-letter {
+  font-size: 40px;
+}
+
+.ct-said > .ct-msg {
+  max-width: calc(100% - 88px);
+}
+
+/* Without a face, the bubble starts at the edge of the thread. */
+.ct-said:not(:has(.ct-face)) > .ct-msg {
+  max-width: 92%;
+}
+
+.ct-quote-slide .ct-sender:has(+ .ct-said:not(:has(.ct-face))) {
+  margin-left: calc(var(--ct-tail) + 4px);
+}
+
+.ct-quote {
+  font-size: 66px;
+  font-weight: 550;
+  line-height: 1.22;
+  letter-spacing: -0.014em;
+  padding-top: 30px;
+  padding-bottom: 36px;
+}
+
+/* A quote stands on its own, so it sits in the middle of the screen. */
+.ct-quote-slide .ct-thread::before {
+  flex-grow: 1;
+}
+
+/* ---------- Stat ---------- */
+
+/* The value is sent on its own, like a big emoji: no bubble, just very large. */
+.ct-big {
+  align-self: flex-end;
+  max-width: 100%;
+  margin: 0 8px 14px 0;
+  color: var(--ct-sent);
+  font-size: 360px;
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+.ct-label {
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.ct-stat .ct-follow {
+  font-size: 44px;
+}
+
+/* ---------- Image ---------- */
+
+/* The photo takes all the height the messages leave. When the text is too long the photo gives
+   way down to its minimum height; after that the text overflows the safe area and gets shrunk. */
+.ct-image .ct-thread {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.ct-image .ct-thread::before,
+.ct-image .ct-thread::after {
+  flex: 0 0 0;
+}
+
+.ct-photo-run {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.ct-in + .ct-photo-run {
+  margin-top: 30px;
+}
+
+/* The photo message: the picture in a rounded bubble with a thin accent rim. */
+.ct-photo {
+  flex: 1 1 0;
+  width: 78%;
+  min-height: 380px;
+  margin-right: var(--ct-tail);
+  padding: 8px;
+  border-radius: var(--ct-r) var(--ct-r) var(--ct-r-joined) var(--ct-r);
+  background: var(--ct-sent);
+}
+
+.ct-photo:last-child {
+  border-bottom-right-radius: var(--ct-r);
+}
+
+.ct-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--ct-r) - 8px) calc(var(--ct-r) - 8px) calc(var(--ct-r-joined) - 6px) calc(var(--ct-r) - 8px);
+  background: var(--ct-pill);
+}
+
+.ct-photo:last-child img {
+  border-bottom-right-radius: calc(var(--ct-r) - 8px);
+}
+
+.ct-photo + .ct-out::before {
+  border-top-right-radius: var(--ct-r-joined);
+}
+
+/* ---------- Call to action ---------- */
+
+.ct-last {
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.024em;
+  padding-top: 28px;
+  padding-bottom: 36px;
+  text-wrap: balance;
+}
+
+.ct-last em {
+  font-weight: 900;
+}
+
+/* The input bar, with the action typed in and ready to send. It bleeds to the slide edges. */
+.ct-compose {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 44px calc(-1 * var(--ct-side)) calc(-1 * var(--ct-bottom));
+  padding: 26px var(--ct-side) var(--ct-bottom);
+  background: var(--ct-bar);
+  border-top: 2px solid var(--ct-line);
+}
+
+.ct-field {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 104px;
+  padding: 18px 34px 20px;
+  border: 3px solid var(--ct-line);
+  border-radius: 52px;
+  background: var(--ct-white);
+  color: var(--ct-ink);
+}
+
+.ct-typed {
+  min-width: 0;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* The text cursor right after the last letter. */
+.ct-caret {
+  flex: none;
+  align-self: stretch;
+  width: 4px;
+  margin: 4px 0 4px 6px;
+  border-radius: 2px;
+  background: var(--ct-sent);
+}
+
+.ct-send {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--ct-sent);
+}
+
+.ct-send svg {
+  width: 52px;
+  height: 52px;
+  fill: none;
+  stroke: var(--ct-white);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Square and wider formats ---------- */
+
+/* The renderer only shrinks text, not gaps, so a square slide gets a slimmer header, tighter gaps
+   and a little less type to start from. */
+@media (max-height: 1100px) {
+  .ct {
+    --ct-top: 30px;
+    --ct-bottom: 44px;
+    --ct-r: 40px;
+  }
+
+  .ct-head {
+    min-height: 136px;
+    padding-bottom: 20px;
+  }
+
+  .ct-avatar {
+    width: 84px;
+    height: 84px;
+  }
+
+  .ct-avatar .ct-initial {
+    line-height: 84px;
+  }
+
+  .ct-thread {
+    padding-top: 26px;
+  }
+
+  .ct-day {
+    margin-bottom: 22px;
+  }
+
+  .ct-msg {
+    padding-top: 20px;
+    padding-bottom: 24px;
+    font-size: 42px;
+  }
+
+  .ct-hook {
+    font-size: 80px;
+    padding-top: 24px;
+    padding-bottom: 30px;
+  }
+
+  .ct-ask {
+    font-size: 46px;
+  }
+
+  .ct-answer {
+    font-size: 41px;
+  }
+
+  .ct-burst > .ct-item {
+    font-size: 40px;
+  }
+
+  .ct-group {
+    gap: 6px;
+  }
+
+  .ct-burst:has(> :nth-child(4)) > .ct-item {
+    padding-top: 14px;
+    padding-bottom: 18px;
+  }
+
+  .ct-quote {
+    font-size: 52px;
+  }
+
+  .ct-big {
+    font-size: 230px;
+  }
+
+  .ct-label {
+    font-size: 44px;
+  }
+
+  .ct-follow,
+  .ct-cover .ct-follow,
+  .ct-stat .ct-follow {
+    font-size: 38px;
+  }
+
+  .ct-last {
+    font-size: 70px;
+  }
+
+  .ct-photo {
+    min-height: 280px;
+  }
+
+  .ct-compose {
+    margin-top: 28px;
+    padding-top: 20px;
+  }
+
+  .ct-field {
+    min-height: 92px;
+  }
+
+  .ct-send {
+    width: 92px;
+    height: 92px;
+  }
+
+  .ct-in + .ct-group,
+  .ct-in + .ct-reacted,
+  .ct-in + .ct-big,
+  .ct-in + .ct-photo-run,
+  .ct-group + .ct-typing {
+    margin-top: 22px;
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "topic": "Five small morning habits, told as a role-playing game. Pixelpause is a made-up creator.",
+  "style": "pixel-quest",
+  "lang": "de",
+  "brand": {
+    "name": "Pixelpause",
+    "handle": "@pixelpause"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Neue Quest",
+      "title": "Level up deinen Morgen",
+      "subtitle": "Fünf kleine Gewohnheiten. Keine davon dauert länger als fünf Minuten."
+    },
+    {
+      "type": "text",
+      "kicker": "Regel 1",
+      "title": "Start im Tutorial",
+      "body": "Niemand startet auf Level 99. Nimm dir nicht fünf neue Gewohnheiten auf einmal vor, sondern *eine*. Erst wenn sie von allein läuft, kommt die nächste dazu."
+    },
+    {
+      "type": "points",
+      "title": "Dein Inventar",
+      "items": [
+        {
+          "title": "Tageslicht",
+          "text": "Kurz raus. Morgenlicht stellt deine innere Uhr."
+        },
+        {
+          "title": "Wasser",
+          "text": "Das Glas steht schon abends neben dem Bett."
+        },
+        {
+          "title": "Handy später",
+          "text": "Erst aufwachen, dann der Feed."
+        },
+        {
+          "title": "Bett machen",
+          "text": "Zwei Minuten, Quest erledigt."
+        },
+        {
+          "title": "Ein Satz Plan",
+          "text": "Welche Quest zählt heute?"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "kicker": "Regel 2",
+      "title": "Combo-Bonus",
+      "body": "Häng die neue Gewohnheit an eine, die schon läuft: Nach dem Zähneputzen trinkst du dein Wasser. Der alte Move startet den neuen, ganz ohne Alarm im Handy."
+    },
+    {
+      "type": "stat",
+      "kicker": "Geduld-Check",
+      "value": "66",
+      "label": "Tage, bis eine Gewohnheit automatisch lief",
+      "note": "Median einer UCL-Studie von 2009. Die Spanne: gut zwei Wochen bis über acht Monate."
+    },
+    {
+      "type": "quote",
+      "quote": "Ein verpasster Morgen ist kein Game Over. Am nächsten Tag lädst du einfach den letzten Speicherpunkt.",
+      "author": "Pixelpause",
+      "role": "Morgenroutine seit 412 Tagen"
+    },
+    {
+      "type": "image",
+      "src": "sunrise-desk.svg",
+      "title": "Abends speichern",
+      "caption": "Glas, Notizbuch, Stift, Wecker: Alles liegt bereit, bevor ich schlafe. Morgens muss ich nur noch anfangen."
+    },
+    {
+      "type": "cta",
+      "title": "Bereit für Level 2?",
+      "text": "Such dir eine Gewohnheit aus und starte morgen früh. Speicher den Post, damit du sie findest.",
+      "action": "Post speichern"
+    }
+  ],
+  "caption": "Dein Morgen braucht kein neues Spiel, nur ein besseres Tutorial.\n\nFünf kleine Gewohnheiten, eine nach der anderen. Welche startest du zuerst?\n\nSpeicher den Post für morgen früh.",
+  "hashtags": [
+    "morgenroutine",
+    "gewohnheiten",
+    "levelup",
+    "kleineschritte"
+  ]
+}

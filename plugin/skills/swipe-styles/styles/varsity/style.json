@@ -1,0 +1,32 @@
+{
+  "id": "varsity",
+  "name": "Varsity",
+  "summary": "A letterman jacket in slides: navy wool, tackle-twill lettering with a gold ring, sleeve stripes, felt pennants, chenille patches and a knit waistband.",
+  "category": "Sport",
+  "suits": ["fitness", "running and sports", "coaching", "team building", "school and college", "game-day content"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#F6B31A",
+    "use": "the team color: the ring around the twill letters, the sleeve stripes and the waistband, the pennant, the patch rims, the author ribbon, the scoreboard frame, the ticket stub and *emphasis*"
+  },
+  "fonts": [
+    { "family": "Graduate", "license": "OFL-1.1", "folder": "fonts/graduate" },
+    { "family": "Saira", "license": "OFL-1.1", "folder": "fonts/saira" }
+  ],
+  "limits": {
+    "cover.title": { "words": 7 },
+    "cover.subtitle": { "words": 16 },
+    "text.title": { "words": 6 },
+    "text.body": { "words": 50 },
+    "points.title": { "words": 5 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 26 },
+    "stat.label": { "words": 7 },
+    "stat.note": { "words": 18 },
+    "image.title": { "words": 6 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 16 },
+    "cta.action": { "words": 4 }
+  }
+}

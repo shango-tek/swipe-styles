@@ -111,7 +111,7 @@ place.
   `carousel.json`. Unknown fields are errors, so typos get caught.
 - **Brand:** every field is optional. `handle` appears in the footer of every slide, `logo` (an image file)
   on the cover and the last slide, and `accent` (a hex color such as `"#2F5D50"`) replaces the style's
-  accent color, as STYLE.md describes. `name` is kept with the carousel but not drawn by the current styles.
+  accent color, as STYLE.md describes. `name` appears in styles that have a place for it (a header or a sender name); STYLE.md says where.
 - **In the text:** `*word*` marks emphasis (each style draws it its own way), and `\n` forces a line break.
   Nothing else: no Markdown, no HTML, and no emoji on slides (the style fonts have none).
 

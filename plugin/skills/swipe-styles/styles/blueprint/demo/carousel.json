@@ -1,0 +1,85 @@
+{
+  "topic": "A tech explainer: what happens between typing a URL and seeing the page. Stacknotes is a made-up example brand.",
+  "style": "blueprint",
+  "lang": "en",
+  "brand": {
+    "name": "Stacknotes",
+    "handle": "@stacknotes.dev"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "How the web works",
+      "title": "What happens when you open a website",
+      "subtitle": "From pressing Enter to the first pixels: every lookup, handshake and request, in order."
+    },
+    {
+      "type": "text",
+      "kicker": "Step 1: DNS lookup",
+      "title": "First, find the address",
+      "body": "Networks route by IP address, *not by name*. Unless a cache already knows the answer, your device asks a DNS resolver which address belongs to the name you typed, for example 203.0.113.7."
+    },
+    {
+      "type": "image",
+      "src": "dns-lookup.svg",
+      "title": "Root, then .com, then the domain",
+      "caption": "With nothing cached, the resolver asks a root server, then a .com server, then the domain’s name server."
+    },
+    {
+      "type": "stat",
+      "kicker": "DNS root zone",
+      "value": "13",
+      "label": "named root servers at the top of DNS",
+      "note": "Named a to m. Each runs as many anycast copies worldwide, so your query reaches a nearby one."
+    },
+    {
+      "type": "points",
+      "kicker": "Steps 2 to 4",
+      "title": "Connect, then ask",
+      "items": [
+        {
+          "title": "TCP handshake",
+          "text": "Three packets: SYN, SYN-ACK, ACK. HTTP/3 uses QUIC instead."
+        },
+        {
+          "title": "TLS handshake",
+          "text": "Keys agreed, certificate checked: one round trip in TLS 1.3."
+        },
+        {
+          "title": "HTTP request",
+          "text": "The browser sends GET with headers like Host and cookies."
+        },
+        {
+          "title": "Server response",
+          "text": "A status code such as 200, headers, then the HTML."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "kicker": "Step 5: rendering",
+      "title": "Then the browser draws",
+      "body": "It parses the HTML into the DOM and the CSS into the CSSOM, works out the layout and paints the pixels. Every script, style sheet and image it finds can *start another request*."
+    },
+    {
+      "type": "quote",
+      "quote": "Slow page? Don’t guess. Open your browser’s network panel: the waterfall shows how long each step took, from DNS lookup to the last byte.",
+      "author": "Stacknotes",
+      "role": "Field notes on web performance"
+    },
+    {
+      "type": "cta",
+      "title": "The classic interview question, answered",
+      "text": "Next time someone asks, walk them through it: DNS, TCP, TLS, HTTP, then the render.",
+      "action": "Save this post"
+    }
+  ],
+  "caption": "You press Enter, and a moment later the page is there. Here is everything that happens in between.\n\nDNS lookup, TCP and TLS handshakes, the HTTP request and the render, one slide each.\n\nSave it for your next interview.",
+  "hashtags": [
+    "webdevelopment",
+    "networking",
+    "dns",
+    "computerscience",
+    "softwareengineering"
+  ]
+}

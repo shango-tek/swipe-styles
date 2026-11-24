@@ -1,0 +1,62 @@
+{
+  "topic": "A budget creator works out what a cup of coffee made at home with a moka pot really costs. Le Petit Budget is a made-up example; the numbers are its own.",
+  "style": "receipt",
+  "lang": "fr",
+  "brand": { "name": "Le Petit Budget", "handle": "@lepetitbudget" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Ticket n° 042, mardi 7 h 30",
+      "title": "Ce que coûte vraiment un café fait maison",
+      "subtitle": "J’ai tout pesé et tout compté, jusqu’au joint de la cafetière."
+    },
+    {
+      "type": "text",
+      "title": "Le kilo ne dit rien",
+      "body": "18 € le kilo de grains, ça fait peur en rayon. Mais personne ne boit un kilo d’un coup. Ce qui compte, c’est le prix *d’une tasse*. Alors j’ai sorti la balance de cuisine."
+    },
+    {
+      "type": "points",
+      "title": "Le détail d’une tasse",
+      "items": [
+        { "title": "Café en grains", "text": "15 g à 18 € le kilo : 0,27 €" },
+        { "title": "Électricité", "text": "5 minutes de plaque : 0,03 €" },
+        { "title": "Joint et filtre", "text": "6 € par an : 0,02 €" },
+        { "title": "Cafetière", "text": "25 € sur six ans : 0,01 €" },
+        { "title": "Eau du robinet", "text": "15 cl : moins d’un centime" }
+      ]
+    },
+    {
+      "type": "stat",
+      "kicker": "Un café par jour",
+      "value": "0,33 €",
+      "label": "Total par tasse",
+      "note": "Tout compris. Au comptoir en bas de chez moi, un café coûte 2,50 €."
+    },
+    {
+      "type": "image",
+      "src": "moka.svg",
+      "title": "Ma cafetière italienne",
+      "caption": "Achetée 25 € il y a six ans : à peine plus d’un centime par jour."
+    },
+    {
+      "type": "text",
+      "title": "L’écart sur un an",
+      "body": "2,50 € au comptoir, 0,33 € à la maison : 2,17 € d’écart chaque jour. Sur 365 jours, ça fait *792 €*. Ça ne veut pas dire « plus jamais de terrasse ». Ça veut dire savoir ce qu’on paie."
+    },
+    {
+      "type": "quote",
+      "quote": "Le café en terrasse n’est pas le problème. Le problème, c’est de le payer par habitude au lieu de le choisir.",
+      "author": "Le Petit Budget",
+      "role": "Budget perso, sans culpabilité"
+    },
+    {
+      "type": "cta",
+      "title": "À toi de faire ton ticket",
+      "text": "Le prix de ton paquet, le poids d’une dose, une division. Cinq minutes suffisent.",
+      "action": "Dis-moi ton prix en commentaire"
+    }
+  ],
+  "caption": "Mon café maison me coûte 0,33 € la tasse. Tout compris.\n\nJ’ai pesé les grains, compté l’électricité et même le joint de la cafetière. Au comptoir, c’est 2,50 €. Sur un an, l’écart fait 792 €.\n\nPas pour culpabiliser : pour choisir.\n\nEt chez toi, la tasse coûte combien ? Dis-le-moi en commentaire.",
+  "hashtags": ["budgetperso", "financespersonnelles", "economiser", "cafe", "petitbudget"]
+}

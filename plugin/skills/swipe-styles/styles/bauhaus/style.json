@@ -1,0 +1,29 @@
+{
+  "id": "bauhaus",
+  "name": "Bauhaus",
+  "summary": "Every slide is a Bauhaus poster: circles, squares, triangles, semicircles and quarter circles in red, yellow, blue and black on cool grey paper, with heavy geometric type standing on, beside or inside the shapes.",
+  "category": "Geometric",
+  "suits": ["design", "architecture", "art history", "education", "culture", "creative process"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#D5281B",
+    "use": "the red of the composition: the square on the cover, the semicircle on the text slides, the square marker, the stat circle, the square beside the picture, the ball on the quote dome and the square in the arrow; text inside it turns white or black by itself"
+  },
+  "fonts": [{ "family": "Jost", "license": "OFL-1.1", "folder": "fonts/jost" }],
+  "limits": {
+    "cover.title": { "words": 7 },
+    "cover.subtitle": { "words": 16 },
+    "text.title": { "words": 6 },
+    "text.body": { "words": 45 },
+    "points.title": { "words": 6 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 26 },
+    "stat.label": { "words": 8 },
+    "stat.note": { "words": 18 },
+    "image.title": { "words": 7 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 16 },
+    "cta.action": { "words": 4 }
+  }
+}

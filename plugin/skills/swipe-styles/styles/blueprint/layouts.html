@@ -1,0 +1,163 @@
+<!-- Blueprint layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     Every slide is a drawing sheet: .bp-sheet draws the frame, the zone ticks and the construction grid;
+     the footer is the title block in the bottom-right corner of the frame. -->
+
+<template data-type="cover">
+  <section class="slide bp bp-cover">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <span class="bp-reg bp-reg-1" aria-hidden="true"></span>
+    <span class="bp-reg bp-reg-2" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="bp-iso" aria-hidden="true">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMaxYMin meet">
+          <g class="bp-iso-centre"><path d="M117.7 112.5 L282.3 207.5 M282.3 112.5 L117.7 207.5 M200 100 V330"/></g>
+          <g class="bp-iso-hidden"><path d="M200 60 V170 M200 170 L26.8 270 M200 170 L373.2 270 M138.8 160 V270 M261.2 160 V270"/><ellipse cx="200" cy="270" rx="61.2" ry="35.4"/></g>
+          <g class="bp-iso-visible"><path d="M200 60 L373.2 160 L200 260 L26.8 160 Z M26.8 160 V270 L200 370 L373.2 270 V160 M200 260 V370"/><ellipse cx="200" cy="160" rx="61.2" ry="35.4"/></g>
+          <path class="bp-iso-redline" d="M106 190 C82 142 150 94 224 96 C294 98 322 146 298 184 C274 220 168 232 120 206 C90 188 98 148 152 122"/>
+        </svg>
+      </div>
+      <h1 class="bp-display" data-field="title" data-fit-min="72"></h1>
+      <div class="bp-dim bp-dim-cover">
+        <span class="bp-dim-line bp-dim-start"></span>
+        <p class="bp-dim-text" data-field="kicker" data-fit-min="24"></p>
+        <span class="bp-dim-line bp-dim-end"></span>
+      </div>
+      <p class="bp-sub" data-field="subtitle" data-fit-min="30"></p>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-logo" data-if="logo"><img data-field="logo"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide bp bp-text">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <div class="safe">
+      <header class="bp-view bp-view-bubble">
+        <h2 class="bp-h2" data-field="title" data-fit-min="52"></h2>
+        <div class="bp-view-rule"><span class="bp-bubble"><span data-field="index"></span></span></div>
+        <p class="bp-view-note" data-field="kicker"></p>
+      </header>
+      <p class="bp-body" data-field="body" data-fit-min="30"></p>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide bp bp-points">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <div class="safe">
+      <header class="bp-view">
+        <h2 class="bp-h2" data-field="title" data-fit-min="52"></h2>
+        <div class="bp-view-rule" data-if="title"></div>
+        <p class="bp-view-note" data-field="kicker"></p>
+      </header>
+      <ol class="bp-parts" data-list="items">
+        <li class="bp-part" data-item>
+          <span class="bp-balloon"><span data-item-field="n"></span></span>
+          <span class="bp-part-body">
+            <span class="bp-part-title" data-item-field="title" data-fit-min="34"></span>
+            <span class="bp-part-text" data-item-field="text" data-fit-min="30"></span>
+          </span>
+        </li>
+      </ol>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide bp bp-quote-slide">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <div class="safe">
+      <div class="bp-notebox">
+        <blockquote class="bp-quote" data-field="quote" data-fit-min="40"></blockquote>
+      </div>
+      <div class="bp-cite" data-if="author">
+        <p class="bp-author" data-field="author"></p>
+        <p class="bp-role" data-field="role"></p>
+      </div>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide bp bp-stat">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <div class="safe">
+      <p class="bp-stat-kicker" data-field="kicker"></p>
+      <div class="bp-dim bp-dim-stat">
+        <span class="bp-dim-line bp-dim-start"></span>
+        <div class="bp-cloud"><p class="bp-value" data-field="value" data-fit-min="90"></p></div>
+        <span class="bp-dim-line bp-dim-end"></span>
+      </div>
+      <p class="bp-label" data-field="label" data-fit-min="52"></p>
+      <p class="bp-note" data-field="note" data-fit-min="32"></p>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide bp bp-image">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <div class="safe">
+      <figure class="bp-figure">
+        <img data-field="src">
+        <span class="bp-crop bp-crop-a" aria-hidden="true"></span>
+        <span class="bp-crop bp-crop-b" aria-hidden="true"></span>
+      </figure>
+      <header class="bp-view bp-view-bubble bp-view-img">
+        <h2 class="bp-img-title" data-field="title" data-fit-min="44"></h2>
+        <div class="bp-view-rule"><span class="bp-bubble"><span data-field="index"></span></span></div>
+        <p class="bp-caption" data-field="caption" data-fit-min="24"></p>
+      </header>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide bp bp-cta">
+    <div class="bp-sheet" aria-hidden="true"><div class="bp-frame"></div></div>
+    <div class="safe">
+      <h2 class="bp-cta-title" data-field="title" data-fit-min="64"></h2>
+      <p class="bp-cta-text" data-field="text" data-fit-min="30"></p>
+      <div class="bp-stamp-zone" data-if="action">
+        <div class="bp-stamp"><p class="bp-action" data-field="action" data-fit-min="30"></p></div>
+      </div>
+      <footer class="bp-tb">
+        <span class="bp-tb-cell bp-tb-proj" aria-hidden="true"></span>
+        <span class="bp-tb-cell bp-tb-logo" data-if="logo"><img data-field="logo"></span>
+        <span class="bp-tb-cell bp-tb-handle" data-if="handle"><span data-field="handle"></span></span>
+        <span class="bp-tb-cell bp-tb-count"><span data-field="counter"></span></span>
+      </footer>
+    </div>
+  </section>
+</template>

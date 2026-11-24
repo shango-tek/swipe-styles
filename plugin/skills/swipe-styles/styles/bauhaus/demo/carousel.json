@@ -1,0 +1,81 @@
+{
+  "topic": "Five composition lessons from the Bauhaus for designers and creators. Atelier Forme is a made-up example studio.",
+  "style": "bauhaus",
+  "lang": "fr",
+  "brand": {
+    "name": "Atelier Forme",
+    "handle": "@atelierforme"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Petit cours de composition",
+      "title": "Cinq leçons du\nBauhaus pour\nmieux composer",
+      "subtitle": "L’école n’a vécu que quatorze ans. Ses règles marchent encore sur vos affiches et vos posts."
+    },
+    {
+      "type": "stat",
+      "kicker": "Weimar, Dessau, Berlin",
+      "value": "14",
+      "label": "ans d’existence,\nde 1919 à 1933",
+      "note": "Fondé à Weimar par Walter Gropius, le Bauhaus s’installe à Dessau en 1925, puis à Berlin en 1932."
+    },
+    {
+      "type": "text",
+      "kicker": "Leçon 1",
+      "title": "Partez de trois formes",
+      "body": "Au Bauhaus, Kandinsky faisait travailler ses élèves sur le cercle, le carré et le triangle. Avant de chercher un style, posez ces trois formes sur la page et regardez comment elles se répondent."
+    },
+    {
+      "type": "points",
+      "kicker": "Leçon 2",
+      "title": "Une forme, un rôle",
+      "items": [
+        {
+          "title": "Le cercle",
+          "text": "Il attire l’œil : gardez-le pour l’élément clé."
+        },
+        {
+          "title": "Le carré",
+          "text": "Il pose et stabilise : il porte le texte."
+        },
+        {
+          "title": "Le triangle",
+          "text": "Il donne une direction : il pointe vers l’action."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "kicker": "Leçon 3",
+      "title": "Trois couleurs, pas plus",
+      "body": "Rouge, jaune, bleu, et le noir pour le texte. Avec une palette aussi courte, chaque couleur a un rôle. Gardez la plus *vive* pour ce qu’on doit voir en premier."
+    },
+    {
+      "type": "image",
+      "src": "facade.svg",
+      "title": "Leçon 4 : la grille d’abord",
+      "caption": "Fenêtres en bandes, toit plat, aucun ornement : la trame fait toute la composition."
+    },
+    {
+      "type": "quote",
+      "quote": "Notre cinquième leçon tient en une phrase : retirez tout ce qui ne sert pas la lecture.",
+      "author": "Atelier Forme",
+      "role": "Studio de design graphique"
+    },
+    {
+      "type": "cta",
+      "title": "À vous de composer",
+      "text": "Trois formes, trois couleurs, une grille : de quoi refaire votre prochain visuel.",
+      "action": "Enregistrez ce post"
+    }
+  ],
+  "caption": "Le Bauhaus n’a existé que quatorze ans. Ses leçons de composition servent encore tous les jours.\n\nFormes, rôles, couleurs, grille, et la plus difficile des cinq.\n\nEnregistrez ce post pour votre prochaine mise en page.",
+  "hashtags": [
+    "bauhaus",
+    "designgraphique",
+    "composition",
+    "typographie",
+    "histoiredudesign"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "style": "varsity",
+  "format": "instagram",
+  "lang": "en",
+  "topic": "A short dynamic warm-up before an easy run",
+  "brand": { "name": "Northside Run Club", "handle": "@northside.runclub" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Pre-run routine",
+      "title": "5 warm-up\nmoves before\nyour run",
+      "subtitle": "Five to ten minutes, no gear, right where your run starts."
+    },
+    {
+      "type": "text",
+      "kicker": "Why bother",
+      "title": "Start warm, not cold",
+      "body": "Easy moving drills raise your heart rate and warm up your muscles. They take your hips, knees and ankles through the motions of running, so the first mile feels *smoother* and you ease into your pace."
+    },
+    {
+      "type": "points",
+      "kicker": "Easy to bouncy",
+      "title": "The playbook",
+      "items": [
+        { "title": "Leg swings", "text": "10 per leg, front to back, holding a fence." },
+        { "title": "Walking lunges", "text": "10 slow steps, chest tall, back knee low." },
+        { "title": "High knees", "text": "20 seconds of quick, light steps." },
+        { "title": "Butt kicks", "text": "20 seconds, heels up toward your glutes." },
+        { "title": "Ankle hops", "text": "20 small, springy hops on the balls of your feet." }
+      ]
+    },
+    {
+      "type": "stat",
+      "kicker": "How long",
+      "value": "5–10",
+      "label": "minutes before an easy run",
+      "note": "A common rule of thumb. Before intervals or a race, warm up a little longer."
+    },
+    {
+      "type": "text",
+      "kicker": "Save it for later",
+      "title": "Long stretches come after",
+      "body": "Held stretches fit best after your run, when you are warm. Before it, keep moving: dynamic drills get you ready, while long holds can briefly take some spring out of your legs."
+    },
+    {
+      "type": "quote",
+      "quote": "Nobody posts the warm-up. It’s still the ten minutes that make the first mile feel like running, not surviving.",
+      "author": "Northside Run Club",
+      "role": "Our Saturday long-run rule"
+    },
+    {
+      "type": "image",
+      "src": "track-shoes.svg",
+      "title": "Lace up, then loosen up",
+      "caption": "No track needed. A quiet sidewalk or a park path works just as well."
+    },
+    {
+      "type": "cta",
+      "title": "See you at the start line",
+      "text": "Save this so the playbook is on your phone before your next run.",
+      "action": "Save this post"
+    }
+  ],
+  "caption": "Five moves, ten minutes, an easier first mile.\n\nThis is our warm-up before every club run: leg swings, walking lunges, high knees, butt kicks and ankle hops. The long stretches wait until after.\n\nSave this for your next run.",
+  "hashtags": ["running", "runclub", "warmup", "runningtips"]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "chat-thread",
+  "name": "Chat Thread",
+  "summary": "Every slide is a screen of a messaging conversation: the audience asks in white bubbles on the left, the creator answers in accent bubbles on the right, on a pale canvas tinted to match.",
+  "category": "Social",
+  "suits": ["coaching", "relationships", "customer stories", "FAQs", "marketing tips", "conversations and dialogues"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#7A2E6B",
+    "use": "the sent bubbles, the big stat value, the photo rim, the send button, the cursor, the back arrow, the author name and the reaction heart; the canvas, pills and grey text are pale or dark tints of its hue. Bright accents are darkened so white text on the bubbles keeps 4.5:1"
+  },
+  "fonts": [{ "family": "Figtree", "license": "OFL-1.1", "folder": "fonts/figtree" }],
+  "limits": {
+    "cover.title": { "words": 8 },
+    "cover.subtitle": { "words": 14 },
+    "text.title": { "words": 10 },
+    "text.body": { "words": 35 },
+    "points.title": { "words": 8 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 26 },
+    "stat.label": { "words": 9 },
+    "stat.note": { "words": 16 },
+    "image.title": { "words": 8 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 7 },
+    "cta.text": { "words": 16 },
+    "cta.action": { "words": 5 }
+  }
+}

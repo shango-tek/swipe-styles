@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1000" width="1300" height="1000">
+  <!-- A DNS lookup drawn for the Blueprint demo: a laptop asks a resolver, the resolver asks a root
+       server, then a .com server, then the domain's own name server. Light greys on black, so the
+       style's cyanotype treatment prints it as white lines on blue. Everything important sits inside
+       x 105-1195 and y 108-892, so both the portrait and the square crop keep it. -->
+  <defs>
+    <marker id="a" viewBox="0 0 26 13" refX="25" refY="6.5" markerWidth="26" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 L26 6.5 L0 13 Z" fill="#ececec"/>
+    </marker>
+    <marker id="r" viewBox="0 0 26 13" refX="25" refY="6.5" markerWidth="26" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 L26 6.5 L0 13 Z" fill="#a8a8a8"/>
+    </marker>
+    <g id="unit">
+      <rect x="0" y="0" width="230" height="62" rx="5"/>
+      <circle cx="32" cy="31" r="8" fill="#ececec" stroke="none"/>
+      <path d="M70 21 H206 M70 41 H178" stroke-width="3.5"/>
+    </g>
+  </defs>
+  <rect width="1300" height="1000" fill="#000"/>
+
+  <!-- Faint construction lines -->
+  <g stroke="#3c3c3c" stroke-width="2" stroke-dasharray="4 11" fill="none">
+    <path d="M110 500 H1190 M851 110 V890"/>
+  </g>
+
+  <g fill="none" stroke="#ececec" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Laptop with a browser window -->
+    <rect x="130" y="398" width="240" height="162" rx="10"/>
+    <rect x="152" y="420" width="196" height="118" rx="4" stroke-width="3.5"/>
+    <path d="M152 446 H348" stroke-width="3.5"/>
+    <rect x="172" y="460" width="156" height="20" rx="10" stroke-width="3.5"/>
+    <path d="M108 560 H392 L372 588 H128 Z"/>
+
+    <!-- Resolver: three units -->
+    <use href="#unit" x="520" y="403"/>
+    <use href="#unit" x="520" y="469"/>
+    <use href="#unit" x="520" y="535"/>
+
+    <!-- Root, top-level domain and authoritative name servers -->
+    <use href="#unit" x="950" y="118"/>
+    <use href="#unit" x="950" y="184"/>
+    <use href="#unit" x="950" y="436"/>
+    <use href="#unit" x="950" y="502"/>
+    <use href="#unit" x="950" y="754"/>
+    <use href="#unit" x="950" y="820"/>
+  </g>
+
+  <!-- Queries (solid) and answers (dashed) -->
+  <g fill="none" stroke="#ececec" stroke-width="4.5" stroke-linecap="round">
+    <path d="M396 486 H506" marker-end="url(#a)"/>
+    <path d="M766 468 L936 190" marker-end="url(#a)"/>
+    <path d="M766 500 H936" marker-end="url(#a)"/>
+    <path d="M766 532 L936 810" marker-end="url(#a)"/>
+  </g>
+  <g fill="none" stroke="#a8a8a8" stroke-width="3.5" stroke-dasharray="13 10" stroke-linecap="round">
+    <path d="M506 526 H396" marker-end="url(#r)"/>
+    <path d="M936 236 L790 474" marker-end="url(#r)"/>
+    <path d="M936 548 H790" marker-end="url(#r)"/>
+    <path d="M936 764 L790 526" marker-end="url(#r)"/>
+  </g>
+
+  <!-- Step balloons on the resolver's queries: one, two and three dots -->
+  <g fill="#000" stroke="#ececec" stroke-width="3.5">
+    <circle cx="851" cy="329" r="24"/>
+    <circle cx="851" cy="500" r="24"/>
+    <circle cx="851" cy="671" r="24"/>
+  </g>
+  <g fill="#ececec">
+    <circle cx="851" cy="329" r="6"/>
+    <circle cx="842" cy="500" r="6"/><circle cx="860" cy="500" r="6"/>
+    <circle cx="837" cy="671" r="5.5"/><circle cx="851" cy="671" r="5.5"/><circle cx="865" cy="671" r="5.5"/>
+  </g>
+</svg>

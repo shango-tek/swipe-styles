@@ -1,0 +1,61 @@
+{
+  "topic": "A wedding photographer answers the five questions couples ask before booking, as a chat. Lumen & Lace is a made-up example.",
+  "style": "chat-thread",
+  "format": "instagram",
+  "lang": "en",
+  "brand": { "name": "Lumen & Lace", "handle": "@lumenandlace.photo" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Booking season",
+      "title": "Before you book a wedding photographer",
+      "subtitle": "The five questions couples ask us every week, answered straight."
+    },
+    {
+      "type": "text",
+      "title": "How far ahead should we book you?",
+      "body": "Summer Saturdays book up *12 to 18 months* ahead. Fridays, Sundays and winter dates often work with 4 to 6 months’ notice."
+    },
+    {
+      "type": "stat",
+      "kicker": "How many photos do we get?",
+      "value": "700",
+      "label": "edited photos from a 10-hour wedding day",
+      "note": "Our average last season. No near-duplicates, no filler: every one is worth printing."
+    },
+    {
+      "type": "text",
+      "title": "When do we get our photos?",
+      "body": "A sneak peek of 40 favorites within 72 hours, while the day still feels fresh. The full gallery follows in *6 to 8 weeks*."
+    },
+    {
+      "type": "points",
+      "title": "What if your camera breaks mid-ceremony?",
+      "items": [
+        { "title": "Two cameras", "text": "Both on us all day, so a swap takes seconds." },
+        { "title": "Two cards", "text": "Every shot is saved to two memory cards at once." },
+        { "title": "Two backups", "text": "Files are copied to two drives the same night." }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "arch.svg",
+      "title": "Do we need a second photographer?",
+      "caption": "Past 100 guests, yes: one of us stays with you, the other catches every reaction."
+    },
+    {
+      "type": "quote",
+      "quote": "Before you book anyone, ask to see one full wedding gallery. Highlights show the best twenty frames. The full gallery shows your whole day.",
+      "author": "Lumen & Lace",
+      "role": "Wedding photographers"
+    },
+    {
+      "type": "cta",
+      "title": "Got a date in mind?",
+      "text": "Send it with your venue. We check the calendar the same day and answer honestly.",
+      "action": "Send us your date"
+    }
+  ],
+  "caption": "Five questions every couple asks before booking a wedding photographer, answered straight.\n\nWe get them every week, so here they are in one place.\n\nSave this for your photographer calls.",
+  "hashtags": ["weddingphotographer", "weddingplanning", "engaged", "weddingtips"]
+}

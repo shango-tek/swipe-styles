@@ -1,0 +1,159 @@
+<!-- Comic layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     Every slide is a comic book page: .cm-panel boxes with thick ink borders on newsprint, white gutters
+     between them. .cm-art holds the printed decoration of a panel (rays, Ben-Day dots), clipped to it.
+     A speech balloon is three layers: the ink tail behind, the balloon, and a paper tail in front that
+     covers the balloon's outline where the tail joins it. -->
+
+<template data-type="cover">
+  <section class="slide cm cm-cover">
+    <div class="safe">
+      <div class="cm-panel cm-burst-panel">
+        <div class="cm-art" aria-hidden="true">
+          <span class="cm-ht cm-ht-burst"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+          <svg class="cm-rays" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice"><path d="M500 500L2000 500L1984.7 713.5ZM500 500L1939.2 922.6L1864.4 1123.1ZM500 500L1761.9 1311L1633.6 1482.3ZM500 500L1482.3 1633.6L1311 1761.9ZM500 500L1123.1 1864.4L922.6 1939.2ZM500 500L713.5 1984.7L500 2000ZM500 500L286.5 1984.7L77.4 1939.2ZM500 500L-123.1 1864.4L-311 1761.9ZM500 500L-482.3 1633.6L-633.6 1482.3ZM500 500L-761.9 1311L-864.4 1123.1ZM500 500L-939.2 922.6L-984.7 713.5ZM500 500L-1000 500L-984.7 286.5ZM500 500L-939.2 77.4L-864.4 -123.1ZM500 500L-761.9 -311L-633.6 -482.3ZM500 500L-482.3 -633.6L-311 -761.9ZM500 500L-123.1 -864.4L77.4 -939.2ZM500 500L286.5 -984.7L500 -1000ZM500 500L713.5 -984.7L922.6 -939.2ZM500 500L1123.1 -864.4L1311 -761.9ZM500 500L1482.3 -633.6L1633.6 -482.3ZM500 500L1761.9 -311L1864.4 -123.1ZM500 500L1939.2 77.4L1984.7 286.5Z"/></svg>
+        </div>
+        <div class="cm-top">
+          <p class="cm-caption cm-corner" data-field="kicker" data-fit-min="26"></p>
+          <span class="cm-logo-box" data-if="logo"><img class="cm-logo" data-field="logo"></span>
+        </div>
+        <h1 class="cm-logo-title" data-field="title" data-fit-min="92"></h1>
+        <div class="cm-balloon cm-balloon-cover" data-if="subtitle">
+          <span class="cm-balloon-shape" aria-hidden="true">
+            <svg class="cm-tail cm-tail-back" viewBox="0 0 100 150" preserveAspectRatio="none"><path d="M30 0C40 60 30 104 4 146C52 118 80 70 84 0Z"/></svg>
+            <svg class="cm-tail cm-tail-front" viewBox="0 0 100 150" preserveAspectRatio="none"><path d="M30 0C40 60 30 104 4 146C52 118 80 70 84 0Z"/></svg>
+          </span>
+          <p class="cm-balloon-text" data-field="subtitle" data-fit-min="36"></p>
+        </div>
+      </div>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide cm cm-text">
+    <div class="safe">
+      <div class="cm-panel cm-text-panel">
+        <div class="cm-art" aria-hidden="true">
+          <span class="cm-ht cm-ht-corner"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+        </div>
+        <p class="cm-caption cm-corner" data-field="kicker" data-fit-min="26"></p>
+        <h2 class="cm-title" data-field="title" data-fit-min="60"></h2>
+        <p class="cm-caption cm-narration" data-field="body" data-fit-min="36"></p>
+      </div>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide cm cm-points">
+    <div class="safe">
+      <header class="cm-panel cm-head">
+        <p class="cm-caption cm-corner" data-field="kicker" data-fit-min="24"></p>
+        <h2 class="cm-title cm-head-title" data-field="title" data-fit-min="52"></h2>
+      </header>
+      <ul class="cm-grid" data-list="items">
+        <li class="cm-panel cm-cell" data-item>
+          <span class="cm-art" aria-hidden="true"><span class="cm-dots"></span><span class="cm-ht cm-ht-cell"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></span>
+          <span class="cm-num" data-item-field="n"></span>
+          <span class="cm-cell-title" data-item-field="title" data-fit-min="38"></span>
+          <span class="cm-cell-text" data-item-field="text" data-fit-min="28"></span>
+        </li>
+      </ul>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide cm cm-quote">
+    <div class="safe">
+      <div class="cm-panel cm-quote-panel">
+        <div class="cm-art" aria-hidden="true"><span class="cm-dots cm-dots-quote"></span></div>
+        <div class="cm-balloon cm-balloon-quote">
+          <span class="cm-balloon-shape" aria-hidden="true">
+            <svg class="cm-tail cm-tail-back" viewBox="0 0 100 150" preserveAspectRatio="none"><path d="M30 0C40 60 30 104 4 146C52 118 80 70 84 0Z"/></svg>
+            <svg class="cm-tail cm-tail-front" viewBox="0 0 100 150" preserveAspectRatio="none"><path d="M30 0C40 60 30 104 4 146C52 118 80 70 84 0Z"/></svg>
+          </span>
+          <blockquote class="cm-balloon-text cm-quote-text" data-field="quote" data-fit-min="36"></blockquote>
+        </div>
+        <div class="cm-tag">
+          <p class="cm-author" data-field="author" data-fit-min="30"></p>
+          <p class="cm-role" data-field="role" data-fit-min="24"></p>
+        </div>
+      </div>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide cm cm-stat">
+    <div class="safe">
+      <div class="cm-panel cm-stat-panel">
+        <div class="cm-art" aria-hidden="true"><span class="cm-dots cm-dots-stat"></span></div>
+        <p class="cm-caption cm-corner" data-field="kicker" data-fit-min="24"></p>
+        <div class="cm-burst">
+          <svg class="cm-burst-art" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <path class="cm-burst-shadow" d="M978.5 502.5L827.8 574L921.6 661.9L776.5 718.6L830.3 844.1L654.5 765.4L636.2 915.3L547.3 820.1L433.1 946L389.3 809.8L296.4 899.6L284.6 734L132.7 799.8L214.4 628.3L60.8 572.7L180.3 483.8L46.4 386.3L203.7 349L136.9 262.1L259.3 250.3L283.1 130.9L392.5 194.2L445.7 43.4L538.6 165.3L661.2 75.1L674.9 230.1L810.1 194L752.7 300.3L907 345.4L805 437.8Z"/>
+            <path class="cm-burst-out" d="M978.5 502.5L827.8 574L921.6 661.9L776.5 718.6L830.3 844.1L654.5 765.4L636.2 915.3L547.3 820.1L433.1 946L389.3 809.8L296.4 899.6L284.6 734L132.7 799.8L214.4 628.3L60.8 572.7L180.3 483.8L46.4 386.3L203.7 349L136.9 262.1L259.3 250.3L283.1 130.9L392.5 194.2L445.7 43.4L538.6 165.3L661.2 75.1L674.9 230.1L810.1 194L752.7 300.3L907 345.4L805 437.8Z"/>
+            <path class="cm-burst-in" d="M898 583.6L757.9 620.6L810.4 758.2L687 748.9L643.4 870.7L558.2 809.2L450.6 922.4L423 782.7L280.1 809.1L285.1 701.3L147.9 732.3L217.8 598.6L80.9 530.5L189.1 438.4L139.3 310.9L271.1 307.1L263.1 172.5L374.1 226L461.1 123.5L529.9 213.8L617.7 103.4L650.4 231.7L778 225.8L746.8 352.5L869.5 408.9L817.1 475.7Z"/>
+          </svg>
+          <p class="cm-value" data-field="value" data-fit-min="100"></p>
+        </div>
+        <div class="cm-captions">
+          <p class="cm-caption cm-label" data-field="label" data-fit-min="30"></p>
+          <p class="cm-caption cm-note" data-field="note" data-fit-min="24"></p>
+        </div>
+      </div>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide cm cm-image">
+    <div class="safe">
+      <figure class="cm-panel cm-figure">
+        <div class="cm-art" aria-hidden="true">
+          <div class="cm-photo"><img data-field="src"><span class="cm-screen"></span></div>
+          <span class="cm-photo-ink"></span>
+          <img class="cm-key" data-field="src">
+        </div>
+        <figcaption class="cm-caption cm-corner cm-img-title" data-field="title" data-fit-min="34"></figcaption>
+      </figure>
+      <p class="cm-panel cm-caption cm-img-caption" data-field="caption" data-fit-min="26"></p>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide cm cm-cta">
+    <div class="safe">
+      <div class="cm-panel cm-burst-panel cm-cta-panel">
+        <div class="cm-art" aria-hidden="true">
+          <span class="cm-ht cm-ht-burst"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+          <svg class="cm-rays" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice"><path d="M500 500L2000 500L1984.7 713.5ZM500 500L1939.2 922.6L1864.4 1123.1ZM500 500L1761.9 1311L1633.6 1482.3ZM500 500L1482.3 1633.6L1311 1761.9ZM500 500L1123.1 1864.4L922.6 1939.2ZM500 500L713.5 1984.7L500 2000ZM500 500L286.5 1984.7L77.4 1939.2ZM500 500L-123.1 1864.4L-311 1761.9ZM500 500L-482.3 1633.6L-633.6 1482.3ZM500 500L-761.9 1311L-864.4 1123.1ZM500 500L-939.2 922.6L-984.7 713.5ZM500 500L-1000 500L-984.7 286.5ZM500 500L-939.2 77.4L-864.4 -123.1ZM500 500L-761.9 -311L-633.6 -482.3ZM500 500L-482.3 -633.6L-311 -761.9ZM500 500L-123.1 -864.4L77.4 -939.2ZM500 500L286.5 -984.7L500 -1000ZM500 500L713.5 -984.7L922.6 -939.2ZM500 500L1123.1 -864.4L1311 -761.9ZM500 500L1482.3 -633.6L1633.6 -482.3ZM500 500L1761.9 -311L1864.4 -123.1ZM500 500L1939.2 77.4L1984.7 286.5Z"/></svg>
+        </div>
+        <div class="cm-top">
+          <span class="cm-logo-box" data-if="logo"><img class="cm-logo" data-field="logo"></span>
+        </div>
+        <h2 class="cm-logo-title cm-cta-title" data-field="title" data-fit-min="80"></h2>
+        <div class="cm-balloon cm-balloon-cta" data-if="text">
+          <span class="cm-balloon-shape" aria-hidden="true">
+            <svg class="cm-tail cm-tail-back" viewBox="0 0 100 150" preserveAspectRatio="none"><path d="M30 0C40 60 30 104 4 146C52 118 80 70 84 0Z"/></svg>
+            <svg class="cm-tail cm-tail-front" viewBox="0 0 100 150" preserveAspectRatio="none"><path d="M30 0C40 60 30 104 4 146C52 118 80 70 84 0Z"/></svg>
+          </span>
+          <p class="cm-balloon-text" data-field="text" data-fit-min="36"></p>
+        </div>
+        <div class="cm-action-row" data-if="action">
+          <svg class="cm-arrow" viewBox="0 0 120 100" aria-hidden="true"><path class="cm-arrow-shadow" d="M6 30H62V6L114 50L62 94V70H6Z"/><path class="cm-arrow-body" d="M6 30H62V6L114 50L62 94V70H6Z"/></svg>
+          <p class="cm-action" data-field="action" data-fit-min="42"></p>
+        </div>
+      </div>
+      <footer class="cm-foot"><span class="cm-handle" data-field="handle"></span><span class="cm-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>

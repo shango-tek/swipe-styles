@@ -1,0 +1,128 @@
+<!-- Varsity layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     Big type is tackle-twill lettering (a fill and two outline rings, built from text-shadow rings in style.css).
+     .vs-stripes are sleeve stripes, .vs-rib is the knit waistband at the bottom of every slide. -->
+
+<template data-type="cover">
+  <section class="slide vs vs-cover">
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="vs-top">
+        <p class="vs-pennant" data-field="kicker"></p>
+        <div class="vs-patch" data-if="logo"><img class="vs-logo" data-field="logo"></div>
+      </div>
+      <div class="vs-cover-main">
+        <h1 class="vs-twill vs-twill-xl vs-display" data-field="title" data-fit-min="72"></h1>
+        <div class="vs-stripes vs-stripes-full" aria-hidden="true"></div>
+        <p class="vs-sub" data-field="subtitle" data-fit-min="30"></p>
+      </div>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide vs vs-text">
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="vs-text-main">
+        <p class="vs-pennant" data-field="kicker"></p>
+        <h2 class="vs-twill vs-h2" data-field="title" data-fit-min="52"></h2>
+        <div class="vs-stripes vs-stripes-sleeve" aria-hidden="true"></div>
+        <p class="vs-body" data-field="body" data-fit-min="30"></p>
+      </div>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide vs vs-points">
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="vs-points-main">
+        <p class="vs-pennant" data-field="kicker"></p>
+        <h2 class="vs-twill vs-h2" data-field="title" data-fit-min="52"></h2>
+        <div class="vs-stripes vs-stripes-sleeve" aria-hidden="true"></div>
+        <ul class="vs-play" data-list="items">
+          <li class="vs-play-item" data-item>
+            <span class="vs-mark" aria-hidden="true">
+              <svg class="vs-mark-o" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="7.5"/></svg>
+              <svg class="vs-mark-x" viewBox="0 0 64 64"><path d="M14 14 L50 50 M50 14 L14 50" fill="none" stroke="currentColor" stroke-width="8.5" stroke-linecap="round"/></svg>
+            </span>
+            <span class="vs-play-body">
+              <span class="vs-play-title" data-item-field="title" data-fit-min="30"></span>
+              <span class="vs-play-text" data-item-field="text" data-fit-min="28"></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide vs vs-quote-slide">
+    <span class="vs-stripes vs-stripes-band" aria-hidden="true"></span>
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="vs-quote-main">
+        <div class="vs-qmark" aria-hidden="true"><span class="vs-twill vs-twill-huge vs-qglyph"></span></div>
+        <blockquote class="vs-quote" data-field="quote" data-fit-min="36"></blockquote>
+        <p class="vs-ribbon" data-field="author"></p>
+        <p class="vs-role" data-field="role"></p>
+      </div>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide vs vs-stat">
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <p class="vs-pennant" data-field="kicker"></p>
+      <div class="vs-stat-main">
+        <p class="vs-twill vs-twill-huge vs-value" data-field="value" data-fit-min="150"></p>
+        <div class="vs-board">
+          <p class="vs-label" data-field="label" data-fit-min="40"></p>
+        </div>
+        <p class="vs-note" data-field="note" data-fit-min="28"></p>
+      </div>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide vs vs-image">
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <figure class="vs-figure"><img data-field="src"></figure>
+      <h2 class="vs-twill vs-img-title" data-field="title" data-fit-min="40"></h2>
+      <p class="vs-caption" data-field="caption" data-fit-min="26"></p>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide vs vs-cta">
+    <span class="vs-rib" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="vs-cta-main">
+        <div class="vs-patch vs-patch-cta" data-if="logo"><img class="vs-logo" data-field="logo"></div>
+        <h2 class="vs-twill vs-twill-xl vs-cta-title" data-field="title" data-fit-min="64"></h2>
+        <div class="vs-stripes vs-stripes-full" aria-hidden="true"></div>
+        <p class="vs-cta-text" data-field="text" data-fit-min="30"></p>
+        <div class="vs-ticket" data-if="action">
+          <p class="vs-action" data-field="action" data-fit-min="30"></p>
+          <span class="vs-stub" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><path d="M32 5 L39.6 23.3 L59.3 24.9 L44.3 37.8 L48.9 57.1 L32 46.8 L15.1 57.1 L19.7 37.8 L4.7 24.9 L24.4 23.3 Z" fill="currentColor"/></svg>
+          </span>
+        </div>
+      </div>
+      <footer class="vs-foot"><span class="vs-handle" data-field="handle"></span><span class="vs-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>

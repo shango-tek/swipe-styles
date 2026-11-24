@@ -1,0 +1,32 @@
+{
+  "id": "comic",
+  "name": "Comic",
+  "summary": "Every slide is a comic book page: thick black ink panels on newsprint, Ben-Day dots, yellow caption boxes, speech balloons and a slanted comic-logo title with a hard 3D shadow.",
+  "category": "Playful",
+  "suits": ["storytelling", "myths vs. facts", "before and after", "explainers for kids and parents", "humor", "fun science"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#E63B2E",
+    "use": "the comic red: the 3D shadow of the cover and last-slide titles, the action burst behind the stat, the number tabs of the points panels, the arrow on the last slide and *emphasis*"
+  },
+  "fonts": [
+    { "family": "Bangers", "license": "OFL-1.1", "folder": "fonts/bangers" },
+    { "family": "Comic Neue", "license": "OFL-1.1", "folder": "fonts/comic-neue" }
+  ],
+  "limits": {
+    "cover.title": { "words": 6 },
+    "cover.subtitle": { "words": 14 },
+    "text.title": { "words": 6 },
+    "text.body": { "words": 40 },
+    "points.title": { "words": 6 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 20 },
+    "stat.label": { "words": 10 },
+    "stat.note": { "words": 16 },
+    "image.title": { "words": 6 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 14 },
+    "cta.action": { "words": 5 }
+  }
+}

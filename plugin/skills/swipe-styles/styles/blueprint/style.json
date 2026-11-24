@@ -1,0 +1,32 @@
+{
+  "id": "blueprint",
+  "name": "Blueprint",
+  "summary": "Every slide is a sheet of a technical drawing: white linework on blueprint blue, a fine construction grid, dimension lines, callout balloons and a title block, with red-orange redline markup.",
+  "category": "Technical",
+  "suits": ["tech explainers", "system design", "how things work", "engineering", "software architecture", "product teardowns"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#FF6B4A",
+    "use": "the redline markup: the loop on the cover drawing, the line under *emphasis*, the dashed note box around a quote, the revision cloud around the stat and the rubber stamp around the call to action"
+  },
+  "fonts": [
+    { "family": "IBM Plex Sans Condensed", "license": "OFL-1.1", "folder": "fonts/ibm-plex-sans-condensed" },
+    { "family": "IBM Plex Mono", "license": "OFL-1.1", "folder": "fonts/ibm-plex-mono" }
+  ],
+  "limits": {
+    "cover.title": { "words": 8 },
+    "cover.subtitle": { "words": 18 },
+    "text.title": { "words": 7 },
+    "text.body": { "words": 50 },
+    "points.title": { "words": 6 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 28 },
+    "stat.label": { "words": 8 },
+    "stat.note": { "words": 20 },
+    "image.title": { "words": 7 },
+    "image.caption": { "words": 18 },
+    "cta.title": { "words": 7 },
+    "cta.text": { "words": 18 },
+    "cta.action": { "words": 4 }
+  }
+}

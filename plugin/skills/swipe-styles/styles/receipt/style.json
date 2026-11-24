@@ -1,0 +1,29 @@
+{
+  "id": "receipt",
+  "name": "Receipt",
+  "summary": "A thermal-paper receipt with torn zigzag edges on a solid color: monospace type, dashed rules, dot leaders, a big total and a barcode.",
+  "category": "Playful",
+  "suits": ["money and budgeting", "price breakdowns", "shopping and food lists", "funny lists", "product launches"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#2347D8",
+    "use": "the backdrop the receipt lies on; nothing printed on the paper uses it"
+  },
+  "fonts": [{ "family": "Martian Mono", "license": "OFL-1.1", "folder": "fonts/martian-mono" }],
+  "limits": {
+    "cover.title": { "words": 8 },
+    "cover.subtitle": { "words": 14 },
+    "text.title": { "words": 6 },
+    "text.body": { "words": 45 },
+    "points.title": { "words": 6 },
+    "points.items": { "count": 5, "words": 14 },
+    "quote.quote": { "words": 24 },
+    "stat.label": { "words": 5 },
+    "stat.note": { "words": 18 },
+    "image.title": { "words": 6 },
+    "image.caption": { "words": 16 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 16 },
+    "cta.action": { "words": 5 }
+  }
+}

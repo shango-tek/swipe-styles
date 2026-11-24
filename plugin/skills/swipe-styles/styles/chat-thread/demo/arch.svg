@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <!-- A couple holding hands under a flower arch, in soft dusk tones. Drawn for the Chat Thread demo. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E4DAE6"/>
+      <stop offset="0.55" stop-color="#F1E6EA"/>
+      <stop offset="1" stop-color="#F7ECE6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="500" cy="560" r="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF6EE"/>
+      <stop offset="1" stop-color="#FFF6EE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D9CCD2"/>
+      <stop offset="1" stop-color="#C9BAC2"/>
+    </linearGradient>
+    <linearGradient id="veil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.25"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="1000" fill="url(#sky)"/>
+  <circle cx="500" cy="560" r="360" fill="url(#glow)"/>
+
+  <!-- Far hills -->
+  <path d="M0 700 C140 640 260 660 380 690 C520 724 640 650 780 652 C880 654 950 680 1000 690 V1000 H0Z" fill="#E2D6DC"/>
+  <path d="M0 760 C180 720 320 744 470 756 C640 770 800 728 1000 744 V1000 H0Z" fill="#DACDD4"/>
+
+  <!-- Ground -->
+  <path d="M0 800 C220 786 380 792 500 794 C660 796 820 784 1000 792 V1000 H0Z" fill="url(#ground)"/>
+  <ellipse cx="505" cy="806" rx="190" ry="16" fill="#B8A7B1" opacity="0.55"/>
+
+  <!-- The arch frame -->
+  <path d="M282 806 V430 A218 218 0 0 1 718 430 V806" fill="none" stroke="#B3A1AC" stroke-width="20" stroke-linecap="round"/>
+  <path d="M282 806 V430 A218 218 0 0 1 718 430 V806" fill="none" stroke="#C9B9C2" stroke-width="6" stroke-linecap="round" transform="translate(-4 -4)"/>
+
+  <!-- Foliage on the arch: top left sweep -->
+  <g fill="#9DAA9A">
+    <circle cx="282" cy="520" r="26"/><circle cx="268" cy="472" r="30"/><circle cx="278" cy="420" r="32"/>
+    <circle cx="300" cy="368" r="30"/><circle cx="332" cy="320" r="32"/><circle cx="372" cy="282" r="30"/>
+    <circle cx="420" cy="252" r="28"/><circle cx="470" cy="236" r="24"/><circle cx="298" cy="574" r="20"/>
+  </g>
+  <g fill="#B7C2B2">
+    <circle cx="298" cy="448" r="22"/><circle cx="312" cy="398" r="20"/><circle cx="350" cy="348" r="22"/>
+    <circle cx="392" cy="306" r="20"/><circle cx="440" cy="276" r="18"/><circle cx="262" cy="540" r="16"/>
+  </g>
+  <!-- Foliage on the arch: right side, lower -->
+  <g fill="#9DAA9A">
+    <circle cx="718" cy="452" r="26"/><circle cx="734" cy="502" r="30"/><circle cx="716" cy="556" r="30"/>
+    <circle cx="738" cy="606" r="26"/><circle cx="712" cy="650" r="22"/><circle cx="700" cy="404" r="20"/>
+  </g>
+  <g fill="#B7C2B2">
+    <circle cx="700" cy="520" r="20"/><circle cx="742" cy="562" r="18"/><circle cx="694" cy="610" r="16"/>
+  </g>
+
+  <!-- Flowers -->
+  <g fill="#E3BFC2">
+    <circle cx="300" cy="412" r="22"/><circle cx="356" cy="318" r="24"/><circle cx="448" cy="250" r="20"/>
+    <circle cx="276" cy="500" r="18"/><circle cx="722" cy="528" r="24"/><circle cx="730" cy="626" r="18"/>
+  </g>
+  <g fill="#D3A2AA">
+    <circle cx="322" cy="364" r="18"/><circle cx="404" cy="276" r="17"/><circle cx="740" cy="478" r="17"/>
+    <circle cx="704" cy="578" r="15"/><circle cx="288" cy="556" r="14"/>
+  </g>
+  <g fill="#FBF6F4">
+    <circle cx="276" cy="446" r="15"/><circle cx="378" cy="300" r="14"/><circle cx="486" cy="240" r="13"/>
+    <circle cx="712" cy="430" r="14"/><circle cx="748" cy="590" r="13"/><circle cx="304" cy="484" r="11"/>
+  </g>
+  <g fill="#C78D98">
+    <circle cx="300" cy="412" r="7"/><circle cx="356" cy="318" r="8"/><circle cx="722" cy="528" r="8"/>
+    <circle cx="448" cy="250" r="6"/><circle cx="276" cy="500" r="6"/>
+  </g>
+
+  <!-- The couple -->
+  <g fill="#5E4C5B">
+    <!-- Left: suit, facing right -->
+    <circle cx="444" cy="418" r="33"/>
+    <path d="M410 422 C406 394 424 377 448 378 C466 379 477 391 478 406 C466 397 450 395 436 398 C423 401 414 410 410 422Z"/>
+    <path d="M432 446 H458 V466 H432Z"/>
+    <path d="M398 486 C400 470 414 462 430 460 H462 C478 462 490 472 492 488 L496 560 L486 612 H408 L396 560Z"/>
+    <path d="M410 606 H484 L480 800 H452 L448 650 L442 650 L438 800 H410Z"/>
+    <path d="M404 802 H440 V792 H410Z M450 802 H488 V792 H452Z"/>
+    <!-- His arm, reaching for her hand -->
+    <path d="M478 490 C496 520 502 552 506 576 L494 584 C484 560 476 534 466 512Z"/>
+
+    <!-- Right: dress, facing left -->
+    <circle cx="556" cy="430" r="30"/>
+    <circle cx="584" cy="416" r="15"/>
+    <path d="M545 456 H568 V474 H545Z"/>
+    <path d="M530 494 C532 480 542 472 556 472 C572 472 584 480 586 494 L584 548 L578 586 H538 L532 548Z"/>
+    <path d="M538 580 H578 C600 650 640 730 672 802 H440 C470 730 514 650 538 580Z"/>
+    <!-- Her arm, reaching for his hand -->
+    <path d="M536 498 C524 524 516 552 510 574 L500 580 C504 552 512 520 524 494Z"/>
+  </g>
+
+  <!-- Veil -->
+  <path d="M590 404 C620 430 630 520 646 600 C660 676 690 744 716 798 C690 790 664 760 646 720 C622 664 610 590 598 520 C592 480 586 440 590 404Z" fill="url(#veil)"/>
+
+  <!-- Bouquet where the hands meet -->
+  <g>
+    <path d="M500 590 L496 640 L506 640 Z" fill="#7F8F7C"/>
+    <circle cx="492" cy="584" r="14" fill="#9DAA9A"/>
+    <circle cx="514" cy="584" r="13" fill="#9DAA9A"/>
+    <circle cx="502" cy="572" r="15" fill="#E3BFC2"/>
+    <circle cx="486" cy="570" r="10" fill="#FBF6F4"/>
+    <circle cx="518" cy="568" r="11" fill="#D3A2AA"/>
+    <circle cx="503" cy="590" r="9" fill="#FBF6F4"/>
+  </g>
+
+  <!-- Petals on the ground -->
+  <g fill="#E3BFC2" opacity="0.9">
+    <ellipse cx="330" cy="828" rx="9" ry="5" transform="rotate(-20 330 828)"/>
+    <ellipse cx="392" cy="852" rx="8" ry="4.5" transform="rotate(25 392 852)"/>
+    <ellipse cx="622" cy="836" rx="9" ry="5" transform="rotate(14 622 836)"/>
+    <ellipse cx="690" cy="866" rx="8" ry="4.5" transform="rotate(-30 690 866)"/>
+    <ellipse cx="540" cy="880" rx="7" ry="4" transform="rotate(8 540 880)"/>
+    <ellipse cx="452" cy="900" rx="8" ry="4.5" transform="rotate(-12 452 900)"/>
+  </g>
+  <g fill="#FBF6F4" opacity="0.9">
+    <ellipse cx="360" cy="886" rx="7" ry="4" transform="rotate(30 360 886)"/>
+    <ellipse cx="652" cy="900" rx="7" ry="4" transform="rotate(-18 652 900)"/>
+    <ellipse cx="586" cy="852" rx="6" ry="3.5" transform="rotate(40 586 852)"/>
+  </g>
+</svg>
