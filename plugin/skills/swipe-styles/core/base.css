@@ -1,0 +1,89 @@
+/* Shared base for every style. The style's own style.css is loaded after this file. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+body {
+  width: var(--slide-w);
+  background: #000;
+}
+
+.slide {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* The safe area. All text stays inside it; render.mjs reports text that leaves it.
+   A style sets --safe (the distance from the edges). */
+.safe {
+  position: absolute;
+  inset: var(--safe, 80px);
+  display: flex;
+  flex-direction: column;
+}
+
+.safe > * {
+  flex-shrink: 0;
+}
+
+[data-field],
+[data-item],
+[data-item-field] {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: inherit;
+  text-wrap: balance;
+}
+
+p,
+li,
+blockquote {
+  text-wrap: pretty;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+em {
+  font-style: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+
+  .slide {
+    break-after: page;
+  }
+
+  .slide:last-child {
+    break-after: auto;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "style": "swiss-grid",
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Why the first sentence of every carousel decides whether anyone reads the second one",
+      "subtitle": "A headline this long gets smaller automatically."
+    }
+  ]
+}

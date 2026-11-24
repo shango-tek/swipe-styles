@@ -1,0 +1,9 @@
+{
+  "style": "swiss-grid",
+  "slides": [
+    {
+      "type": "cover",
+      "title": "This headline is far too long for any slide because it keeps going with one more clause, and then another one, and after that a list of every reason a reader might stop, which includes the length of this very headline, the size of the phone, the time of day, the mood of the reader, the number of other posts in the feed, the colour of the background, the weight of the type, the spacing between the lines, and many other details that no single slide could ever hold at a readable size, no matter how small the type becomes or how tightly the lines are set, so the renderer has to report it instead of hiding it"
+    }
+  ]
+}

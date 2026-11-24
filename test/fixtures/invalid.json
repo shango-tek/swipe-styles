@@ -1,0 +1,8 @@
+{
+  "style": "swiss-grid",
+  "brand": { "accent": "red; background: url(x)" },
+  "slides": [
+    { "type": "slide", "title": "Not a slide type" },
+    { "type": "cover", "subtitel": "Typo in the field name, and no title" }
+  ]
+}

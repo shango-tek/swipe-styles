@@ -1,0 +1,26 @@
+{
+  "instagram": {
+    "width": 1080,
+    "height": 1350,
+    "maxSlides": 20,
+    "label": "4:5 portrait, the default for Instagram and LinkedIn"
+  },
+  "square": {
+    "width": 1080,
+    "height": 1080,
+    "maxSlides": 20,
+    "label": "1:1 square, Instagram and LinkedIn"
+  },
+  "instagram-tall": {
+    "width": 1080,
+    "height": 1440,
+    "maxSlides": 20,
+    "label": "3:4 tall; Instagram accepts it, but it is not an official Instagram size"
+  },
+  "linkedin": {
+    "width": 1080,
+    "height": 1350,
+    "maxSlides": 300,
+    "label": "4:5 portrait for a LinkedIn document post (PDF)"
+  }
+}

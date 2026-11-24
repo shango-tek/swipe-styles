@@ -1,0 +1,6 @@
+{
+  "style": "swiss-grid",
+  "slides": [
+    { "type": "image", "src": "square.svg", "title": "A local image", "caption": "Loaded from a path next to the carousel file." }
+  ]
+}

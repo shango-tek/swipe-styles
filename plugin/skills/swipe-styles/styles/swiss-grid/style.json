@@ -1,0 +1,28 @@
+{
+  "id": "swiss-grid",
+  "name": "Swiss Grid",
+  "summary": "Big condensed grotesque on white, a strict grid, black rules, and one red bar that shows how far the reader is.",
+  "category": "Minimal",
+  "suits": ["professional tips", "LinkedIn explainers", "frameworks", "business lessons", "data-led posts"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#E30613",
+    "use": "the progress bar, the quotation mark, the stat bar, *emphasis* and the call-to-action block"
+  },
+  "fonts": [{ "family": "Archivo", "license": "OFL-1.1", "folder": "fonts/archivo" }],
+  "limits": {
+    "cover.title": { "words": 8 },
+    "cover.subtitle": { "words": 18 },
+    "text.title": { "words": 8 },
+    "text.body": { "words": 60 },
+    "points.title": { "words": 8 },
+    "points.items": { "count": 5, "words": 18 },
+    "quote.quote": { "words": 30 },
+    "stat.label": { "words": 8 },
+    "stat.note": { "words": 22 },
+    "image.title": { "words": 8 },
+    "image.caption": { "words": 18 },
+    "cta.title": { "words": 8 },
+    "cta.text": { "words": 20 }
+  }
+}

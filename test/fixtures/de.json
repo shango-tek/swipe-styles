@@ -1,0 +1,16 @@
+{
+  "style": "swiss-grid",
+  "lang": "de",
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Donaudampfschifffahrtsgesellschaftskapitänsmütze",
+      "subtitle": "Lange Wörter werden getrennt, statt aus der Folie zu laufen."
+    },
+    {
+      "type": "text",
+      "title": "Rechtsschutzversicherungsgesellschaften",
+      "body": "Arbeitsunfähigkeitsbescheinigung, Kraftfahrzeughaftpflichtversicherung und Grundstücksverkehrsgenehmigungszuständigkeitsübertragungsverordnung sind echte deutsche Wörter."
+    }
+  ]
+}

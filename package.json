@@ -1,0 +1,19 @@
+{
+  "name": "swipe-styles",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Carousel styles for your coding agent: pick a style, bring your topic, get Instagram and LinkedIn slides rendered from HTML.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "render": "node plugin/skills/swipe-styles/core/render.mjs",
+    "demos": "node tools/render-demos.mjs",
+    "test": "node --test \"test/**/*.test.mjs\""
+  },
+  "dependencies": {
+    "playwright": "1.65.1"
+  }
+}

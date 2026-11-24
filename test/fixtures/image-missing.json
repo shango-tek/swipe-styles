@@ -1,0 +1,4 @@
+{
+  "style": "swiss-grid",
+  "slides": [{ "type": "image", "src": "does-not-exist.png", "title": "Missing" }]
+}

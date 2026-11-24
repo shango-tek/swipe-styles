@@ -1,0 +1,23 @@
+{
+  "style": "swiss-grid",
+  "lang": "en",
+  "brand": { "name": "Northline Studio", "handle": "@northline.studio", "accent": "#0F766E" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Pricing guide",
+      "title": "How we price design work",
+      "subtitle": "Three rules that ended our underpaid projects."
+    },
+    {
+      "type": "points",
+      "title": "Three rules",
+      "items": [
+        { "title": "Price the outcome", "text": "Clients pay for what the work changes, not for the hours." },
+        "Write the scope down before the first sketch.",
+        { "title": "Raise prices every year", "text": "Small steps keep long-term clients on board." }
+      ]
+    },
+    { "type": "cta", "title": "Save this for your next quote", "action": "Follow for more" }
+  ]
+}

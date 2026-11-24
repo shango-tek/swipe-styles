@@ -1,0 +1,102 @@
+<!-- Swiss Grid layouts. One <template> per slide type; render.mjs fills the data-field elements. -->
+
+<template data-type="cover">
+  <section class="slide sg sg-cover">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <div class="sg-top">
+        <p class="sg-kicker" data-field="kicker"></p>
+        <img class="sg-logo" data-field="logo">
+      </div>
+      <h1 class="sg-display" data-field="title" data-fit-min="72"></h1>
+      <div class="sg-rule"></div>
+      <p class="sg-sub" data-field="subtitle" data-fit-min="30"></p>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide sg sg-text">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <p class="sg-kicker sg-kicker-top" data-field="kicker"></p>
+      <h2 class="sg-h2" data-field="title" data-fit-min="52"></h2>
+      <p class="sg-body" data-field="body" data-fit-min="30"></p>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide sg sg-points">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <p class="sg-kicker sg-kicker-top" data-field="kicker"></p>
+      <h2 class="sg-h2" data-field="title" data-fit-min="52"></h2>
+      <ul class="sg-list" data-list="items">
+        <li class="sg-item" data-item>
+          <span class="sg-item-title" data-item-field="title" data-fit-min="32"></span>
+          <span class="sg-item-text" data-item-field="text" data-fit-min="26"></span>
+        </li>
+      </ul>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide sg sg-quote-slide">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <div class="sg-quote-mark" aria-hidden="true">&ldquo;</div>
+      <blockquote class="sg-quote" data-field="quote" data-fit-min="38"></blockquote>
+      <div class="sg-cite">
+        <p class="sg-author" data-field="author"></p>
+        <p class="sg-role" data-field="role"></p>
+      </div>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide sg sg-stat">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <p class="sg-kicker sg-kicker-top" data-field="kicker"></p>
+      <p class="sg-value" data-field="value" data-fit-min="140"></p>
+      <div class="sg-stat-rule"></div>
+      <p class="sg-label" data-field="label" data-fit-min="38"></p>
+      <p class="sg-note" data-field="note" data-fit-min="26"></p>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide sg sg-image">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <figure class="sg-figure"><img data-field="src"></figure>
+      <h2 class="sg-img-title" data-field="title" data-fit-min="40"></h2>
+      <p class="sg-caption" data-field="caption" data-fit-min="24"></p>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide sg sg-cta">
+    <div class="safe">
+      <div class="sg-bar"></div>
+      <div class="sg-top">
+        <img class="sg-logo" data-field="logo">
+      </div>
+      <h2 class="sg-cta-title" data-field="title" data-fit-min="64"></h2>
+      <p class="sg-cta-text" data-field="text" data-fit-min="30"></p>
+      <p class="sg-action" data-field="action" data-fit-min="32"></p>
+      <footer class="sg-foot"><span data-field="handle"></span><span class="sg-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
