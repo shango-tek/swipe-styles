@@ -1,0 +1,370 @@
+/* Riso Zine: two-color Risograph print. Fluorescent pink and medium blue ink overprint each other
+   (multiply), with yellow as a third ink, on grainy paper. Type: Bricolage Grotesque (OFL). */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../../fonts/bricolage-grotesque/BricolageGrotesque-Variable.ttf") format("truetype");
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: block;
+}
+
+:root {
+  --accent: #ff48b0;
+  --blue: #0078bf;
+  --yellow: #ffe800;
+  --paper: #f6f6f3;
+  --safe: 84px;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.rz {
+  background: var(--paper);
+  color: var(--blue);
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 500;
+  font-stretch: 100%;
+}
+
+/* Paper grain over everything, like ink printed on uncoated paper. */
+.rz::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--grain) 0 0 / 280px 280px;
+  mix-blend-mode: multiply;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.rz .safe {
+  z-index: 2;
+}
+
+.rz em {
+  color: var(--accent);
+}
+
+/* Ink shapes behind the text. Multiply makes overlapping inks darken, as on a real Risograph. */
+.rz-shape {
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+}
+
+.rz-sun {
+  top: -200px;
+  right: -230px;
+  width: 780px;
+  height: 780px;
+  background: var(--yellow);
+}
+
+.rz-dots {
+  background: radial-gradient(circle, var(--accent) 0 33%, transparent 35%) 0 0 / 26px 26px;
+}
+
+.rz-dots-cover {
+  top: 210px;
+  right: 60px;
+  width: 520px;
+  height: 520px;
+}
+
+.rz-moon {
+  right: -300px;
+  bottom: auto;
+  width: 600px;
+  height: 600px;
+  background: var(--blue);
+  opacity: 0.9;
+  top: 560px;
+}
+
+.rz-dots-corner {
+  top: -140px;
+  right: -140px;
+  width: 460px;
+  height: 460px;
+}
+
+.rz-dots-quote {
+  top: -280px;
+  right: -280px;
+  width: 560px;
+  height: 560px;
+  background-size: 30px 30px;
+}
+
+.rz-sun-stat {
+  top: 200px;
+  right: -160px;
+  width: 820px;
+  height: 820px;
+}
+
+/* Text */
+.rz-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+/* A strip of yellow tape with the kicker on it. */
+.rz-tape {
+  align-self: flex-start;
+  margin-top: 22px;
+  padding: 8px 20px 12px;
+  background: var(--yellow);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.1;
+  mix-blend-mode: multiply;
+  transform: rotate(-2.5deg);
+  transform-origin: left top;
+}
+
+.rz-logo {
+  height: 80px;
+  width: auto;
+  margin-left: auto;
+}
+
+/* Headlines print in blue with the pink plate slightly out of register. */
+.rz-display,
+.rz-h2,
+.rz-img-title {
+  font-weight: 800;
+  font-stretch: 75%;
+  letter-spacing: -0.015em;
+  text-shadow: 0.045em 0.035em 0 var(--accent);
+  mix-blend-mode: multiply;
+}
+
+.rz-display {
+  margin-top: auto;
+  font-size: 220px;
+  line-height: 0.86;
+}
+
+.rz-sub {
+  max-width: 820px;
+  margin-top: 40px;
+  font-size: 42px;
+  font-weight: 560;
+  line-height: 1.24;
+}
+
+.rz-h2 {
+  margin-top: 40px;
+  font-size: 120px;
+  line-height: 0.9;
+}
+
+.rz-body {
+  max-width: 820px;
+  margin-top: 56px;
+  font-size: 50px;
+  line-height: 1.3;
+}
+
+.rz-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 40px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.rz-count {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.rz-cover .rz-foot,
+.rz-stat .rz-foot,
+.rz-cta .rz-foot {
+  margin-top: 0;
+  padding-top: 56px;
+}
+
+/* Points: pink stars as bullets. */
+.rz-list {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 64px;
+}
+
+.rz-item {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.rz-star {
+  flex: none;
+  width: 58px;
+  height: 58px;
+  margin-top: 2px;
+  background: var(--accent);
+  clip-path: polygon(50% 0, 61% 34%, 97% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 3% 35%, 39% 34%);
+  mix-blend-mode: multiply;
+}
+
+.rz-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.rz-item-title {
+  font-size: 54px;
+  font-weight: 760;
+  font-stretch: 85%;
+  line-height: 1.05;
+}
+
+.rz-item-text,
+.rz-item-body > :only-child {
+  font-size: 52px;
+  font-weight: 560;
+  line-height: 1.24;
+}
+
+/* Quote */
+.rz-quote-mark {
+  height: 190px;
+  margin-top: 8px;
+  font-size: 420px;
+  font-weight: 800;
+  line-height: 0.8;
+  color: var(--blue);
+  mix-blend-mode: multiply;
+}
+
+.rz-quote {
+  font-size: 92px;
+  font-weight: 760;
+  font-stretch: 82%;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  mix-blend-mode: multiply;
+}
+
+.rz-author {
+  margin-top: 48px;
+  font-size: 40px;
+  font-weight: 760;
+}
+
+.rz-role {
+  margin-top: 4px;
+  font-size: 32px;
+}
+
+/* Stat: the number in pink with the blue plate off register. */
+.rz-value {
+  margin-top: auto;
+  font-size: 470px;
+  font-weight: 800;
+  font-stretch: 75%;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  text-shadow: 0.03em 0.025em 0 var(--blue);
+  white-space: nowrap;
+  mix-blend-mode: multiply;
+}
+
+.rz-label {
+  max-width: 860px;
+  margin-top: 44px;
+  font-size: 68px;
+  font-weight: 780;
+  font-stretch: 82%;
+  line-height: 1;
+}
+
+.rz-note {
+  max-width: 780px;
+  margin-top: 24px;
+  font-size: 38px;
+  line-height: 1.3;
+}
+
+/* Image: printed as a pink duotone, with the blue plate as an offset frame. */
+.rz-figure {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 10px 22px 0 0;
+  background: var(--accent);
+  box-shadow: 22px 22px 0 var(--blue);
+}
+
+.rz-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.2) brightness(1.08);
+  mix-blend-mode: multiply;
+}
+
+.rz-img-title {
+  margin-top: 60px;
+  font-size: 92px;
+  line-height: 0.92;
+}
+
+.rz-caption {
+  margin-top: 18px;
+  font-size: 36px;
+  line-height: 1.26;
+}
+
+/* Call to action: yellow paper, blue type, the action on a blue sticker. */
+.rz-cta {
+  background: var(--yellow);
+}
+
+.rz-dots-cta {
+  bottom: auto;
+  left: auto;
+  width: 560px;
+  height: 560px;
+  top: -160px;
+  right: -160px;
+}
+
+
+.rz-cta-title {
+  font-size: 170px;
+}
+
+.rz-action {
+  align-self: flex-start;
+  margin-top: 52px;
+  padding: 18px 30px 22px;
+  background: var(--blue);
+  color: var(--yellow);
+  font-size: 46px;
+  font-weight: 780;
+  line-height: 1.1;
+  transform: rotate(-2deg);
+  transform-origin: left top;
+}
+
+/* Quote: the block sits in the vertical middle of the slide. */
+.rz-quote-slide .rz-quote-mark {
+  margin-top: auto;
+}
+
+.rz-quote-slide .rz-quote {
+  font-size: 100px;
+}

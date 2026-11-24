@@ -1,0 +1,54 @@
+{
+  "topic": "A small print shop invites first-timers to make a zine. Inkspot Press and Juno Park are a made-up example.",
+  "style": "riso-zine",
+  "lang": "en",
+  "brand": { "name": "Inkspot Press", "handle": "@inkspot.press" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Weekend project",
+      "title": "Make a zine in two days",
+      "subtitle": "Eight pages, one sheet of paper, no budget."
+    },
+    {
+      "type": "text",
+      "title": "Why zines are back",
+      "body": "A feed scrolls past. A zine stays on a shelf. Small print runs let you share work that is too weird, too personal or too slow for an algorithm."
+    },
+    {
+      "type": "points",
+      "title": "What you need",
+      "items": [
+        "One sheet of paper, folded into eight pages",
+        "A pen, scissors and a photocopier",
+        "Something you care about more than likes",
+        "Friends to swap copies with"
+      ]
+    },
+    {
+      "type": "stat",
+      "kicker": "Last month",
+      "value": "120",
+      "label": "zines printed in our shop by first-timers",
+      "note": "Most of them were made in a single weekend."
+    },
+    {
+      "type": "quote",
+      "quote": "Nobody asked for my zine about bus stops. Forty people took a copy anyway.",
+      "author": "Juno Park",
+      "role": "First-time zine maker"
+    },
+    {
+      "type": "image",
+      "src": "zines.svg",
+      "title": "Fold, cut, staple",
+      "caption": "One sheet becomes an eight-page booklet in three minutes."
+    },
+    {
+      "type": "cta",
+      "title": "Make one this weekend",
+      "text": "Tag us when it is done. We share our favorites every Friday.",
+      "action": "Follow @inkspot.press"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+<!-- Notebook layouts. One <template> per slide type; render.mjs fills the data-field elements. -->
+
+<template data-type="cover">
+  <section class="slide nb nb-cover">
+    <div class="safe">
+      <div class="nb-top">
+        <p class="nb-note nb-kicker" data-field="kicker"></p>
+        <img class="nb-logo" data-field="logo">
+      </div>
+      <h1 class="nb-title"><span class="nb-hl" data-field="title" data-fit-min="64"></span></h1>
+      <p class="nb-sub" data-field="subtitle" data-fit-min="30"></p>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide nb nb-text">
+    <div class="safe">
+      <p class="nb-note nb-kicker" data-field="kicker"></p>
+      <h2 class="nb-h2" data-field="title" data-fit-min="48"></h2>
+      <div class="nb-squiggle" data-if="title"></div>
+      <p class="nb-body" data-field="body" data-fit-min="30"></p>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide nb nb-points">
+    <div class="safe">
+      <p class="nb-note nb-kicker" data-field="kicker"></p>
+      <h2 class="nb-h2" data-field="title" data-fit-min="48"></h2>
+      <div class="nb-squiggle" data-if="title"></div>
+      <ul class="nb-list" data-list="items">
+        <li class="nb-item" data-item>
+          <span class="nb-check" aria-hidden="true"></span>
+          <span class="nb-item-body">
+            <span class="nb-item-title" data-item-field="title" data-fit-min="32"></span>
+            <span class="nb-item-text" data-item-field="text" data-fit-min="28"></span>
+          </span>
+        </li>
+      </ul>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide nb nb-quote-slide">
+    <div class="safe">
+      <figure class="nb-sticky">
+        <span class="nb-tape" aria-hidden="true"></span>
+        <div class="nb-sticky-text">
+          <blockquote class="nb-quote" data-field="quote" data-fit-min="40"></blockquote>
+          <figcaption class="nb-cite">
+            <span class="nb-author" data-field="author"></span>
+            <span class="nb-role" data-field="role"></span>
+          </figcaption>
+        </div>
+      </figure>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide nb nb-stat">
+    <div class="safe">
+      <p class="nb-note nb-kicker" data-field="kicker"></p>
+      <div class="nb-circled"><p class="nb-value" data-field="value" data-fit-min="120"></p></div>
+      <p class="nb-label" data-field="label" data-fit-min="40"></p>
+      <p class="nb-stat-note" data-field="note" data-fit-min="28"></p>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide nb nb-image">
+    <div class="safe">
+      <figure class="nb-photo">
+        <span class="nb-tape nb-tape-left" aria-hidden="true"></span>
+        <span class="nb-tape nb-tape-right" aria-hidden="true"></span>
+        <img data-field="src">
+      </figure>
+      <h2 class="nb-img-title" data-field="title" data-fit-min="40"></h2>
+      <p class="nb-note nb-caption" data-field="caption" data-fit-min="32"></p>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide nb nb-cta">
+    <div class="safe">
+      <div class="nb-top">
+        <img class="nb-logo" data-field="logo">
+      </div>
+      <h2 class="nb-title nb-cta-title"><span class="nb-hl" data-field="title" data-fit-min="60"></span></h2>
+      <p class="nb-sub" data-field="text" data-fit-min="30"></p>
+      <div class="nb-action-row" data-if="action">
+        <span class="nb-arrow" aria-hidden="true"></span>
+        <p class="nb-note nb-action" data-field="action" data-fit-min="40"></p>
+      </div>
+      <footer class="nb-foot"><span class="nb-handle" data-field="handle"></span><span class="nb-page" data-field="page"></span></footer>
+    </div>
+  </section>
+</template>

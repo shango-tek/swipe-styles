@@ -1,0 +1,54 @@
+{
+  "topic": "A teacher shares study habits that beat re-reading. Ms. Okafor and her class are a made-up example.",
+  "style": "notebook",
+  "lang": "en",
+  "brand": { "name": "Ms. Okafor", "handle": "@ms.okafor.teaches" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Study notes",
+      "title": "Read less, remember more",
+      "subtitle": "Four habits that work better than reading the chapter again."
+    },
+    {
+      "type": "text",
+      "title": "Re-reading feels like learning",
+      "body": "The page looks familiar the second time, so it feels known. But familiar is not the same as *remembered*. The test is simple: close the book. What can you write down?"
+    },
+    {
+      "type": "stat",
+      "kicker": "My class, this term",
+      "value": "24 of 30",
+      "label": "students scored higher after switching to self-tests",
+      "note": "Same chapters, same time spent. They closed the book and wrote down what they remembered."
+    },
+    {
+      "type": "points",
+      "title": "Four habits that work",
+      "items": [
+        { "title": "Close the book", "text": "Write down everything you remember, then check." },
+        { "title": "Space it out", "text": "Review after one day, then three, then a week." },
+        { "title": "Explain it simply", "text": "Teach it to a friend in plain words." },
+        { "title": "Mix the topics", "text": "Switch subjects instead of one long block." }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "Struggling to remember is not failing. It is the moment you are learning.",
+      "author": "Ms. Okafor",
+      "role": "Biology teacher"
+    },
+    {
+      "type": "image",
+      "src": "desk.svg",
+      "title": "Close it, then write",
+      "caption": "Five minutes after each chapter is enough"
+    },
+    {
+      "type": "cta",
+      "title": "Try it tonight",
+      "text": "Pick one chapter. Read it once, close the book, and write down what you remember.",
+      "action": "Save this for exam week"
+    }
+  ]
+}

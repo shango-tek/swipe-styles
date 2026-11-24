@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- Three folded zines drawn in code for the demo, in greys so the duotone shows. -->
+  <rect width="1200" height="900" fill="#cfcfcf"/>
+  <g transform="rotate(-12 360 470)">
+    <rect x="170" y="230" width="380" height="500" fill="#f4f4f4"/>
+    <circle cx="360" cy="420" r="120" fill="#5a5a5a"/>
+    <rect x="220" y="600" width="280" height="26" fill="#2a2a2a"/>
+    <rect x="220" y="646" width="200" height="16" fill="#7a7a7a"/>
+  </g>
+  <g transform="rotate(5 640 450)">
+    <rect x="450" y="170" width="380" height="520" fill="#ffffff"/>
+    <rect x="500" y="230" width="280" height="260" fill="#9a9a9a"/>
+    <path d="M500 490 L 640 330 L 780 490 Z" fill="#3c3c3c"/>
+    <rect x="500" y="540" width="280" height="30" fill="#222"/>
+    <rect x="500" y="590" width="220" height="16" fill="#777"/>
+    <rect x="636" y="160" width="8" height="40" fill="#555"/>
+    <rect x="636" y="660" width="8" height="40" fill="#555"/>
+  </g>
+  <g transform="rotate(14 900 520)">
+    <rect x="740" y="300" width="340" height="460" fill="#e2e2e2"/>
+    <rect x="790" y="360" width="240" height="240" rx="120" fill="#2e2e2e"/>
+    <rect x="790" y="640" width="200" height="24" fill="#444"/>
+  </g>
+</svg>

@@ -1,0 +1,102 @@
+<!-- Riso Zine layouts. One <template> per slide type; render.mjs fills the data-field elements.
+     The .rz-shape elements are ink shapes printed behind the text. -->
+
+<template data-type="cover">
+  <section class="slide rz rz-cover">
+    <span class="rz-shape rz-sun" aria-hidden="true"></span>
+    <span class="rz-shape rz-dots rz-dots-cover" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="rz-top">
+        <p class="rz-tape" data-field="kicker"></p>
+        <img class="rz-logo" data-field="logo">
+      </div>
+      <h1 class="rz-display" data-field="title" data-fit-min="80"></h1>
+      <p class="rz-sub" data-field="subtitle" data-fit-min="30"></p>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="text">
+  <section class="slide rz rz-text">
+    <span class="rz-shape rz-moon" aria-hidden="true"></span>
+    <div class="safe">
+      <p class="rz-tape" data-field="kicker"></p>
+      <h2 class="rz-h2" data-field="title" data-fit-min="56"></h2>
+      <p class="rz-body" data-field="body" data-fit-min="30"></p>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="points">
+  <section class="slide rz rz-points">
+    <span class="rz-shape rz-dots rz-dots-corner" aria-hidden="true"></span>
+    <div class="safe">
+      <p class="rz-tape" data-field="kicker"></p>
+      <h2 class="rz-h2" data-field="title" data-fit-min="56"></h2>
+      <ul class="rz-list" data-list="items">
+        <li class="rz-item" data-item>
+          <span class="rz-star" aria-hidden="true"></span>
+          <span class="rz-item-body">
+            <span class="rz-item-title" data-item-field="title" data-fit-min="34"></span>
+            <span class="rz-item-text" data-item-field="text" data-fit-min="30"></span>
+          </span>
+        </li>
+      </ul>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="quote">
+  <section class="slide rz rz-quote-slide">
+    <span class="rz-shape rz-dots rz-dots-quote" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="rz-quote-mark" aria-hidden="true">&ldquo;</div>
+      <blockquote class="rz-quote" data-field="quote" data-fit-min="40"></blockquote>
+      <p class="rz-author" data-field="author"></p>
+      <p class="rz-role" data-field="role"></p>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="stat">
+  <section class="slide rz rz-stat">
+    <span class="rz-shape rz-sun rz-sun-stat" aria-hidden="true"></span>
+    <div class="safe">
+      <p class="rz-tape" data-field="kicker"></p>
+      <p class="rz-value" data-field="value" data-fit-min="140"></p>
+      <p class="rz-label" data-field="label" data-fit-min="40"></p>
+      <p class="rz-note" data-field="note" data-fit-min="28"></p>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="image">
+  <section class="slide rz rz-image">
+    <div class="safe">
+      <figure class="rz-figure"><img data-field="src"></figure>
+      <h2 class="rz-img-title" data-field="title" data-fit-min="44"></h2>
+      <p class="rz-caption" data-field="caption" data-fit-min="28"></p>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>
+
+<template data-type="cta">
+  <section class="slide rz rz-cta">
+    <span class="rz-shape rz-dots rz-dots-cta" aria-hidden="true"></span>
+    <div class="safe">
+      <div class="rz-top">
+        <img class="rz-logo" data-field="logo">
+      </div>
+      <h2 class="rz-display rz-cta-title" data-field="title" data-fit-min="72"></h2>
+      <p class="rz-sub" data-field="text" data-fit-min="30"></p>
+      <p class="rz-action" data-field="action" data-fit-min="32"></p>
+      <footer class="rz-foot"><span data-field="handle"></span><span class="rz-count" data-field="counter"></span></footer>
+    </div>
+  </section>
+</template>

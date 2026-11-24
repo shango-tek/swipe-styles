@@ -1,0 +1,31 @@
+{
+  "id": "notebook",
+  "name": "Notebook",
+  "summary": "A page from a squared school notebook: printed serif text, a highlighter, and notes in blue ink.",
+  "category": "Handmade",
+  "suits": ["study tips", "teaching", "coaching", "how-to guides", "book notes", "self-improvement"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#1D3F9E",
+    "use": "the blue ink: handwritten notes, underlines, check marks, the circle around a number and the arrow"
+  },
+  "fonts": [
+    { "family": "Literata", "license": "OFL-1.1", "folder": "fonts/literata" },
+    { "family": "Caveat", "license": "OFL-1.1", "folder": "fonts/caveat" }
+  ],
+  "limits": {
+    "cover.title": { "words": 7 },
+    "cover.subtitle": { "words": 18 },
+    "text.title": { "words": 7 },
+    "text.body": { "words": 55 },
+    "points.title": { "words": 7 },
+    "points.items": { "count": 4, "words": 16 },
+    "quote.quote": { "words": 22 },
+    "stat.label": { "words": 10 },
+    "stat.note": { "words": 22 },
+    "image.title": { "words": 7 },
+    "image.caption": { "words": 12 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 22 }
+  }
+}

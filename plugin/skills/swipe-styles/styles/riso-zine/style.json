@@ -1,0 +1,28 @@
+{
+  "id": "riso-zine",
+  "name": "Riso Zine",
+  "summary": "Two-color Risograph print: fluorescent pink and blue ink overprinting on grainy paper, chunky type slightly out of register.",
+  "category": "Playful",
+  "suits": ["art and design", "music", "events", "creative tips", "zines and DIY", "Gen-Z creators"],
+  "types": ["cover", "text", "points", "quote", "stat", "image", "cta"],
+  "accent": {
+    "default": "#FF48B0",
+    "use": "the fluorescent pink ink: the off-register shadow, the halftone shapes, the stars, the big number and the image duotone"
+  },
+  "fonts": [{ "family": "Bricolage Grotesque", "license": "OFL-1.1", "folder": "fonts/bricolage-grotesque" }],
+  "limits": {
+    "cover.title": { "words": 6 },
+    "cover.subtitle": { "words": 14 },
+    "text.title": { "words": 6 },
+    "text.body": { "words": 45 },
+    "points.title": { "words": 6 },
+    "points.items": { "count": 5, "words": 12 },
+    "quote.quote": { "words": 22 },
+    "stat.label": { "words": 9 },
+    "stat.note": { "words": 16 },
+    "image.title": { "words": 6 },
+    "image.caption": { "words": 14 },
+    "cta.title": { "words": 6 },
+    "cta.text": { "words": 16 }
+  }
+}

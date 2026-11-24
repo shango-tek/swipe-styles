@@ -1,0 +1,53 @@
+{
+  "topic": "A small design studio explains why it stopped billing by the hour. Northline Studio is a made-up example.",
+  "style": "swiss-grid",
+  "lang": "en",
+  "brand": { "name": "Northline Studio", "handle": "@northline.studio" },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "For freelance designers",
+      "title": "Stop pricing by the hour",
+      "subtitle": "What changed when our studio switched to one fixed price per project."
+    },
+    {
+      "type": "text",
+      "title": "Hours punish good work",
+      "body": "The faster we got, the less we earned. A logo that took us 40 hours in our first year took 12 in our fifth, and it was better. Billing by the hour turned experience into a discount."
+    },
+    {
+      "type": "stat",
+      "kicker": "Our own numbers, last year",
+      "value": "38%",
+      "label": "of project time is invisible to clients",
+      "note": "Research, revisions, file prep and calls. A fixed price covers it. An hourly invoice starts an argument about it."
+    },
+    {
+      "type": "points",
+      "title": "Three rules we price by",
+      "items": [
+        { "title": "Price the outcome", "text": "A rebrand that lifts sales is worth more than the hours behind it." },
+        { "title": "Fix the scope in writing", "text": "List every deliverable and round of changes before the first sketch." },
+        { "title": "Raise prices every January", "text": "Small yearly steps keep long-term clients on board." }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "The first fixed quote felt terrifying. The second felt normal. By the tenth, we had stopped tracking hours.",
+      "author": "Mara Lindqvist",
+      "role": "Founder, Northline Studio"
+    },
+    {
+      "type": "image",
+      "src": "poster.svg",
+      "title": "One price, one page",
+      "caption": "Our quotes now fit on a single page: the outcome, the scope and the price."
+    },
+    {
+      "type": "cta",
+      "title": "Send your next quote with one price",
+      "text": "Save this post for your next client call.",
+      "action": "Follow @northline.studio"
+    }
+  ]
+}

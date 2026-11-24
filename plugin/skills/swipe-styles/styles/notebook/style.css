@@ -1,0 +1,403 @@
+/* Notebook: a page from a squared school notebook.
+   Printed text in Literata (OFL), handwritten notes in Caveat (OFL), one blue ink, one highlighter. */
+
+@font-face {
+  font-family: "Literata";
+  src: url("../../fonts/literata/Literata-Variable.ttf") format("truetype");
+  font-weight: 200 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("../../fonts/caveat/Caveat-Variable.ttf") format("truetype");
+  font-weight: 400 700;
+  font-display: block;
+}
+
+:root {
+  --accent: #1d3f9e;
+  --paper: #fdfdfb;
+  --grid: #d9e6f4;
+  --margin: #e5484d;
+  --graphite: #232327;
+  --pencil: #55555e;
+  --marker: #ffe600;
+  --sticky: #fff27a;
+  --cell: 60px;
+
+  /* Hand-drawn strokes, used as masks so they take the ink color. */
+  --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M4 15 C 50 5, 95 21, 150 11 S 250 6, 296 14' stroke='black' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M7 26 C 12 30, 15 35, 19 40 C 25 27, 32 16, 44 6' stroke='black' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --ring: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240' preserveAspectRatio='none'%3E%3Cpath d='M206 20 C 322 14, 392 66, 386 124 C 380 194, 274 228, 184 224 C 84 220, 10 178, 16 114 C 22 54, 106 18, 222 30' stroke='black' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 120'%3E%3Cpath d='M8 14 C 56 8, 104 34, 136 96' stroke='black' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Cpath d='M106 88 L 138 100 L 146 66' stroke='black' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.nb {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 2px, transparent 2px),
+    linear-gradient(90deg, var(--grid) 2px, transparent 2px);
+  background-size: var(--cell) var(--cell);
+  background-position: 0 -1px;
+  color: var(--graphite);
+  font-family: "Literata", serif;
+  font-weight: 420;
+}
+
+/* The red margin line of the notebook page. */
+.nb::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 152px;
+  width: 3px;
+  background: var(--margin);
+}
+
+.nb .safe {
+  inset: 92px 84px 72px 196px;
+}
+
+.nb em {
+  text-decoration: underline wavy var(--accent);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.18em;
+}
+
+/* Handwriting in blue ink. */
+.nb-note {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1.05;
+}
+
+.nb-kicker {
+  align-self: flex-start;
+  /* The note tilts around its top-left corner, so its left edge stays on the margin.
+     Its right end rises; the top margin leaves room for that. */
+  margin-top: 30px;
+  font-size: 64px;
+  transform: rotate(-2deg);
+  transform-origin: left top;
+}
+
+.nb-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.nb-logo {
+  height: 72px;
+  width: auto;
+  margin-left: auto;
+}
+
+.nb-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 40px;
+}
+
+.nb-handle {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--pencil);
+}
+
+.nb-page {
+  margin-left: auto;
+  font-family: "Caveat", cursive;
+  font-size: 46px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Cover and call to action: a heavy printed title, highlighted line by line. */
+.nb-title {
+  margin-top: auto;
+  font-size: 132px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.nb-hl {
+  padding: 0 0.08em;
+  background: linear-gradient(transparent 50%, var(--marker) 50%, var(--marker) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.nb-sub {
+  max-width: 760px;
+  margin-top: 44px;
+  font-size: 40px;
+  line-height: var(--cell);
+}
+
+/* Text and points */
+.nb-h2 {
+  margin-top: 28px;
+  font-size: 94px;
+  font-weight: 760;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+
+.nb-squiggle {
+  width: 300px;
+  height: 24px;
+  margin-top: 18px;
+  background: var(--accent);
+  -webkit-mask: var(--squiggle) no-repeat center / 100% 100%;
+  mask: var(--squiggle) no-repeat center / 100% 100%;
+}
+
+.nb-body {
+  margin-top: 58px;
+  font-size: 42px;
+  line-height: var(--cell);
+}
+
+.nb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  margin-top: 60px;
+}
+
+.nb-item {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* A box drawn in ink with a tick in it. */
+.nb-check {
+  position: relative;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  margin-top: 6px;
+  border: 4px solid var(--accent);
+  border-radius: 6px 3px 7px 4px;
+  transform: rotate(-3deg);
+}
+
+.nb-check::after {
+  content: "";
+  position: absolute;
+  inset: -16px -12px 0 -2px;
+  background: var(--accent);
+  -webkit-mask: var(--tick) no-repeat center / contain;
+  mask: var(--tick) no-repeat center / contain;
+}
+
+.nb-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.nb-item-title {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.nb-item-text {
+  font-size: 40px;
+  line-height: 1.4;
+}
+
+/* Quote on a sticky note, taped to the page. */
+.nb-sticky {
+  position: relative;
+  align-self: center;
+  width: 760px;
+  height: 820px;
+  margin: auto 0 0;
+  padding: 96px 72px 64px;
+  background: var(--sticky);
+  transform: rotate(-2.2deg);
+  box-shadow:
+    0 2px 2px rgb(60 50 0 / 0.12),
+    0 26px 34px -18px rgb(60 50 0 / 0.38);
+}
+
+.nb-sticky-text {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nb-quote {
+  font-family: "Caveat", cursive;
+  font-size: 78px;
+  font-weight: 600;
+  line-height: 1.06;
+  color: var(--accent);
+}
+
+.nb-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.nb-author {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.nb-role {
+  font-size: 28px;
+  color: var(--pencil);
+}
+
+.nb-tape {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  width: 230px;
+  height: 64px;
+  background: rgb(236 236 226 / 0.78);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  transform: translateX(-50%) rotate(3deg);
+}
+
+/* Stat: the number in ink, circled by hand. */
+.nb-circled {
+  position: relative;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 36px 84px 44px 64px;
+}
+
+.nb-circled::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  -webkit-mask: var(--ring) no-repeat center / 100% 100%;
+  mask: var(--ring) no-repeat center / 100% 100%;
+}
+
+.nb-value {
+  font-family: "Caveat", cursive;
+  font-size: 300px;
+  font-weight: 700;
+  line-height: 0.86;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.nb-label {
+  max-width: 780px;
+  margin-top: 48px;
+  font-size: 62px;
+  font-weight: 740;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.nb-stat-note {
+  max-width: 760px;
+  margin-top: 28px;
+  font-size: 38px;
+  line-height: var(--cell);
+  color: var(--pencil);
+}
+
+.nb-stat .nb-foot,
+.nb-cover .nb-foot,
+.nb-cta .nb-foot,
+.nb-quote-slide .nb-foot {
+  margin-top: 0;
+  padding-top: 56px;
+}
+
+/* Image: a photo taped onto the page. */
+.nb-photo {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 18px 12px 0 0;
+  padding: 20px 20px 20px;
+  background: #ffffff;
+  transform: rotate(1.4deg);
+  box-shadow:
+    0 2px 3px rgb(0 0 0 / 0.1),
+    0 24px 30px -18px rgb(0 0 0 / 0.35);
+}
+
+.nb-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nb-photo .nb-tape {
+  width: 170px;
+  height: 52px;
+}
+
+.nb-tape-left {
+  left: 6%;
+  transform: rotate(-8deg);
+}
+
+.nb-tape-right {
+  left: auto;
+  right: 4%;
+  transform: rotate(7deg);
+}
+
+.nb-img-title {
+  margin-top: 52px;
+  font-size: 62px;
+  font-weight: 760;
+  line-height: 1.06;
+}
+
+.nb-caption {
+  margin-top: 12px;
+  font-size: 56px;
+}
+
+/* Call to action */
+.nb-cta-title {
+  font-size: 124px;
+}
+
+.nb-action-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.nb-arrow {
+  flex: none;
+  width: 120px;
+  height: 92px;
+  background: var(--accent);
+  -webkit-mask: var(--arrow) no-repeat center / contain;
+  mask: var(--arrow) no-repeat center / contain;
+}
+
+.nb-action {
+  font-size: 66px;
+  transform: rotate(-1.5deg);
+  transform-origin: left bottom;
+}

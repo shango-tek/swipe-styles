@@ -1,0 +1,8 @@
+{
+  "style": "swiss-grid",
+  "brand": { "name": "Northline Studio", "handle": "@northline.studio", "logo": "square.svg" },
+  "slides": [
+    { "type": "cover", "title": "A cover with a logo" },
+    { "type": "cta", "title": "And a last slide with it", "action": "Follow for more" }
+  ]
+}

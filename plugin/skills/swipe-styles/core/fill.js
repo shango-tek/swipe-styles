@@ -50,6 +50,7 @@
         index: pad(i + 1),
         total: pad(total),
         counter: `${pad(i + 1)} / ${pad(total)}`,
+        page: `${i + 1}/${total}`,
         handle: brand.handle,
         name: brand.name,
         logo: brand.logo,
@@ -186,7 +187,7 @@
 
       let smallest = Infinity;
       for (const el of textElements(slide)) {
-        if (el.textContent.trim()) smallest = Math.min(smallest, parseFloat(getComputedStyle(el).fontSize));
+        if (hasOwnText(el)) smallest = Math.min(smallest, parseFloat(getComputedStyle(el).fontSize));
       }
       if (smallest < minReadable()) {
         warnings.push({
@@ -197,6 +198,14 @@
         });
       }
     }
+  }
+
+  // True when the element shows text itself, not only through child elements
+  // (a list item whose text sits in its title and text spans has no own text).
+  function hasOwnText(el) {
+    return [...el.childNodes].some(
+      (node) => (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) || node.nodeName === 'EM',
+    );
   }
 
   function textElements(slide) {
@@ -215,7 +224,8 @@
       const r = el.getBoundingClientRect();
       if (r.width === 0 && r.height === 0) continue;
       const name = el.dataset.field ?? el.closest('[data-list]')?.dataset.list ?? 'text';
-      const outside = r.top < box.top - 1 || r.left < box.left - 1 || r.bottom > box.bottom + 1 || r.right > box.right + 1;
+      // 2px of tolerance for sub-pixel rounding.
+      const outside = r.top < box.top - 2 || r.left < box.left - 2 || r.bottom > box.bottom + 2 || r.right > box.right + 2;
       // A word wider than its box (for example a long word that could not be hyphenated).
       const tooWide = el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 2;
       // Text cut off by a box with a fixed height. Boxes that grow with their text are not checked

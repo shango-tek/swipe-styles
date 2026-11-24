@@ -33,6 +33,14 @@ test('applies the brand accent color', async () => {
   assert.match(deck, /--accent:#0F766E;/);
 });
 
+test('loads the brand logo from a path next to the carousel', async () => {
+  const { out, code, stdout } = await renderFile(join(FIXTURES, 'brand-logo.json'));
+  assert.equal(code, 0, stdout);
+  assert.deepEqual((await readReport(out)).errors, []);
+  const deck = await readFile(join(out, '.swipe/deck.html'), 'utf8');
+  assert.match(deck, /"logo":"file:\/\/[^"]+\/square\.svg"/);
+});
+
 test('shrinks a long headline until it fits, without an error', async () => {
   const { out, code, stdout } = await renderFile(join(FIXTURES, 'long-title.json'));
   assert.equal(code, 0, stdout);
