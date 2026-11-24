@@ -1,0 +1,9 @@
+{
+  "name": "swipe-styles-runtime",
+  "private": true,
+  "description": "What scripts/setup.mjs installs into the swipe-styles data folder. Keep the version equal to the Playwright Docker image in tools/docker.sh.",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "1.65.1"
+  }
+}

@@ -9,7 +9,7 @@ notes, ticks and circles drawn in blue ink. It feels like a friend's class notes
 ## Writing for this style
 
 - Write the way a good teacher talks: plain, warm, direct. Short sentences.
-- Headlines: 3 to 7 words. The cover and last-slide headlines are highlighted line by line.
+- Headlines: 3 to 7 words, up to 6 on the last slide. The cover and last-slide headlines are highlighted line by line.
 - `kicker` is a handwritten note in blue ink above the headline ("Study notes", "Week 3"). Keep it to 1 to 4 words.
 - `points`: 3 or 4 items, each with a ticked box. Each item: a short `title` and one sentence of `text`.
   The ticks mean "do this", so the items should be actions.

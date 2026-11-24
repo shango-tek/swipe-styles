@@ -1,0 +1,13 @@
+{
+  "name": "swipe-styles",
+  "version": "0.1.0",
+  "description": "Turns a topic into a finished Instagram or LinkedIn carousel in a ready-made style: PNG slides, a PDF for LinkedIn and a caption. Your handle, color and logo on every style.",
+  "author": {
+    "name": "Glory Pierrette (shango-tek)",
+    "url": "https://github.com/shango-tek"
+  },
+  "homepage": "https://shango-tek.github.io/swipe-styles/",
+  "repository": "https://github.com/shango-tek/swipe-styles",
+  "license": "MIT",
+  "keywords": ["carousel", "instagram", "linkedin", "social-media", "slides", "design", "content-creation"]
+}

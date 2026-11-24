@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "swipe-styles",
+  "description": "Carousel styles for Claude Code: Instagram and LinkedIn slides from one sentence.",
+  "owner": {
+    "name": "Glory Pierrette (shango-tek)",
+    "url": "https://github.com/shango-tek"
+  },
+  "plugins": [
+    {
+      "name": "swipe-styles",
+      "source": "./plugin",
+      "description": "Turns a topic into a finished Instagram or LinkedIn carousel in a ready-made style: PNG slides, a PDF and a caption.",
+      "category": "design",
+      "homepage": "https://shango-tek.github.io/swipe-styles/"
+    }
+  ]
+}

@@ -23,6 +23,7 @@
     "image.title": { "words": 8 },
     "image.caption": { "words": 18 },
     "cta.title": { "words": 8 },
-    "cta.text": { "words": 20 }
+    "cta.text": { "words": 20 },
+    "cta.action": { "words": 5 }
   }
 }

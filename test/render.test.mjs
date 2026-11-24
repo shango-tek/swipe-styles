@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
+import { execFile } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { test } from 'node:test';
 
-import { validate } from '../plugin/skills/swipe-styles/core/render.mjs';
-import { FIXTURES, pdfPageCount, pngSize, readReport, renderFile } from './helpers.mjs';
+import { listStyles, validate } from '../plugin/skills/swipe-styles/core/render.mjs';
+import { FIXTURES, pdfPageCount, pngSize, readReport, renderFile, SKILL } from './helpers.mjs';
 
 test('renders one PNG per slide at the format size, a PDF with one page per slide, and a clean report', async () => {
   const { out, code, stdout } = await renderFile(join(FIXTURES, 'basic.json'));
@@ -18,6 +19,26 @@ test('renders one PNG per slide at the format size, a PDF with one page per slid
     assert.deepEqual(pngSize(await readFile(join(out, name))), { width: 1080, height: 1350 });
   }
   assert.equal(pdfPageCount(await readFile(join(out, 'carousel.pdf'))), 3);
+});
+
+test('writes the caption with hashtags, and an overview with all slides on one image', async () => {
+  const { out, code, stdout } = await renderFile(join(FIXTURES, 'basic.json'));
+  assert.equal(code, 0, stdout);
+  const report = await readReport(out);
+  assert.equal(report.files.caption, 'caption.txt');
+  assert.equal(
+    await readFile(join(out, 'caption.txt'), 'utf8'),
+    'Three rules that ended our underpaid projects.\n\nSave this for your next quote.\n\n#designbusiness #pricing #freelancedesign\n',
+  );
+  // 3 thumbnails of 340x425 px side by side, 20 px apart, with 32 px padding.
+  assert.deepEqual(pngSize(await readFile(join(out, report.files.overview))), { width: 1124, height: 489 });
+});
+
+test('--styles lists every style with what it suits', async () => {
+  const { stdout } = await new Promise((resolve) => {
+    execFile(process.execPath, [join(SKILL, 'core/render.mjs'), '--styles'], (error, out) => resolve({ error, stdout: out }));
+  });
+  for (const id of await listStyles()) assert.match(stdout, new RegExp(`^${id} \\(.+\\): .+ Suits: .+\\.$`, 'm'));
 });
 
 test('--format square renders 1080x1080 slides', async () => {
@@ -95,4 +116,8 @@ test('validate() accepts a minimal carousel and refuses too many slides', () => 
 
   const problems = validate({ style: 'swiss-grid', slides: Array(21).fill(slide) }, { formats, styles });
   assert.match(problems.join('\n'), /allows at most 20/);
+
+  const captionProblems = validate({ style: 'swiss-grid', slides: [slide], caption: 7, hashtags: '#a #b' }, { formats, styles });
+  assert.match(captionProblems.join('\n'), /"caption" must be text/);
+  assert.match(captionProblems.join('\n'), /"hashtags" must be a list/);
 });

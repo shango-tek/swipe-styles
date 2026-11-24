@@ -2,15 +2,19 @@
 // Renders a carousel.json into PNG slides, one PDF and a report.json.
 //
 //   node render.mjs <carousel.json> [--out <dir>] [--style <id>] [--format <id>]
+//   node render.mjs --styles            lists the styles
 //
 // Exit codes: 0 rendered without problems, 2 rendered but the report has errors
-// (for example text that does not fit), 1 the carousel could not be rendered.
+// (for example text that does not fit), 1 the carousel could not be rendered,
+// 3 the one-time setup is needed (scripts/setup.mjs).
 
 import { existsSync } from 'node:fs';
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
+
+import { launchBrowser, SETUP_EXIT, SetupNeeded } from './runtime.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SKILL = resolve(HERE, '..');
@@ -114,6 +118,12 @@ export function validate(carousel, { formats, styles }) {
   const known = new Set(['style', 'format', 'lang', 'brand', 'slides', 'caption', 'hashtags', 'topic']);
   for (const key of Object.keys(carousel)) {
     if (!known.has(key)) problems.push(`Unknown top-level field "${key}". Allowed: ${[...known].join(', ')}.`);
+  }
+  if (carousel.caption !== undefined && typeof carousel.caption !== 'string') {
+    problems.push('"caption" must be text.');
+  }
+  if (carousel.hashtags !== undefined && !(Array.isArray(carousel.hashtags) && carousel.hashtags.every((tag) => typeof tag === 'string'))) {
+    problems.push('"hashtags" must be a list of words, such as ["coffee", "farming"].');
   }
 
   if (!Array.isArray(carousel.slides) || carousel.slides.length === 0) {
@@ -225,11 +235,27 @@ ${layouts}
 `;
 }
 
-function launchOptions() {
-  // SWIPE_BROWSER_CHANNEL=chrome uses the Chrome that is already installed,
-  // instead of the Chromium that Playwright downloads.
-  const channel = process.env.SWIPE_BROWSER_CHANNEL;
-  return channel ? { channel } : {};
+// The caption to paste under the post: the text, a blank line, then the hashtags.
+function captionText(carousel) {
+  const tags = (carousel.hashtags ?? []).map((tag) => `#${tag.trim().replace(/^#+/, '').replace(/\s+/g, '')}`).filter((tag) => tag !== '#');
+  const parts = [carousel.caption?.trim(), tags.join(' ')].filter(Boolean);
+  return parts.length > 0 ? `${parts.join('\n\n')}\n` : undefined;
+}
+
+// All slides small on one image, so the result can be checked at a glance.
+const OVERVIEW = { columns: 4, thumb: 340, gap: 20, padding: 32 };
+
+function overviewHtml(png, format) {
+  const { columns, thumb, gap, padding } = OVERVIEW;
+  const height = Math.round((thumb * format.height) / format.width);
+  const images = png.map((name) => `<img src="../${name}" width="${thumb}" height="${height}" alt="${name}">`).join('\n');
+  return `<!doctype html><meta charset="utf-8">
+<style>
+  body { margin: 0; padding: ${padding}px; background: #d6d6d6; width: max-content; }
+  div { display: grid; grid-template-columns: repeat(${Math.min(columns, png.length)}, ${thumb}px); gap: ${gap}px; }
+  img { display: block; box-shadow: 0 1px 3px rgb(0 0 0 / 0.25); }
+</style>
+<div>${images}</div>`;
 }
 
 export async function render(file, options = {}) {
@@ -267,7 +293,7 @@ export async function render(file, options = {}) {
   const buildDir = join(outDir, '.swipe');
   await mkdir(buildDir, { recursive: true });
   for (const name of await readdir(outDir)) {
-    if (/^slide-\d+\.png$/.test(name) || name === 'carousel.pdf' || name === 'report.json') await rm(join(outDir, name));
+    if (/^slide-\d+\.png$/.test(name) || ['carousel.pdf', 'report.json', 'caption.txt'].includes(name)) await rm(join(outDir, name));
   }
 
   const deckFile = join(buildDir, 'deck.html');
@@ -276,8 +302,7 @@ export async function render(file, options = {}) {
     deckHtml({ lang: carousel.lang ?? 'en', format, styleDir, layouts, accent: brand.accent, data: { slides, brand } }),
   );
 
-  const { chromium } = await import('playwright');
-  const browser = await chromium.launch(launchOptions());
+  const browser = await launchBrowser();
   let result;
   const png = [];
   try {
@@ -303,8 +328,23 @@ export async function render(file, options = {}) {
       printBackground: true,
       preferCSSPageSize: true,
     });
+
+    const sheetFile = join(buildDir, 'overview.html');
+    await writeFile(sheetFile, overviewHtml(png, format));
+    // A tiny viewport, because a full-page screenshot is never smaller than the viewport.
+    const sheet = await browser.newPage({ viewport: { width: 200, height: 100 }, deviceScaleFactor: 1 });
+    await sheet.goto(pathToFileURL(sheetFile).href);
+    await sheet.evaluate(() => Promise.all([...document.images].map((img) => img.decode())));
+    await sheet.screenshot({ path: join(buildDir, 'overview.png'), fullPage: true });
   } finally {
     await browser.close();
+  }
+
+  const files = { png, pdf: 'carousel.pdf', overview: '.swipe/overview.png' };
+  const caption = captionText(carousel);
+  if (caption) {
+    await writeFile(join(outDir, 'caption.txt'), caption);
+    files.caption = 'caption.txt';
   }
 
   const report = {
@@ -315,29 +355,56 @@ export async function render(file, options = {}) {
     slides: png.length,
     errors: result.errors,
     warnings: [...limitWarnings(carousel, style.limits), ...result.warnings],
-    files: { png, pdf: 'carousel.pdf' },
+    files,
   };
   await writeFile(join(outDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   return { outDir, report };
 }
 
 const USAGE = `Usage: node render.mjs <carousel.json> [--out <dir>] [--style <id>] [--format <id>]
+       node render.mjs --styles
 
 Renders the carousel into <dir> (default: a "slides" folder next to the file):
   slide-01.png, slide-02.png, ...   one PNG per slide
   carousel.pdf                      all slides, for a LinkedIn document post
-  report.json                       errors and warnings to fix`;
+  caption.txt                       the caption and hashtags, when the carousel has them
+  report.json                       errors and warnings to fix
+  .swipe/overview.png               all slides on one image, to check the result
+
+Exit codes: 0 done, 2 the report has errors, 1 the carousel is invalid, 3 run scripts/setup.mjs first.`;
+
+// One line per style: id, name, summary and what it suits.
+export async function describeStyles() {
+  const lines = [];
+  for (const id of await listStyles()) {
+    const style = await readJson(join(STYLES, id, 'style.json'), 'style.json');
+    lines.push(`${id} (${style.name}): ${style.summary} Suits: ${style.suits.join(', ')}.`);
+  }
+  return lines.join('\n');
+}
 
 async function main() {
-  const { values, positionals } = parseArgs({
-    allowPositionals: true,
-    options: {
-      out: { type: 'string' },
-      style: { type: 'string' },
-      format: { type: 'string' },
-      help: { type: 'boolean', short: 'h' },
-    },
-  });
+  let parsed;
+  try {
+    parsed = parseArgs({
+      allowPositionals: true,
+      options: {
+        out: { type: 'string' },
+        style: { type: 'string' },
+        format: { type: 'string' },
+        styles: { type: 'boolean' },
+        help: { type: 'boolean', short: 'h' },
+      },
+    });
+  } catch (error) {
+    console.error(`${error.message}\n\n${USAGE}`);
+    process.exit(1);
+  }
+  const { values, positionals } = parsed;
+  if (values.styles) {
+    console.log(await describeStyles());
+    return;
+  }
   if (values.help || positionals.length !== 1) {
     console.log(USAGE);
     process.exit(values.help ? 0 : 1);
@@ -345,7 +412,11 @@ async function main() {
 
   try {
     const { outDir, report } = await render(positionals[0], values);
-    console.log(`Rendered ${report.slides} slides (${report.style}, ${report.format} ${report.size}) to ${outDir}`);
+    const count = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+    console.log(
+      `Rendered ${report.slides} slides (${report.style}, ${report.format} ${report.size}) to ${outDir}: ` +
+        `${count(report.errors.length, 'error')}, ${count(report.warnings.length, 'warning')}.`,
+    );
     for (const error of report.errors) console.log(`ERROR    ${error.message}`);
     for (const warning of report.warnings) console.log(`warning  ${warning.message}`);
     process.exit(report.ok ? 0 : 2);
@@ -353,6 +424,10 @@ async function main() {
     if (error instanceof CarouselError) {
       console.error(error.message);
       process.exit(1);
+    }
+    if (error instanceof SetupNeeded) {
+      console.error(error.message);
+      process.exit(SETUP_EXIT);
     }
     throw error;
   }

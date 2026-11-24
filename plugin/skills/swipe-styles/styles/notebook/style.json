@@ -26,6 +26,7 @@
     "image.title": { "words": 7 },
     "image.caption": { "words": 12 },
     "cta.title": { "words": 6 },
-    "cta.text": { "words": 22 }
+    "cta.text": { "words": 22 },
+    "cta.action": { "words": 5 }
   }
 }
